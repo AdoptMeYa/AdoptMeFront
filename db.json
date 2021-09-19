@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "email": "TeckElGatito@gmail.com",
+      "password": "$2a$10$V5dngwaYIuFuHorfCAFn6ejIZI5kziQrFlWo7.86YgNyPPV6R09Ke",
+      "id": 6
+    },
+    {
+      "email": "FifiTheBest@gmail.com",
+      "password": "$2a$10$fdePZWWfzHw6FPwxKe.MPedHlfVE1dOHCC04ooedGQikR1UdjfyiW",
+      "id": 7
+    }
+  ]
+}
