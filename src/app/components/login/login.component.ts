@@ -1,8 +1,9 @@
 import {Component, OnInit } from "@angular/core";
 import {Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {AuthService} from "./../../services/auth.service";
+import { StorageService} from './../../services/storage.service';
 import {Router} from "@angular/router";
-import { SessionContainer } from "../../models/session.model";
+import { Session, SessionContainer } from "../../models/session.model";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   public error: {code: number, message: string} = null;
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private storageService: StorageService) { }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -34,8 +36,14 @@ export class LoginComponent implements OnInit {
       )
     }
   }
-  private correctLogin(data: SessionContainer){
+  private correctLogin(data: Session){
     console.log("login correcto");
-    this.router.navigate(['main']);
+    if (data.user) {
+      console.log("Json del usuario que hizo login")
+      console.log(data.user)
+      this.storageService.setCurrentSession(data);
+      console.log(data)
+      this.router.navigate(['main']);
+    }
   }
 }

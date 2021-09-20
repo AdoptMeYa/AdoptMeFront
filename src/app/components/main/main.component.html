@@ -1,3 +1,16 @@
-<mat-label>Felicidades haz iniciado sesion</mat-label>
-
+<p>
+    <mat-label>Felicidades haz iniciado sesion</mat-label>
+</p>
+<p>
+    <mat-label>Email del usuario: {{getUser().email }}</mat-label>
+</p>
+<p>
+    <mat-card-subtitle>ID: {{getUser().id}} </mat-card-subtitle>
+</p>
+<p>
+    <mat-card-subtitle>{{getUser().password}}</mat-card-subtitle>
+</p>
+<p>
+    <mat-button-toggle (click)="logout()">logout</mat-button-toggle>
+</p>
 

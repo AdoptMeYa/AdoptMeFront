@@ -1,6 +1,6 @@
 import { User } from "./user.model";
 export class Session {
-    public token: string;
+    public accessToken: string;
     public user: User
 }
 export class SessionContainer {

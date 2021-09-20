@@ -2,7 +2,7 @@ import {Component, OnInit } from "@angular/core";
 import {Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {AuthService} from "./../../services/auth.service";
 import {Router} from "@angular/router";
-import { SessionContainer } from "../../models/session.model";
+import { Session, SessionContainer } from "../../models/session.model";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -33,12 +33,12 @@ export class SignupComponent implements OnInit {
       console.log("click signup")
       this.authenticationService.signup(email, password).subscribe(
         data => this.correctSignup(data)
-        //error => this.error = JSON.parse(error._body)
       )
     }
   }
-  private correctSignup(data: SessionContainer){
+  private correctSignup(data: Session){
     console.log("signup correcto");
-    this.router.navigate(['login']);
+    console.log(data);
+    this.router.navigate(['login'])
   }
 }

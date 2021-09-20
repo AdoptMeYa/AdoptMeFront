@@ -9,6 +9,11 @@
       "email": "FifiTheBest@gmail.com",
       "password": "$2a$10$fdePZWWfzHw6FPwxKe.MPedHlfVE1dOHCC04ooedGQikR1UdjfyiW",
       "id": 7
+    },
+    {
+      "email": "Test@gmail.com",
+      "password": "$2a$10$2vPEB6rZGGFJIgoeVEbf3.uywhnlqPpd4wacvv1gyDcMU8.cI.Aee",
+      "id": 8
     }
   ]
 }
