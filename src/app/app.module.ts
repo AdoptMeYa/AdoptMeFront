@@ -16,8 +16,12 @@ import { SignupComponent } from './components/signup/signup.component';
 import { MainComponent } from './components/main/main.component';
 // services
 import { AuthService } from './services/auth.service'
-
-
+import { StorageService } from './services/storage.service';
+import { UserService } from './services/user.service';
+// guards
+import { AuthGuard } from './guards/AuthGuard';
+// interceptor
+import { AuthInterceptor } from './interceptor/AuthInterceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,13 @@ import { AuthService } from './services/auth.service'
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthService
+  providers: [
+    AuthService, StorageService, AuthGuard, UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

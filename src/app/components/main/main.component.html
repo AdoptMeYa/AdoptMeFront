@@ -1,6 +1,12 @@
-<p>
-    <mat-label>Felicidades haz iniciado sesion</mat-label>
-</p>
+<div *ngIf="getUser() ==null; else elseBlock">
+    No hay usuario logeado.</div>
+<ng-template #elseBlock>
+    <p>
+        <mat-label>Felicidades haz iniciado sesion</mat-label>
+    </p>
+</ng-template>
+
+
 <p>
     <mat-label>Email del usuario: {{getUser().email }}</mat-label>
 </p>
