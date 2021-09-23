@@ -1,0 +1,56 @@
+<p>new-publication works!</p>
+<div class="aligner">
+  <mat-card class="aligner-center-item">
+    <mat-card-title>
+      Login Form
+    </mat-card-title>
+
+    <mat-card-content class="login-board" >
+      <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
+        <div style="display: flexbox; flex-direction: row;">
+
+
+          <mat-input-container [ngClass]="{'mat-input-invalid': submitted && error?.code == 1}">
+
+            <input mdInput type="text" formControlName="Animal" placeholder="Dog or Cat"/>
+
+          </mat-input-container>
+
+          <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+            <input mdInput type="text" formControlName="Name" placeholder="Enter Name"/>
+
+          </mat-input-container>
+
+          <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+            <input mdInput type="text" formControlName="IsAtention" placeholder="Require Atention"/>
+
+          </mat-input-container>
+
+          <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+            <input mdInput type="text" formControlName="Race" placeholder="Race"/>
+
+          </mat-input-container>
+
+          <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+            <input mdInput type="text" formControlName="Age" placeholder="Age"/>
+
+          </mat-input-container>
+
+          <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+            <input mdInput type="text" formControlName="Ubication" placeholder="Ubication"/>
+
+          </mat-input-container>
+          <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+            <input mdInput type="text" formControlName="Comment" placeholder="Comment"/>
+
+          </mat-input-container>
+
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions style="text-align: right;">
+      <button md-raised-button type="submit" form="publish-form"> Publish</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>
