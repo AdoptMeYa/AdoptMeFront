@@ -1,4 +1,3 @@
-import {User} from "./user.model";
 
 export class Publish {
   public descripcion: string;
@@ -11,10 +10,4 @@ export class Publish {
   public UserId: number;
   public fecha: string;
   public id: number;
-}
-
-export class PublishContainer {
-  public ok: string;
-  public message: string;
-  public body: User[];
 }

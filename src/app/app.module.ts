@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Reactive Forms
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 // Http
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // angular materail
 import { MaterialModule } from './material.module';
 // components
@@ -22,13 +22,16 @@ import { UserService } from './services/user.service';
 import { AuthGuard } from './guards/AuthGuard';
 // interceptor
 import { AuthInterceptor } from './interceptor/AuthInterceptor';
+import {NewPublicationComponent} from './components/new-publication/new-publication.component';
+import {PublishService} from './services/publish.service';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
     MainComponent,
-    SignupComponent
+    SignupComponent,
+    NewPublicationComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { AuthInterceptor } from './interceptor/AuthInterceptor';
     HttpClientModule,
   ],
   providers: [
-    AuthService, StorageService, AuthGuard, UserService,
+    AuthService, StorageService, AuthGuard, UserService, PublishService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
   }
   getUser(): any {
     return this.storageService.getCurrentUser();
@@ -23,5 +23,8 @@ export class MainComponent implements OnInit {
   logout(){
     this.storageService.logout();
     this.router.navigate(['login'])
+  }
+  onClick(): void {
+    this.router.navigate(['Publication']);
   }
 }

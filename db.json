@@ -16,10 +16,53 @@
   "publicacion": [
     {
       "descripcion": "Test publicacion",
-      "userId": 1,
-      "fecha": "2021-09-24T18:25:43.511Z",
-      "mascotaId": 1,
-      "id": 1
+      "Name": "1",
+      "IsAtention": "Z",
+      "Race": "1",
+      "Ubication": "1",
+      "Commnet": "sdasd",
+      "Age": 20,
+      "IdUser": 1,
+      "Fecha": "121212",
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "descripcion": "Algo de texto",
+      "Name": "Algo de texto",
+      "IsAtention": "Algo de texto",
+      "Race": "Algo de texto",
+      "Ubication": "1",
+      "Commnet": "ddddddddddddddddddddddddddd",
+      "Age": 20,
+      "IdPublication": 2,
+      "IdUser": 1,
+      "Fecha": "121212",
+      "id": 5
+    },
+    {
+      "descripcion": "LLLLLLLLLLLLLLLLLLLLLLLLL",
+      "Name": "LLLLLLLLLLLLLLLLLLLLLLLLL",
+      "IsAtention": "LLLLLLLLLLLLLLLLLLLLLLLLL",
+      "Race": "1",
+      "Ubication": "1",
+      "Commnet": "LLLLLLLLLLLLLLLLLLLLLLLLL",
+      "Age": 20,
+      "IdUser": 1,
+      "Fecha": "121212",
+      "id": 6
+    },
+    {
+      "descripcion": "ASDSAD",
+      "Name": "SAD",
+      "IsAtention": "ASDSA",
+      "Race": "SAD",
+      "Ubication": "ASADAS",
+      "Commnet": "ASS",
+      "Age": "ASD",
+      "id": 7
     }
   ],
   "mascota": [
