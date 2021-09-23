@@ -1,0 +1,40 @@
+<div class="aligner">
+    <mat-card class="aligner-center-item">
+        <mat-card-title>
+            Login Form
+        </mat-card-title>
+
+        <mat-card-content class="login-board" >
+            <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate >
+                <div style="display: flexbox; flex-direction: row;">
+
+                
+                    <mat-input-container [ngClass]="{'mat-input-invalid': submitted && error?.code == 1}">
+
+
+                        <input mdInput type="text" formControlName="email" placeholder="Email"/>
+                        <mat-hint style="color: red;" *ngIf="submitted && error?.code == 1 && !loginForm.controls.username.hasError('required')">
+                            {{error.message}}
+                        </mat-hint>
+                        <mat-hint style="color: red;" *ngIf="submitted && loginForm.controls.email.hasError('required')">
+                            Field is mandatory
+                        </mat-hint>
+                    </mat-input-container>
+                    <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+                        <input mdInput type="password" formControlName="password" placeholder="Password"/>
+                        <mat-hint style="color: red;" *ngIf="submitted && error?.code == 2 && !loginForm.controls.password.hasError('required')">
+                            {{error.message}}
+                        </mat-hint>
+                        <mat-hint style="color: red;" *ngIf="submitted && loginForm.controls.password.hasError('required')">
+                            Field is mandatory
+                        </mat-hint>
+                    </mat-input-container>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions style="text-align: right;">
+            <button md-raised-button type="submit" form="login-form"> Log In</button>
+        </mat-card-actions>
+    </mat-card>
+      
+</div>

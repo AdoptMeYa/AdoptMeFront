@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "email": "Nightingale@gmail.com",
+      "password": "$2a$10$yxNdHfZico28Ad1Y8K.xDuEEMIYbGkzJkHtZdNhFuEO1S7qKw0LUy",
+      "username": "Florence",
+      "rol": "cliente",
+      "cantidad publicaciones": 0,
+      "edad": 21,
+      "direccion": "Florencia",
+      "telefono": "943135843",
+      "image": null,
+      "id": 1
+    }
+  ],
+  "publicacion": [
+    {
+      "descripcion": "Test publicacion",
+      "userId": 1,
+      "fecha": "2021-09-24T18:25:43.511Z",
+      "mascotaId": 1,
+      "id": 1
+    }
+  ],
+  "mascota": [
+    {
+      "descripcion": "Test mascota",
+      "raza": "pug",
+      "tamaño": 30,
+      "imagen": null,
+      "publicacionId": 1,
+      "id": 1
+    }
+  ]
+}
