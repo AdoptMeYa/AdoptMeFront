@@ -1,24 +1,35 @@
 {
   "users": [
     {
-      "email": "TeckElGatito@gmail.com",
-      "password": "$2a$10$V5dngwaYIuFuHorfCAFn6ejIZI5kziQrFlWo7.86YgNyPPV6R09Ke",
-      "id": 6
-    },
+      "email": "Nightingale@gmail.com",
+      "password": "$2a$10$yxNdHfZico28Ad1Y8K.xDuEEMIYbGkzJkHtZdNhFuEO1S7qKw0LUy",
+      "username": "Florence",
+      "rol": "cliente",
+      "cantidad publicaciones": 0,
+      "edad": 21,
+      "direccion": "Florencia",
+      "telefono": "943135843",
+      "image": null,
+      "id": 1
+    }
+  ],
+  "publicacion": [
     {
-      "email": "FifiTheBest@gmail.com",
-      "password": "$2a$10$fdePZWWfzHw6FPwxKe.MPedHlfVE1dOHCC04ooedGQikR1UdjfyiW",
-      "id": 7
-    },
+      "descripcion": "Test publicacion",
+      "userId": 1,
+      "fecha": "2021-09-24T18:25:43.511Z",
+      "mascotaId": 1,
+      "id": 1
+    }
+  ],
+  "mascota": [
     {
-      "email": "Test@gmail.com",
-      "password": "$2a$10$2vPEB6rZGGFJIgoeVEbf3.uywhnlqPpd4wacvv1gyDcMU8.cI.Aee",
-      "id": 8
-    },
-    {
-      "email": "Test2@gmail.com",
-      "password": "$2a$10$HMXlcGdCoMzjv/4obpCPquS31a/SD9OmOlAwK685gTy9LUumXH4aC",
-      "id": 9
+      "descripcion": "Test mascota",
+      "raza": "pug",
+      "tamaño": 30,
+      "imagen": null,
+      "publicacionId": 1,
+      "id": 1
     }
   ]
 }

@@ -11,10 +11,10 @@
     <mat-label>Email del usuario: {{getUser().email }}</mat-label>
 </p>
 <p>
-    <mat-card-subtitle>ID: {{getUser().id}} </mat-card-subtitle>
+    <mat-card-subtitle>Mi nombre es: {{getUser().username}} </mat-card-subtitle>
 </p>
 <p>
-    <mat-card-subtitle>{{getUser().password}}</mat-card-subtitle>
+    <mat-card-subtitle>Mi rol es: {{getUser().rol}} </mat-card-subtitle>
 </p>
 <p>
     <mat-button-toggle (click)="logout()">logout</mat-button-toggle>
