@@ -33,7 +33,7 @@ export class NewPublicationComponent implements OnInit {
     // TO-DO: crear boton, en publish-component, que enrute a otro componente llamando listaPublish
     // en aquel componente se mostraran todas las publicaciones
     // Este fragmento de codigo recupera la lista de todas las publicaciones
-    this.publishService.listPublish().subscribe((data) =>{
+    this.publishService.listPublishByUserId(this.storageservice.getCurrentUser().id).subscribe((data) =>{
       // listpublish contiene toda la lista/arreglo
       this.listpublish = data;
       // en el componente publish podran ver su contenido al ver 'inspeccionar elemento'

@@ -37,4 +37,7 @@ export class PublishService {
   listPublish(): Observable<Publish[]> {
     return this.http.get<Publish[]>("http://localhost:3000/publicacion");
   }
+  listPublishByUserId(userId: number): Observable<Publish[]> {
+    return this.http.get<Publish[]>("http://localhost:3000/publicacion?IdUser=" + userId.toString());
+  }
 }
