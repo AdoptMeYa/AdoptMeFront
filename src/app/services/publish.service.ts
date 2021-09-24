@@ -34,4 +34,7 @@ export class PublishService {
       Fecha: Fecha
     })
   }
+  listPublish(): Observable<Publish[]> {
+    return this.http.get<Publish[]>("http://localhost:3000/publicacion");
+  }
 }

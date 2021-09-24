@@ -15,7 +15,7 @@ export class NewPublicationComponent implements OnInit {
   public submitted: Boolean = false;
   public error: {code: number, message: string} = null;
   public myDate = new Date();
-
+  public listpublish : any;
   constructor(private formBuilder: FormBuilder, private publishService: PublishService,
     private storageservice: StorageService,
     private datePipe: DatePipe) { }
@@ -30,6 +30,24 @@ export class NewPublicationComponent implements OnInit {
       Comment: ['', Validators.required],
       Age: ['', Validators.required]
     });
+    // TO-DO: crear boton, en publish-component, que enrute a otro componente llamando listaPublish
+    // en aquel componente se mostraran todas las publicaciones
+    // Este fragmento de codigo recupera la lista de todas las publicaciones
+    this.publishService.listPublish().subscribe((data) =>{
+      // listpublish contiene toda la lista/arreglo
+      this.listpublish = data;
+      // en el componente publish podran ver su contenido al ver 'inspeccionar elemento'
+      console.log("Lista de publicaciones");
+      console.log(this.listpublish);
+      // como cualquier arreglo puede iterar sobre él
+      console.log("Publicacion indice 1");
+      console.log(this.listpublish[1]);
+      // tambien podemos acceder a sus atributos como se ve acontinuacion
+      console.log("Nombre de la mascota",this.listpublish[1].Name);
+      // recuerden que dentro de ts/js pueden usar bucles for
+      // y también dentro del propio html usando "*ngFor" pueden buscar documentacion en internet
+    });
+    
   }
 
   onSubmit(): void {
