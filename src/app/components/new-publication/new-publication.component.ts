@@ -2,18 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {PublishService} from '../../services/publish.service';
 import {Publish} from '../../models/publish.model';
-
+import { StorageService } from 'src/app/services/storage.service';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-new-publication',
   templateUrl: './new-publication.component.html',
-  styleUrls: ['./new-publication.component.css']
+  styleUrls: ['./new-publication.component.css'],
+  providers: [DatePipe]
 })
 export class NewPublicationComponent implements OnInit {
   public PublishForm: FormGroup;
   public submitted: Boolean = false;
   public error: {code: number, message: string} = null;
+  public myDate = new Date();
 
-  constructor(private formBuilder: FormBuilder, private publishService: PublishService ) { }
+  constructor(private formBuilder: FormBuilder, private publishService: PublishService,
+    private storageservice: StorageService,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.PublishForm = this.formBuilder.group({
@@ -23,7 +28,7 @@ export class NewPublicationComponent implements OnInit {
       Race: ['', Validators.required],
       Ubication: ['', Validators.required],
       Comment: ['', Validators.required],
-      Age: ['', Validators.required],
+      Age: ['', Validators.required]
     });
   }
 
@@ -39,12 +44,17 @@ export class NewPublicationComponent implements OnInit {
       const Age: string = this.PublishForm.value.Age;
       const Ubication: string = this.PublishForm.value.Ubication;
       const Comment: string = this.PublishForm.value.Comment;
-
-      this.publishService.createFormPublish(Descripcion, Name, IsAtention, Race, Age,
-        Ubication, Comment).subscribe(
+      let fecha: string;
+      fecha = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+      const iduser = this.storageservice.getCurrentUser().id
+      this.publishService.createFormPublish(Descripcion, Name, IsAtention, Race,
+        Ubication, Comment, Age, iduser, fecha.toString()).subscribe(
         data => this.correctPublishForm(data)
       );
       console.log('Valido');
+    }
+    else {
+      console.log("No Valido")
     }
 
 
