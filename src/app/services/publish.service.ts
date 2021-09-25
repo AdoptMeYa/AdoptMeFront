@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Publish} from '../models/publish.model';
+import {map} from "rxjs/operators"
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,10 @@ export class PublishService {
   }
   listPublishByUserId(userId: number): Observable<Publish[]> {
     return this.http.get<Publish[]>("http://localhost:3000/publicacion?IdUser=" + userId.toString());
+  }
+
+  deletePublishById(id:number):Observable<Publish>
+  {
+    return this.http.delete<Publish>("http://localhost:3000/publicacion?id=" +"4")
   }
 }

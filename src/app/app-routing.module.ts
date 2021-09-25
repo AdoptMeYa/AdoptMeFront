@@ -5,6 +5,7 @@ import { MainComponent } from './components/main/main.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './guards/AuthGuard';
 import {NewPublicationComponent} from './components/new-publication/new-publication.component';
+import {PublicationsComponent } from './components/publications/publications.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -12,8 +13,9 @@ const routes: Routes = [
   {path:'signup', component: SignupComponent},
   {path:'Publication', component: NewPublicationComponent},
   // si no hay usuario logeado, no se puede entrar a main
-  {path:'main', component: MainComponent, canActivate: [AuthGuard]}
-
+  {path:'main', component: MainComponent, canActivate: [AuthGuard]},
+  {path:'PublicationsMain',component: PublicationsComponent},
+  
 
 ];
 
