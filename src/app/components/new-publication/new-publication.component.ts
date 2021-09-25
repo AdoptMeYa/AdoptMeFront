@@ -4,6 +4,7 @@ import {PublishService} from '../../services/publish.service';
 import {Publish} from '../../models/publish.model';
 import { StorageService } from 'src/app/services/storage.service';
 import { DatePipe } from '@angular/common';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-new-publication',
   templateUrl: './new-publication.component.html',
@@ -18,7 +19,8 @@ export class NewPublicationComponent implements OnInit {
   public listpublish : any;
   constructor(private formBuilder: FormBuilder, private publishService: PublishService,
     private storageservice: StorageService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.PublishForm = this.formBuilder.group({
@@ -49,7 +51,9 @@ export class NewPublicationComponent implements OnInit {
     });
     
   }
-
+  onClick(): void {
+    this.router.navigate(['PublicationsMain']);
+  }
   onSubmit(): void {
     this.submitted = true;
     this.error = null;

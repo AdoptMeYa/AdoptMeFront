@@ -42,8 +42,8 @@ export class PublishService {
     return this.http.get<Publish[]>("http://localhost:3000/publicacion?IdUser=" + userId.toString());
   }
 
-  deletePublishById(id:number):Observable<Publish>
+  deletePublishById(id: number):Observable<Publish>
   {
-    return this.http.delete<Publish>("http://localhost:3000/publicacion?id=" +"4")
+    return this.http.delete<Publish>("http://localhost:3000/publicacion/" + id.toString())
   }
 }
