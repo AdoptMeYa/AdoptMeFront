@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { PublishService } from '../../services/publish.service';
 import { Publish } from '../../models/publish.model';
 import { StorageService } from 'src/app/services/storage.service';
 import { DatePipe } from '@angular/common';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { DialogEditPublicationComponent } from '../dialog-edit-publication/dialog-edit-publication.component';
 
 @Component({
   selector: 'app-publications',
@@ -19,6 +21,7 @@ export class PublicationsComponent implements OnInit {
   constructor(
     private publishService: PublishService,
     private storageservice: StorageService,
+    public dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.publishService
@@ -43,5 +46,23 @@ export class PublicationsComponent implements OnInit {
     console.log(data);
     let index = this.names.findIndex(d => d.id === id);
     this.names.splice(index, 1); 
+  }
+  
+  openDialog(event, id:number, i: number) {
+    const dialogPosition: DialogPosition = {
+      top: event.y + 'px',
+      left: event.x + 'px'
+    }
+
+    this.dialog.open(DialogEditPublicationComponent, {
+      width: '500px',
+      data:{
+        indice: i,
+        identifacion: id,
+        array: this.names
+      }
+    }
+
+    );
   }
 }

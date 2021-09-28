@@ -15,7 +15,7 @@
             <p>Comment:{{name.Commnet}}</p>
 
             <mat-card-actions>
-                <button mat-button>Edit</button>
+                <button mat-button (click)="openDialog($event, name.id, i)">Edit</button>
                 <button id ="red"mat-button (click)="onClick(name.id, i)">Delete </button>
             </mat-card-actions>
         </mat-card>
