@@ -28,27 +28,27 @@ export class PublicationsComponent implements OnInit {
       .subscribe((data) => {
         this.listpublish = data;
         console.log(this.listpublish);
-        this.names=this.listpublish
+        this.names = this.listpublish;
       });
   }
 
   onClick(id: number, i: number): void {
     console.log(this.listpublish[i].Name);
-    alert("Publicación eliminada\nAdios " + (this.listpublish[i].Name).toString())
-    
+    alert('Publicación eliminada\nAdios ' + (this.listpublish[i].Name).toString());
+
     this.publishService.deletePublishById(id).subscribe(
       data => this.correctDelete(data, id)
     );
   }
-  private correctDelete(data: Publish, id: number){
+  private correctDelete(data: Publish, id: number): void{
     console.log('DELETE correcto');
     console.log(data);
-    let index = this.names.findIndex(d => d.id === id);
-    this.names.splice(index, 1); 
+    const index = this.names.findIndex(d => d.id === id);
+    this.names.splice(index, 1);
   }
-  
-  
 
-  
-  
+
+
+
+
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "../../models/user.model";
-import {Router} from "@angular/router";
-import { StorageService} from './../../services/storage.service';
+import { User } from '../../models/user.model';
+import {Router} from '@angular/router';
+import { StorageService} from '../../services/storage.service';
 import { PublishService } from '../../services/publish.service';
 import { Publish } from '../../models/publish.model';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -20,7 +21,7 @@ export class MainComponent implements OnInit {
   names = [];
   employeeData !: any;
   Descriptions = [];
-  public submitted: Boolean = false;
+  public submitted: boolean;
   public error: { code: number; message: string } = null;
   public listpublish: any;
   public myDate = new Date();
@@ -54,9 +55,9 @@ export class MainComponent implements OnInit {
   getUser(): any {
     return this.storageService.getCurrentUser();
   }
-  logout(){
+  logout(): void{
     this.storageService.logout();
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
   }
   onSubmit(): void {
     this.submitted = true;
@@ -68,40 +69,48 @@ export class MainComponent implements OnInit {
     if (this.PublishForm.valid){
       this.publishmodel.descripcion = this.PublishForm.value.Descripcion;
       this.publishmodel.Name = this.PublishForm.value.Name;
-      this.publishmodel.IsAtention=this.PublishForm.value.IsAtention;
-      this.publishmodel.Race=this.PublishForm.value.Race;
-      this.publishmodel.Age=this.PublishForm.value.Age;
-      this.publishmodel.Ubication=this.PublishForm.value.Ubication;
-      this.publishmodel.Commnet=this.PublishForm.value.Comment;
+      this.publishmodel.IsAtention = this.PublishForm.value.IsAtention;
+      this.publishmodel.Race = this.PublishForm.value.Race;
+      this.publishmodel.Age = this.PublishForm.value.Age;
+      this.publishmodel.Ubication = this.PublishForm.value.Ubication;
+      this.publishmodel.Commnet = this.PublishForm.value.Comment;
       let fecha: string;
       fecha = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
       const iduser = this.storageService.getCurrentUser().id;
-      this.publishService.createFormPublish(this.publishmodel.descripcion, this.publishmodel.Name, this.publishmodel.IsAtention, this.publishmodel.Race,
+      this.publishService.createFormPublish(this.publishmodel.descripcion, this.publishmodel.Name,
+        this.publishmodel.IsAtention, this.publishmodel.Race,
         this.publishmodel.Ubication, this.publishmodel.Commnet, this.publishmodel.Age, iduser, fecha.toString()).subscribe(
         data => this.correctPublishForm(data)
       );
       console.log('Valido');
-      alert("Pet added succesfully")
+      alert('Pet added succesfully');
     }
     else {
-      console.log("No Valido")
+      console.log('No Valido');
     }
+    this.publishService
+      .listPublishByUserId(this.storageService.getCurrentUser().id)
+      .subscribe((data) => {
+        this.listpublish = data;
+        console.log(this.listpublish);
+        this.names = this.listpublish;
+      });
   }
-  private correctPublishForm(data: Publish){
+  private correctPublishForm(data: Publish): void{
     console.log('Publish correcto');
     console.log(data);
   }
-  deletePublication(name:any, id: number, i: number){
-    this.publishService.deletePublishById(name.id).subscribe(res=>{
-      alert("Publication deleted")
+  deletePublication(name: any, id: number, i: number): void{
+    this.publishService.deletePublishById(name.id).subscribe(res => {
+      alert('Publication deleted');
       });
-    console.log(id)
-    console.log(i)
-    let index = this.names.findIndex(d => d.id === name.id);
-    this.names.splice(index, 1); 
+    console.log(id);
+    console.log(i);
+    const index = this.names.findIndex(d => d.id === name.id);
+    this.names.splice(index, 1);
   }
 
-  onEdit(row:any){
+  onEdit(row: any): void{
     this.publishmodel.id = row.id;
     this.PublishForm.controls['Descripcion'.toString()].setValue(row.descripcion);
     this.PublishForm.controls['Name'.toString()].setValue(row.Name);
@@ -112,41 +121,38 @@ export class MainComponent implements OnInit {
     this.PublishForm.controls['Age'.toString()].setValue(row.Age);
   }
 
-  getAllPublications(){
-    this.publishService.getPublication().subscribe(res=>{
-      this.employeeData=res;
-    })
+  getAllPublications(): void{
+    this.publishService.getPublication().subscribe(res => {
+      this.employeeData = res;
+    });
   }
-  updatePublication(){
-    console.log("Actualizando...")
+  updatePublication(): void{
+    console.log('Actualizando...');
     this.publishmodel.descripcion = this.PublishForm.value.Descripcion;
     this.publishmodel.Name = this.PublishForm.value.Name;
-    this.publishmodel.IsAtention=this.PublishForm.value.IsAtention;
-    this.publishmodel.Race=this.PublishForm.value.Race;
-    this.publishmodel.Age=this.PublishForm.value.Age;
-    this.publishmodel.Ubication=this.PublishForm.value.Ubication;
-    this.publishmodel.Commnet=this.PublishForm.value.Comment;
-    this.publishmodel.IdUser=this.storageService.getCurrentUser().id;
-    this.publishmodel.Fecha=this.datePipe.transform(this.date, 'yyyy-MM-dd');
+    this.publishmodel.IsAtention = this.PublishForm.value.IsAtention;
+    this.publishmodel.Race = this.PublishForm.value.Race;
+    this.publishmodel.Age = this.PublishForm.value.Age;
+    this.publishmodel.Ubication = this.PublishForm.value.Ubication;
+    this.publishmodel.Commnet = this.PublishForm.value.Comment;
+    this.publishmodel.IdUser = this.storageService.getCurrentUser().id;
+    this.publishmodel.Fecha = this.datePipe.transform(this.date, 'yyyy-MM-dd');
 
-    this.publishService.updatePublishbyId(this.publishmodel,this.publishmodel.id)
-      .subscribe(res=>{
-        alert("Publication updated")
+    this.publishService.updatePublishbyId(this.publishmodel, this.publishmodel.id)
+      .subscribe(res => {
+        alert('Publication updated');
         this.PublishForm.reset();
         this.getAllPublications();
-      })
-      this.publishService
+      });
+    this.publishService
       .listPublishByUserId(this.storageService.getCurrentUser().id)
       .subscribe((data) => {
         this.listpublish = data;
         console.log(this.listpublish);
-        console.log("lol")
+        console.log('lol');
         this.names = this.listpublish;
       });
-      
 
-  }
-  onClick(): void {
-    this.router.navigate(['Publication']);
+
   }
 }
