@@ -1,1 +1,92 @@
+<nav class="navbar navbar-light bg-primary" >
+  <div class="container-fluid" >
+    <h1 style="color:white">Adopt me ya!</h1>
+    <div class="d-flex">
+      <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add Publication</button>
+    </div>
+  </div>
+</nav>
 <button mat-button color="primary" (click)="onClick()">Publish</button>
+
+<div >
+  <ul >
+    <li *ngFor="let name of names; let i = index" >
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{name.Name}}</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+             alt="Photo of a Shiba Inu" />
+        <h3>Race:{{name.Race}}     </h3>
+        <h3 >Ubication:{{name.Ubication}}</h3>
+        <h3 >Age:{{name.Age}}      </h3>
+        <h3>Fecha :{{name.Fecha}}   </h3>
+        <p>Comment:{{name.Commnet}}</p>
+
+        <mat-card-actions>
+          <!-----en el edit se pega type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" para que muestre el mismo formulario del add publication------>
+          <button id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onEdit(name)">Edit</button>
+          <button id ="delete"mat-button (click)="deletePublication(name)">Delete </button>
+        </mat-card-actions>
+      </mat-card>
+    </li>
+  </ul>
+
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details of Pet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
+          <div style="display: flexbox; flex-direction: row;">
+
+            <mat-input-container [ngClass]="{'mat-input-invalid': submitted && error?.code == 1}">
+              <input mdInput type="text" formControlName="Descripcion" placeholder="Dog or Cat"/>
+            </mat-input-container>
+
+            <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+              <input mdInput type="text" formControlName="Name" placeholder="Enter Name"/>
+            </mat-input-container>
+
+            <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+              <input mdInput type="text" formControlName="IsAtention" placeholder="Require Atention"/>
+            </mat-input-container>
+
+            <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+              <input mdInput type="text" formControlName="Race" placeholder="Race"/>
+            </mat-input-container>
+
+            <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+              <input mdInput type="text" formControlName="Ubication" placeholder="Ubication"/>
+            </mat-input-container>
+
+            <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+              <input mdInput type="text" formControlName="Comment" placeholder="Commentary"/>
+            </mat-input-container>
+
+            <mat-input-container style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted && error?.code == 2}">
+              <input mdInput type="text" formControlName="Age" placeholder="Age"/>
+            </mat-input-container>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">Add</button>
+        <button type="button" class="btn btn-primary" (click)="updatePublication()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

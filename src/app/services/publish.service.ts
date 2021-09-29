@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Publish} from '../models/publish.model';
+import {map} from "rxjs/operators"
 
 @Injectable({
   providedIn: 'root'
@@ -43,20 +44,18 @@ export class PublishService {
 
   deletePublishById(id: number):Observable<Publish>
   {
-    return this.http.delete<Publish>("http://localhost:3000/publicacion/" + id.toString())
+    return this.http.delete<Publish>("http://localhost:3000/publicacion/" + id.toString());
   }
-  editPublishById(id: number, descripcion: string, Name: string, IsAtention: string, 
-    Race: string, Ubication: string, Commnet: string, Age: string, IdUser : number, Fecha: string):Observable<Publish>{
-    return this.http.put<Publish>("http://localhost:3000/publicacion/" + id.toString(), {
-      descripcion: descripcion,
-      Name: Name,
-      IsAtention: IsAtention,
-      Race: Race,
-      Ubication: Ubication,
-      Commnet: Commnet,
-      Age: Age,
-      IdUser: IdUser,
-      Fecha: Fecha
-    }) 
+  getPublication(){
+    return this.http.get<Publish[]>("http://localhost:3000/publicacion")
+      .pipe(map((res: any)=>{
+        return res;
+      }))
   }
+  updatePublishbyId(data:any,id:number){
+    return this.http.put<Publish[]>("http://localhost:3000/publicacion/"+id,data).pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
 }
