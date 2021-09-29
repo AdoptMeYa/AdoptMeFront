@@ -25,7 +25,6 @@ import { AuthInterceptor } from './interceptor/AuthInterceptor';
 import {NewPublicationComponent} from './components/new-publication/new-publication.component';
 import {PublishService} from './services/publish.service';
 import { PublicationsComponent } from './components/publications/publications.component';
-import { DialogEditPublicationComponent } from './components/dialog-edit-publication/dialog-edit-publication.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +33,8 @@ import { DialogEditPublicationComponent } from './components/dialog-edit-publica
     MainComponent,
     SignupComponent,
     NewPublicationComponent,
-    PublicationsComponent,
-    DialogEditPublicationComponent
+    PublicationsComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -45,7 +44,7 @@ import { DialogEditPublicationComponent } from './components/dialog-edit-publica
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-  ],
+  ], 
   providers: [
     AuthService, StorageService, AuthGuard, UserService, PublishService,
     {

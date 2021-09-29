@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 })
 export class MainComponent implements OnInit {
   public user: User;
+  date = new Date();
   public PublishForm: FormGroup;
   publishmodel: Publish = new Publish();
   names = [];
@@ -72,15 +73,6 @@ export class MainComponent implements OnInit {
       this.publishmodel.Age=this.PublishForm.value.Age;
       this.publishmodel.Ubication=this.PublishForm.value.Ubication;
       this.publishmodel.Commnet=this.PublishForm.value.Comment;
-      /*
-      const Descripcion: string = this.PublishForm.value.Descripcion;
-      const Name: string = this.PublishForm.value.Name;
-      const IsAtention: string = this.PublishForm.value.IsAtention;
-      const Race: string = this.PublishForm.value.Race;
-      const Age: string = this.PublishForm.value.Age;
-      const Ubication: string = this.PublishForm.value.Ubication;
-      const Comment: string = this.PublishForm.value.Comment;
-*/
       let fecha: string;
       fecha = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
       const iduser = this.storageService.getCurrentUser().id;
@@ -99,15 +91,16 @@ export class MainComponent implements OnInit {
     console.log('Publish correcto');
     console.log(data);
   }
-
-
-
-
-  deletePublication(name:any){
+  deletePublication(name:any, id: number, i: number){
     this.publishService.deletePublishById(name.id).subscribe(res=>{
       alert("Publication deleted")
-    })
+      });
+    console.log(id)
+    console.log(i)
+    let index = this.names.findIndex(d => d.id === name.id);
+    this.names.splice(index, 1); 
   }
+
   onEdit(row:any){
     this.publishmodel.id = row.id;
     this.PublishForm.controls['Descripcion'.toString()].setValue(row.descripcion);
@@ -125,6 +118,7 @@ export class MainComponent implements OnInit {
     })
   }
   updatePublication(){
+    console.log("Actualizando...")
     this.publishmodel.descripcion = this.PublishForm.value.Descripcion;
     this.publishmodel.Name = this.PublishForm.value.Name;
     this.publishmodel.IsAtention=this.PublishForm.value.IsAtention;
@@ -132,12 +126,24 @@ export class MainComponent implements OnInit {
     this.publishmodel.Age=this.PublishForm.value.Age;
     this.publishmodel.Ubication=this.PublishForm.value.Ubication;
     this.publishmodel.Commnet=this.PublishForm.value.Comment;
+    this.publishmodel.IdUser=this.storageService.getCurrentUser().id;
+    this.publishmodel.Fecha=this.datePipe.transform(this.date, 'yyyy-MM-dd');
+
     this.publishService.updatePublishbyId(this.publishmodel,this.publishmodel.id)
       .subscribe(res=>{
         alert("Publication updated")
         this.PublishForm.reset();
         this.getAllPublications();
       })
+      this.publishService
+      .listPublishByUserId(this.storageService.getCurrentUser().id)
+      .subscribe((data) => {
+        this.listpublish = data;
+        console.log(this.listpublish);
+        console.log("lol")
+        this.names = this.listpublish;
+      });
+      
 
   }
   onClick(): void {

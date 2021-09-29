@@ -3,8 +3,7 @@ import { PublishService } from '../../services/publish.service';
 import { Publish } from '../../models/publish.model';
 import { StorageService } from 'src/app/services/storage.service';
 import { DatePipe } from '@angular/common';
-import { DialogPosition, MatDialog } from '@angular/material/dialog';
-import { DialogEditPublicationComponent } from '../dialog-edit-publication/dialog-edit-publication.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-publications',
@@ -48,21 +47,8 @@ export class PublicationsComponent implements OnInit {
     this.names.splice(index, 1); 
   }
   
-  openDialog(event, id:number, i: number) {
-    const dialogPosition: DialogPosition = {
-      top: event.y + 'px',
-      left: event.x + 'px'
-    }
+  
 
-    this.dialog.open(DialogEditPublicationComponent, {
-      width: '500px',
-      data:{
-        indice: i,
-        identifacion: id,
-        array: this.names
-      }
-    }
-
-    );
-  }
+  
+  
 }

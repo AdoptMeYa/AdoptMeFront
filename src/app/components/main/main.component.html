@@ -28,7 +28,7 @@
         <mat-card-actions>
           <!-----en el edit se pega type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" para que muestre el mismo formulario del add publication------>
           <button id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onEdit(name)">Edit</button>
-          <button id ="delete"mat-button (click)="deletePublication(name)">Delete </button>
+          <button id ="delete"mat-button (click)="deletePublication(name, name.id, i)">Delete </button>
         </mat-card-actions>
       </mat-card>
     </li>

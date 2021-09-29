@@ -7,7 +7,7 @@ export class Publish {
   public Ubication: string;
   public Commnet: string;
   public Age: string;
-  public UserId: number;
-  public fecha: string;
+  public IdUser: number;
+  public Fecha: string;
   public id: number;
 }

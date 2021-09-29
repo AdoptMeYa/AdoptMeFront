@@ -53,7 +53,7 @@ export class PublishService {
       }))
   }
   updatePublishbyId(data:any,id:number){
-    return this.http.put<Publish[]>("http://localhost:3000/publicacion/"+id,data).pipe(map((res:any)=>{
+    return this.http.put<Publish>("http://localhost:3000/publicacion/"+id,data).pipe(map((res:any)=>{
       return res;
     }))
   }
