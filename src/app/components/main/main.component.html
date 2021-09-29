@@ -1,17 +1,14 @@
-<nav class="navbar navbar-light bg-primary" >
-  <div class="container-fluid" >
-    <h1 style="color:white">Adopt me ya!</h1>
-    <div class="d-flex">
-      <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add Publication</button>
-    </div>
-  </div>
-</nav>
-<button mat-button color="primary" (click)="onClick()">Publish</button>
 
-<div >
-  <ul >
-    <li *ngFor="let name of names; let i = index" >
-      <mat-card class="example-card">
+
+
+<app-main-togglenav>
+  <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" >Add Publication</button>
+<div>
+  <ul>
+    <div *ngFor="let name of names; let i = index" style="display: flex;
+  justify-content: center;
+  align-items: center; " >
+      <mat-card class="example-card" style="height:60%; width:60%; margin-bottom: 20px;">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{name.Name}}</mat-card-title>
@@ -24,22 +21,20 @@
         <h3 >Age:{{name.Age}}      </h3>
         <h3>Fecha :{{name.Fecha}}   </h3>
         <p>Comment:{{name.Commnet}}</p>
-
         <mat-card-actions>
           <!-----en el edit se pega type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" para que muestre el mismo formulario del add publication------>
           <button id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onEdit(name)">Edit</button>
           <button id ="delete"mat-button (click)="deletePublication(name, name.id, i)">Delete </button>
         </mat-card-actions>
       </mat-card>
-    </li>
+    </div>
   </ul>
 
 </div>
 
-
-
-
+</app-main-togglenav>
 <!-- Modal -->
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -47,6 +42,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Details of Pet</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
         <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
           <div style="display: flexbox; flex-direction: row;">
@@ -82,11 +78,13 @@
           </div>
         </form>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="onSubmit()">Add</button>
         <button type="button" class="btn btn-primary" (click)="updatePublication()">Update</button>
       </div>
+
     </div>
   </div>
 </div>

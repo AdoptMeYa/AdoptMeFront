@@ -15,7 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { MainComponent } from './components/main/main.component';
 // services
-import { AuthService } from './services/auth.service'
+import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
 // guards
@@ -25,6 +25,7 @@ import { AuthInterceptor } from './interceptor/AuthInterceptor';
 import {NewPublicationComponent} from './components/new-publication/new-publication.component';
 import {PublishService} from './services/publish.service';
 import { PublicationsComponent } from './components/publications/publications.component';
+import { MainTogglenavComponent } from './components/main-togglenav/main-togglenav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,8 +34,9 @@ import { PublicationsComponent } from './components/publications/publications.co
     MainComponent,
     SignupComponent,
     NewPublicationComponent,
-    PublicationsComponent
-    
+    PublicationsComponent,
+    MainTogglenavComponent
+
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { PublicationsComponent } from './components/publications/publications.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-  ], 
+  ],
   providers: [
     AuthService, StorageService, AuthGuard, UserService, PublishService,
     {

@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let name of names; let i = index">
+    <div *ngFor="let name of names; let i = index">
         <mat-card class="example-card">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
@@ -19,5 +19,5 @@
                 <button id ="red"mat-button (click)="onClick(name.id, i)">Delete </button>
             </mat-card-actions>
         </mat-card>
-    </li>
+    </div>
 </ul>
