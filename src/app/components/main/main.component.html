@@ -1,13 +1,25 @@
+<mat-toolbar color="primary">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+  >
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <span>AdoptMeYaFrontend</span>
+</mat-toolbar>
 
 
 
-<app-main-togglenav>
-  <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" >Add Publication</button>
+<button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" >Add Publication</button>
+
+<button type="button" class="btn btn-success" (click)="seeAllPublicaions()">Add Publication</button>
+
 <div>
   <ul>
-    <div *ngFor="let name of names; let i = index" style="display: flex;
-  justify-content: center;
-  align-items: center; " >
+      <div *ngFor="let name of names; let i = index" style="display: flex;
+    justify-content: center;
+    align-items: center; " >
       <mat-card class="example-card" style="height:60%; width:60%; margin-bottom: 20px;">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
@@ -31,8 +43,6 @@
   </ul>
 
 </div>
-
-</app-main-togglenav>
 <!-- Modal -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

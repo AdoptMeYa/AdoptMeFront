@@ -22,10 +22,9 @@ import { UserService } from './services/user.service';
 import { AuthGuard } from './guards/AuthGuard';
 // interceptor
 import { AuthInterceptor } from './interceptor/AuthInterceptor';
-import {NewPublicationComponent} from './components/new-publication/new-publication.component';
 import {PublishService} from './services/publish.service';
-import { PublicationsComponent } from './components/publications/publications.component';
 import { MainTogglenavComponent } from './components/main-togglenav/main-togglenav.component';
+import { ViewAllPublicationsComponent } from './components/view-all-publications/view-all-publications.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,9 +32,8 @@ import { MainTogglenavComponent } from './components/main-togglenav/main-togglen
     LoginComponent,
     MainComponent,
     SignupComponent,
-    NewPublicationComponent,
-    PublicationsComponent,
-    MainTogglenavComponent
+    MainTogglenavComponent,
+    ViewAllPublicationsComponent
 
   ],
   imports: [

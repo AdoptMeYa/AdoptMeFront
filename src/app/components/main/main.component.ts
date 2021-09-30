@@ -96,6 +96,7 @@ export class MainComponent implements OnInit {
         this.names = this.listpublish;
       });
   }
+
   private correctPublishForm(data: Publish): void{
     console.log('Publish correcto');
     console.log(data);
@@ -108,6 +109,10 @@ export class MainComponent implements OnInit {
     console.log(i);
     const index = this.names.findIndex(d => d.id === name.id);
     this.names.splice(index, 1);
+  }
+
+  seeAllPublicaions(): void{
+    this.router.navigate(['publications']);
   }
 
   onEdit(row: any): void{
