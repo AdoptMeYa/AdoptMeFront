@@ -14,7 +14,6 @@ export class MainTogglenavComponent {
       map(result => result.matches),
       shareReplay()
     );
-
   constructor(private breakpointObserver: BreakpointObserver) {}
 
 }

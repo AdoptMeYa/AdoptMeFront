@@ -60,5 +60,123 @@
       "publicacionId": 1,
       "id": 1
     }
+  ],
+  "USER":[
+    {
+      "id": 0,
+      "type": "cliente",
+      "user": "admin",
+      "password": "admin",
+      "ruc": "",
+      "dni": "4648654",
+      "phone": "965428546",
+      "email": "aaaaa@gmail.com",
+      "name": "Ricardo",
+      "lastName": "Yalico",
+      "localityId": 0
+    }
+  ],
+  "PUBLICATIONS": [
+    {
+      "id": 0,
+      "comment": "This is a comment!",
+      "petId": 0,
+      "datetime": "29/09/2021 16:20",
+      "userId": 0
+    }
+  ],
+  "PET": [
+    {
+      "id": 0,
+      "type": "perro",
+      "name": "Juanito",
+      "attention": "Si requiere",
+      "race": "chusquito",
+      "age": 2,
+      "isAdopted": "sí",
+      "userId": 0
+    }
+  ],
+  "LOCALITY": [
+    {
+      "id": 0,
+      "description": "This is a descriptión!",
+      "districtId": 0
+    }
+
+  ],
+  "DISTRICT": [
+    {
+      "id": 0,
+      "district": "Ventanilla",
+      "departmentId": 0
+    }
+  ],
+  "DEPARTMENT": [
+    {
+      "id": 0,
+      "departament": "Callao",
+      "countryId": 0
+    }
+  ],
+  "COUNTRY": [
+    {
+      "id": 0,
+      "country": "Perú"
+    }
+  ],
+  "ADVERTISEMENT": [
+    {
+      "id": 0,
+      "titled": "This is a titled!",
+      "description": "This is a descriptión!",
+      "datetime": "29/09/2021 16:20",
+      "userId": 0,
+      "listAdvertisementId": 0
+    }
+  ],
+  "LIST_ADVERTISEMENT": [
+    {
+      "id": 0,
+      "type": "advertisement provider"
+    }
+  ],
+  "TRANSACTION": [
+    {
+      "id": 0,
+      "userId": 0,
+      "datetime": "29/09/2021 16:20"
+    }
+  ],
+  "DETAIL": [
+    {
+      "id": 0,
+      "transactionId": 0,
+      "membershipId": 0
+    }
+  ],
+  "MEMBERSHIP": [
+    {
+      "id": 0,
+      "price": 18,
+      "name": "VIP Client",
+      "description": "This is a descriptión!",
+      "listMemberShipId": 0
+    }
+  ],
+  "LIST_MEMBERSHIP": [
+    {
+      "id": 0,
+      "type": "client"
+    }
+  ],
+  "ADOPTION_REQUEST": [
+    {
+      "id": 0,
+      "publicationId": 0,
+      "message": "This is a message!",
+      "userId": 0
+    }
   ]
 }
+
