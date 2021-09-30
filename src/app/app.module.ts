@@ -25,6 +25,7 @@ import { AuthInterceptor } from './interceptor/AuthInterceptor';
 import {PublishService} from './services/publish.service';
 import { MainTogglenavComponent } from './components/main-togglenav/main-togglenav.component';
 import { ViewAllPublicationsComponent } from './components/view-all-publications/view-all-publications.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ViewAllPublicationsComponent } from './components/view-all-publications
     MainComponent,
     SignupComponent,
     MainTogglenavComponent,
-    ViewAllPublicationsComponent
+    ViewAllPublicationsComponent,
+    SubscriptionsComponent
 
   ],
   imports: [

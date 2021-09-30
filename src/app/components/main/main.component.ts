@@ -115,6 +115,9 @@ export class MainComponent implements OnInit {
     this.router.navigate(['publications']);
   }
 
+  showSubscriptions(): void{
+    this.router.navigate(['subscriptions']);
+  }
   onEdit(row: any): void{
     this.publishmodel.id = row.id;
     this.PublishForm.controls['Descripcion'.toString()].setValue(row.descripcion);
