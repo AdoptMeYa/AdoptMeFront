@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 })
 export class MainComponent implements OnInit {
   public user: User;
+  public isEmpty = 1;
   date = new Date();
   public PublishForm: FormGroup;
   publishmodel: Publish = new Publish();
@@ -47,10 +48,10 @@ export class MainComponent implements OnInit {
         .listPublishByUserId(this.storageService.getCurrentUser().id)
         .subscribe((data) => {
           this.listpublish = data;
-          console.log(this.listpublish);
           this.names = this.listpublish;
+          this.isEmpty = data.length;
+          console.log(this.isEmpty);
         });
-
   }
   getUser(): any {
     return this.storageService.getCurrentUser();

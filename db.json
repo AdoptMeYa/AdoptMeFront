@@ -11,6 +11,18 @@
       "telefono": "943135843",
       "image": null,
       "id": 1
+    },
+    {
+      "email": "ricardo@gmail.com",
+      "password": "Ricardo123456",
+      "username": "Florence",
+      "rol": "cliente",
+      "cantidad publicaciones": 2,
+      "edad": 21,
+      "direccion": "Florencia",
+      "telefono": "943135843",
+      "image": null,
+      "id": 2
     }
   ],
   "publicacion": [
