@@ -8,6 +8,7 @@ import { PublishService } from '../../services/publish.service';
 })
 export class ViewAllPublicationsComponent implements OnInit {
   names = [];
+  indice = 0;
   constructor(private publishService: PublishService) { }
 
   ngOnInit(): void {
@@ -17,4 +18,8 @@ export class ViewAllPublicationsComponent implements OnInit {
     });
   }
 
+  filter(valor): void{
+    this.indice = valor;
+
+  }
 }
