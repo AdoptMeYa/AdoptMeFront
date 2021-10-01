@@ -1,13 +1,12 @@
-<mat-toolbar color="primary" style=" justify-content:space-between">
+<div class="md-form mt-0" style="align-items: center;">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" #newvalor>
+    <button type="button" class="btn btn-success"
+            (click)="filter(newvalor.value)"
+    >Filtrar
+    </button>
+</div>
 
-  <span >AdoptMeYaFrontend</span >
-</mat-toolbar>
 
-  <input type="text" id="name" name="valor" #newvalor >
-  <button type="button" class="btn btn-success"
-    (click)="filter(newvalor.value)"
-  >Search
-  </button>
 
 <div>
   <ul>
