@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.component.html',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  seeAllPublicaions(): void{
+    this.router.navigate(['publications']);
+  }
+
+  showSubscriptions(): void{
+    this.router.navigate(['subscriptions']);
+  }
+
+  showMyPublications(): void{
+    this.router.navigate(['main']);
   }
 
 }

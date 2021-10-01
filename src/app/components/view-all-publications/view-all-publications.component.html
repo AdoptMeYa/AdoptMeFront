@@ -1,3 +1,7 @@
+<mat-toolbar color="primary" style=" justify-content:space-between">
+
+  <span >AdoptMeYaFrontend</span >
+</mat-toolbar>
 
   <input type="text" id="name" name="valor" #newvalor >
   <button type="button" class="btn btn-success"
@@ -11,7 +15,7 @@
     <div *ngFor="let name of names; let i = index" style="display: flex;
     justify-content: center;
     align-items: center; " >
-      <mat-card class="example-card" style="height:60%; width:60%; margin-bottom: 20px;" *ngIf="newvalor.value==name.Age||newvalor.value==''">
+      <mat-card class="example-card" style="height:60%; width:60%; margin-bottom: 20px;" *ngIf="newvalor.value==name.Age||newvalor.value==''" >
         <mat-card-header >
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{name.Name}}</mat-card-title>
@@ -28,5 +32,5 @@
       </mat-card>
     </div>
   </ul>
-
+  <div *ngIf="names.length==0">No publicaiones</div>
 </div>
