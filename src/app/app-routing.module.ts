@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'toggle', component: MainTogglenavComponent},
   {path: 'publications', component: ViewAllPublicationsComponent},
-  {path:'subscriptions',component:SubscriptionsComponent}
+  {path: 'subscriptions', component: SubscriptionsComponent}
 ];
 
 @NgModule({

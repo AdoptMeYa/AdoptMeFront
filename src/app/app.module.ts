@@ -35,7 +35,8 @@ import { SubscriptionsComponent } from './components/subscriptions/subscriptions
     SignupComponent,
     MainTogglenavComponent,
     ViewAllPublicationsComponent,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+
 
   ],
   imports: [
