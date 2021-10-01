@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,5 +14,15 @@ export class HeaderComponent implements OnInit {
   onClick(): void {
     this.router.navigate(['signup']);
   }
+  seeAllPublicaions(): void{
+    this.router.navigate(['publications']);
+  }
 
+  showSubscriptions(): void{
+    this.router.navigate(['subscriptions']);
+  }
+
+  seeMyAllPublicaions(): void{
+    this.router.navigate(['main']);
+  }
 }
