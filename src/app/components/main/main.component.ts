@@ -26,6 +26,7 @@ export class MainComponent implements OnInit {
   public error: string = null;
   public listpublish: any;
   public myDate = new Date();
+  public exist: boolean = true;
   constructor(
     private storageService: StorageService,
     private router: Router,
@@ -49,6 +50,7 @@ export class MainComponent implements OnInit {
         .subscribe((data) => {
           this.listpublish = data;
           this.names = this.listpublish;
+          if (this.names.length == 0) {this.exist=true;}
           this.isEmpty = data.length;
           console.log(this.isEmpty);
         });
@@ -137,6 +139,8 @@ export class MainComponent implements OnInit {
     });
   }
   updatePublication(): void{
+    this.error=null;
+    if(this.PublishForm.valid){
     console.log('Actualizando...');
     this.publishmodel.descripcion = this.PublishForm.value.Descripcion;
     this.publishmodel.Name = this.PublishForm.value.Name;
@@ -162,6 +166,10 @@ export class MainComponent implements OnInit {
         console.log('lol');
         this.names = this.listpublish;
       });
+    }
+    else{
+      this.error = "Intente de nuevo";
+    }
 
 
   }

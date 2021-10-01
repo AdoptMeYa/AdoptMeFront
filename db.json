@@ -27,52 +27,28 @@
   ],
   "publicacion": [
     {
-      "descripcion": "sdf",
-      "Name": "sdfs",
-      "IsAtention": "sdf",
-      "Race": "sdf",
-      "Age": "2",
-      "Ubication": "sdfs",
-      "Commnet": "sdf",
-      "id": 6,
-      "IdUser": 1,
-      "Fecha": "2021-09-29"
-    },
-    {
-      "descripcion": "aaaaaaaaaa",
-      "Name": "aaaaaaaaaa",
-      "IsAtention": "aaaaaaaa",
-      "Race": "aaaaaaaaaa",
+      "descripcion": "Cat",
+      "Name": "Misha",
+      "IsAtention": "No",
+      "Race": "British",
+      "Ubication": "AV El polo",
+      "Commnet": "Gata seria",
       "Age": "3",
-      "Ubication": "aaaaaaaaaa",
-      "Commnet": "aaaaaaaaaa",
-      "id": 7,
       "IdUser": 1,
-      "Fecha": "2021-09-29"
+      "Fecha": "2021-09-30",
+      "id": 1
     },
     {
-      "descripcion": "ccccccccc",
-      "Name": "ccccccccc",
-      "IsAtention": "ccccccccc",
-      "Race": "ccccccccc",
-      "Age": "56",
-      "Ubication": "ccccccccc",
-      "Commnet": "ccccccccc",
-      "id": 8,
-      "IdUser": 1,
-      "Fecha": "2021-09-29"
-    },
-    {
-      "id": 9,
-      "descripcion": "bb",
-      "Name": "aa",
-      "IsAtention": "aa",
-      "Race": "aa",
+      "descripcion": "Dog",
+      "Name": "Cisco",
+      "IsAtention": "No",
+      "Race": "Pug",
+      "Ubication": "AV la encalada",
+      "Commnet": "perrito travieso y jugueton",
       "Age": "1",
-      "Ubication": "aa",
-      "Commnet": "aa",
-      "IdUser": 1,
-      "Fecha": "2021-09-30"
+      "IdUser": 2,
+      "Fecha": "2021-09-30",
+      "id": 2
     }
   ],
   "mascota": [
@@ -85,7 +61,7 @@
       "id": 1
     }
   ],
-  "USER":[
+  "USER": [
     {
       "id": 0,
       "type": "cliente",
@@ -100,34 +76,14 @@
       "localityId": 0
     }
   ],
-  "PUBLICATIONS": [
-    {
-      "id": 0,
-      "comment": "This is a comment!",
-      "petId": 0,
-      "datetime": "29/09/2021 16:20",
-      "userId": 0
-    }
-  ],
-  "PET": [
-    {
-      "id": 0,
-      "type": "perro",
-      "name": "Juanito",
-      "attention": "Si requiere",
-      "race": "chusquito",
-      "age": 2,
-      "isAdopted": "sí",
-      "userId": 0
-    }
-  ],
+  "PUBLICATIONS": [],
+  "PET": [],
   "LOCALITY": [
     {
       "id": 0,
       "description": "This is a descriptión!",
       "districtId": 0
     }
-
   ],
   "DISTRICT": [
     {
@@ -149,29 +105,14 @@
       "country": "Perú"
     }
   ],
-  "ADVERTISEMENT": [
-    {
-      "id": 0,
-      "titled": "This is a titled!",
-      "description": "This is a descriptión!",
-      "datetime": "29/09/2021 16:20",
-      "userId": 0,
-      "listAdvertisementId": 0
-    }
-  ],
+  "ADVERTISEMENT": [],
   "LIST_ADVERTISEMENT": [
     {
       "id": 0,
       "type": "advertisement provider"
     }
   ],
-  "TRANSACTION": [
-    {
-      "id": 0,
-      "userId": 0,
-      "datetime": "29/09/2021 16:20"
-    }
-  ],
+  "TRANSACTION": [],
   "DETAIL": [
     {
       "id": 0,
@@ -194,13 +135,5 @@
       "type": "client"
     }
   ],
-  "ADOPTION_REQUEST": [
-    {
-      "id": 0,
-      "publicationId": 0,
-      "message": "This is a message!",
-      "userId": 0
-    }
-  ]
+  "ADOPTION_REQUEST": []
 }
-
