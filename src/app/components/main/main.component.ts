@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
   employeeData !: any;
   Descriptions = [];
   public submitted: boolean;
-  public error: { code: number; message: string } = null;
+  public error: string = null;
   public listpublish: any;
   public myDate = new Date();
   constructor(
@@ -88,6 +88,7 @@ export class MainComponent implements OnInit {
     }
     else {
       console.log('No Valido');
+      this.error = "Ingrese los datos correctamente";
     }
     this.publishService
       .listPublishByUserId(this.storageService.getCurrentUser().id)
