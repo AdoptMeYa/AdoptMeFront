@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
   public type_pets: any[] = ['Perro', 'Gato', 'Tortuga', 'Canario', 'Loro', 'Hamster', 'Pez', 'Otro']
   public user: User;
   public isEmpty = 1;
-  // get current date 
+  // get current date
   tzoffset = (new Date()).getTimezoneOffset() * 60000;
   localISOTime = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
   date = this.localISOTime.slice(0, 19).replace('T', ' ');
@@ -42,8 +42,8 @@ export class MainComponent implements OnInit {
   public listpublish: any;
   public listpets: any;
   npets = [];
-  constructor(private storageService: StorageService, private router: Router, 
-    private publishService: PublishService, private formBuilder: FormBuilder, 
+  constructor(private storageService: StorageService, private router: Router,
+    private publishService: PublishService, private formBuilder: FormBuilder,
     private petService: PetsService) { }
 
   ngOnInit(): void {
@@ -69,11 +69,12 @@ export class MainComponent implements OnInit {
           this.names = this.listpublish;
           this.isEmpty = data.length;
         });
-      this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
+    this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
         this.listpets = data;
         this.npets = this.listpets;
-      })
+      });
   }
+
   onSubmit(): void {
     this.submitted = true;
 
@@ -81,12 +82,12 @@ export class MainComponent implements OnInit {
       alert("Publicacion creada")
       const iduser = this.storageService.getCurrentUser().id;
       this.public.comment = this.PublishForm.value.comment;
-      this.public.datetime = this.date; 
+      this.public.datetime = this.date;
       this.public.userId = iduser;
       this.publishService.CreatePublish(this.public.comment, this.public.datetime, iduser).subscribe(
         data => this.correctPublication(data)
       )
-      
+
       this.publishService.listPublishByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
           this.listpublish = data;
           this.names = this.listpublish;
@@ -97,8 +98,6 @@ export class MainComponent implements OnInit {
           });
         }
       );
-      
-    
     }
   }
 
@@ -113,16 +112,16 @@ export class MainComponent implements OnInit {
     this.pet.publicationId = data.id;
     this.petService.CreatePet(this.pet.type, this.pet.name, this.pet.attention,
       this.pet.race, this.pet.age, this.pet.isAdopted, this.pet.userId, this.pet.publicationId).subscribe();
-    
+
   }
-  
+
   deletePublication(name: any, id: number, i: number): void{
     this.publishService.deletePublishById(name.id).subscribe(data => {
       alert('Publication deleted');
       this.petService.ReadPetsByPublicationId(data.id).subscribe(cip =>{
         this.petService.DeletePet(cip.id).subscribe()
       })
- 
+
     });
     const index = this.names.findIndex(d => d.id === name.id);
     this.names.splice(index, 1);
@@ -135,7 +134,7 @@ export class MainComponent implements OnInit {
   showSubscriptions(): void{
     this.router.navigate(['subscriptions']);
   }
-  
+
   onEdit(row: any, npets: any): void{
     this.update_publish.id = row.id;
     this.update_publish.userId = row.userId;
@@ -143,7 +142,7 @@ export class MainComponent implements OnInit {
     this.update_pet.id = npets.id;
     this.update_pet.publicationId = npets.publicationId;
     this.update_pet.userId = npets.userId;
-   
+
     this.PublishForm.controls['comment'.toString()].setValue(row.comment)
     this.PublishForm.controls['type'.toString()].setValue(npets.type)
     this.PublishForm.controls['name'.toString()].setValue(npets.name)
@@ -152,7 +151,7 @@ export class MainComponent implements OnInit {
     this.PublishForm.controls['age'.toString()].setValue(npets.age)
   }
 
-  updatePublication(): void{    
+  updatePublication(): void{
     this.update_publish.comment = this.PublishForm.value.comment;
     this.update_publish.datetime = this.date;
     this.publishService.updatePublishbyId(this.update_publish.comment, this.update_publish.datetime, this.update_publish.userId, this.update_publish.id).subscribe(

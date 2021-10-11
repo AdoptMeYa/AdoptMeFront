@@ -222,5 +222,70 @@
       "listMemberShipId": 0
     }
   ],
-  "adoptionRequests": []
+  "adoptionRequests": [
+    {
+      "id": 0,
+      "uerIdFrom": 1,
+      "useridAt": 2,
+      "message": "I would like to adopt your pet",
+      "publicationId": 2,
+      "date": "11-02-2021"
+    },
+    {
+      "uerIdFrom": 1,
+      "useridAt": 4,
+      "message": "",
+      "publicationId": 4,
+      "date": "2021-10-11 09:35:29",
+      "id": 1
+    },
+    {
+      "uerIdFrom": 1,
+      "useridAt": 4,
+      "message": "Hi, I really love you lovely pet!",
+      "publicationId": 4,
+      "date": "2021-10-11 09:35:29",
+      "id": 2
+    },
+    {
+      "uerIdFrom": 1,
+      "useridAt": 2,
+      "message": "Hi,I really love your little pet!. Please contact me.",
+      "publicationId": 2,
+      "date": "2021-10-11 09:40:41",
+      "id": 3
+    },
+    {
+      "uerIdFrom": 2,
+      "useridAt": 1,
+      "message": "I am interested to adopt it!",
+      "publicationId": 11,
+      "date": "2021-10-11 09:43:38",
+      "id": 4
+    },
+    {
+      "uerIdFrom": 2,
+      "useridAt": 1,
+      "message": "I like this poor pet :(",
+      "publicationId": 12,
+      "date": "2021-10-11 09:47:22",
+      "id": 5
+    },
+    {
+      "uerIdFrom": 2,
+      "useridAt": 1,
+      "message": "Misha looks so funny",
+      "publicationId": 13,
+      "date": "2021-10-11 09:51:34",
+      "id": 6
+    },
+    {
+      "uerIdFrom": 2,
+      "useridAt": 4,
+      "message": "Only a little proof",
+      "publicationId": 4,
+      "date": "2021-10-11 09:51:34",
+      "id": 7
+    }
+  ]
 }
