@@ -1,114 +1,129 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
+import { Pet } from '../../models/pet.model';
 import {Router} from '@angular/router';
 import { StorageService} from '../../services/storage.service';
 import { PublishService } from '../../services/publish.service';
-import { Publish } from '../../models/publish.model';
-import {Validators, FormGroup, FormBuilder} from '@angular/forms';
-import { DatePipe } from '@angular/common';
-
+import { PetsService } from '../../services/pets.service';
+import { Publish, Publication } from '../../models/publish.model';
+import { Validators, FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css'],
-  providers: [DatePipe],
+  styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  public matcher1 = new MyErrorStateMatcher();
+  public need_atention: any[] = ['Yes', 'No'];
+  public type_pets: any[] = ['Perro', 'Gato', 'Tortuga', 'Canario', 'Loro', 'Hamster', 'Pez', 'Otro']
   public user: User;
   public isEmpty = 1;
-  date = new Date();
+  // get current date 
+  tzoffset = (new Date()).getTimezoneOffset() * 60000;
+  localISOTime = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
+  date = this.localISOTime.slice(0, 19).replace('T', ' ');
   public PublishForm: FormGroup;
   publishmodel: Publish = new Publish();
+  update_publish : Publication = new Publication();
+  update_pet : Pet = new Pet();
+  public: Publication = new Publication();
+  pet: Pet = new Pet();
   names = [];
   employeeData !: any;
   Descriptions = [];
   public submitted: boolean;
-  public error: string = null;
   public listpublish: any;
-  public myDate = new Date();
-  public exist: boolean = true;
-  constructor(
-    private storageService: StorageService,
-    private router: Router,
-    private publishService: PublishService,
-    private datePipe: DatePipe,
-    private formBuilder: FormBuilder
-  ) { }
+  public listpets: any;
+  npets = [];
+  constructor(private storageService: StorageService, private router: Router, 
+    private publishService: PublishService, private formBuilder: FormBuilder, 
+    private petService: PetsService) { }
 
   ngOnInit(): void {
     this.PublishForm = this.formBuilder.group({
-      Descripcion: ['', Validators.required],
-      Name: ['', Validators.required],
-      IsAtention: ['', Validators.required],
-      Race: ['', Validators.required],
-      Ubication: ['', Validators.required],
-      Comment: ['', Validators.required],
-      Age: ['', Validators.required]
+      // PUBLICATION
+      comment: ['', Validators.required],
+      // datetime
+      // userid
+      //id
+
+      // PET
+      type: ['', Validators.required],
+      name: ['', Validators.required],
+      attention: ['', Validators.required],
+      race: [''],
+      age: ['', [Validators.required, Validators.min(0), Validators.max(70)]]
+      // is adopted: no
+      // userId
+      // publicationId
     }),
-      this.publishService
-        .listPublishByUserId(this.storageService.getCurrentUser().id)
-        .subscribe((data) => {
+      this.publishService.listPublishByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
           this.listpublish = data;
           this.names = this.listpublish;
-          if (this.names.length == 0) {this.exist=true;}
           this.isEmpty = data.length;
-          console.log(this.isEmpty);
         });
-  }
-  getUser(): any {
-    return this.storageService.getCurrentUser();
-  }
-  logout(): void{
-    this.storageService.logout();
-    this.router.navigate(['login']);
+      this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
+        this.listpets = data;
+        this.npets = this.listpets;
+      })
   }
   onSubmit(): void {
     this.submitted = true;
-    this.error = null;
-
-    /*
-    funciona esta cosa
-     */
-    if (this.PublishForm.valid){
-      this.publishmodel.descripcion = this.PublishForm.value.Descripcion;
-      this.publishmodel.Name = this.PublishForm.value.Name;
-      this.publishmodel.IsAtention = this.PublishForm.value.IsAtention;
-      this.publishmodel.Race = this.PublishForm.value.Race;
-      this.publishmodel.Age = this.PublishForm.value.Age;
-      this.publishmodel.Ubication = this.PublishForm.value.Ubication;
-      this.publishmodel.Commnet = this.PublishForm.value.Comment;
-      let fecha: string;
-      fecha = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+    console.log(this.PublishForm.value)
+    if (this.PublishForm.valid) {
+      alert("Publicacion creada")
       const iduser = this.storageService.getCurrentUser().id;
-      this.publishService.createFormPublish(this.publishmodel.descripcion, this.publishmodel.Name,
-        this.publishmodel.IsAtention, this.publishmodel.Race,
-        this.publishmodel.Ubication, this.publishmodel.Commnet, this.publishmodel.Age, iduser, fecha.toString()).subscribe(
-        data => this.correctPublishForm(data)
+      this.public.comment = this.PublishForm.value.comment;
+      this.public.datetime = this.date; 
+      this.public.userId = iduser;
+      this.publishService.CreatePublish(this.public.comment, this.public.datetime, iduser).subscribe(
+        data => this.correctPublication(data)
+      )
+      
+      this.publishService.listPublishByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
+          this.listpublish = data;
+          this.names = this.listpublish;
+
+          this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
+            this.listpets = data;
+            this.npets = this.listpets;
+          });
+        }
       );
-      console.log('Valido');
-      alert('Pet added succesfully');
+      
+    
     }
-    else {
-      console.log('No Valido');
-      this.error = "Ingrese los datos correctamente";
-    }
-    this.publishService
-      .listPublishByUserId(this.storageService.getCurrentUser().id)
-      .subscribe((data) => {
-        this.listpublish = data;
-        console.log(this.listpublish);
-        this.names = this.listpublish;
-      });
   }
 
-  private correctPublishForm(data: Publish): void{
-    console.log('Publish correcto');
-    console.log(data);
+  private correctPublication(data: Publication): void{
+    this.pet.type = this.PublishForm.value.type
+    this.pet.name = this.PublishForm.value.name
+    this.pet.attention = this.PublishForm.value.attention
+    this.pet.race = this.PublishForm.value.race;
+    this.pet.age = this.PublishForm.value.age;
+    this.pet.isAdopted = "No"
+    this.pet.userId = data.userId;
+    this.pet.publicationId = data.id;
+    this.petService.CreatePet(this.pet.type, this.pet.name, this.pet.attention,
+      this.pet.race, this.pet.age, this.pet.isAdopted, this.pet.userId, this.pet.publicationId).subscribe();
+    
   }
+  
   deletePublication(name: any, id: number, i: number): void{
-    this.publishService.deletePublishById(name.id).subscribe(res => {
+    this.publishService.deletePublishById(name.id).subscribe(data => {
       alert('Publication deleted');
-      });
+      this.petService.ReadPetsByPublicationId(data.id).subscribe(cip =>{
+        this.petService.DeletePet(cip.id).subscribe()
+      })
+ 
+    });
     console.log(id);
     console.log(i);
     const index = this.names.findIndex(d => d.id === name.id);
@@ -122,15 +137,20 @@ export class MainComponent implements OnInit {
   showSubscriptions(): void{
     this.router.navigate(['subscriptions']);
   }
-  onEdit(row: any): void{
-    this.publishmodel.id = row.id;
-    this.PublishForm.controls['Descripcion'.toString()].setValue(row.descripcion);
-    this.PublishForm.controls['Name'.toString()].setValue(row.Name);
-    this.PublishForm.controls['IsAtention'.toString()].setValue(row.IsAtention);
-    this.PublishForm.controls['Race'.toString()].setValue(row.Race);
-    this.PublishForm.controls['Ubication'.toString()].setValue(row.Ubication);
-    this.PublishForm.controls['Comment'.toString()].setValue(row.Commnet);
-    this.PublishForm.controls['Age'.toString()].setValue(row.Age);
+  
+  onEdit(row: any, npets: any): void{
+    this.update_publish.id = row.id;
+    this.update_publish.userId = row.userId;
+    this.update_pet.id = npets.id;
+    this.update_pet.publicationId = npets.publicationId;
+    this.update_pet.userId = npets.userId;
+    console.log(row.id, row.userId, npets.id, npets.publicationId, npets.userId)
+    this.PublishForm.controls['comment'.toString()].setValue(row.comment)
+    this.PublishForm.controls['type'.toString()].setValue(npets.type)
+    this.PublishForm.controls['name'.toString()].setValue(npets.name)
+    this.PublishForm.controls['attention'.toString()].setValue(npets.attention)
+    this.PublishForm.controls['race'.toString()].setValue(npets.race)
+    this.PublishForm.controls['age'.toString()].setValue(npets.age)
   }
 
   getAllPublications(): void{
@@ -138,39 +158,37 @@ export class MainComponent implements OnInit {
       this.employeeData = res;
     });
   }
-  updatePublication(): void{
-    this.error=null;
-    if(this.PublishForm.valid){
-    console.log('Actualizando...');
-    this.publishmodel.descripcion = this.PublishForm.value.Descripcion;
-    this.publishmodel.Name = this.PublishForm.value.Name;
-    this.publishmodel.IsAtention = this.PublishForm.value.IsAtention;
-    this.publishmodel.Race = this.PublishForm.value.Race;
-    this.publishmodel.Age = this.PublishForm.value.Age;
-    this.publishmodel.Ubication = this.PublishForm.value.Ubication;
-    this.publishmodel.Commnet = this.PublishForm.value.Comment;
-    this.publishmodel.IdUser = this.storageService.getCurrentUser().id;
-    this.publishmodel.Fecha = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+  updatePublication(): void{    
+    console.log('Actualizando...');     
+    this.update_publish.comment = this.PublishForm.value.comment;
+    this.update_publish.datetime = this.date;
+    this.publishService.updatePublishbyId(this.update_publish.comment, this.update_publish.datetime, this.update_publish.userId, this.update_publish.id).subscribe(
+      data => {
+        this.petService.ReadPetsByPublicationId(data.id).subscribe(cip =>{
+          this.update_pet.age = this.PublishForm.value.age;
+          this.update_pet.attention = this.PublishForm.value.attention;
+          this.update_pet.isAdopted = this.PublishForm.value.isAdopted;
+          this.update_pet.name = this.PublishForm.value.name;
+          this.update_pet.race = this.PublishForm.value.race;
+          this.update_pet.type = this.PublishForm.value.type;
+          let aux_id = cip.id;
 
-    this.publishService.updatePublishbyId(this.publishmodel, this.publishmodel.id)
-      .subscribe(res => {
-        alert('Publication updated');
-        this.PublishForm.reset();
-        this.getAllPublications();
-      });
-    this.publishService
-      .listPublishByUserId(this.storageService.getCurrentUser().id)
-      .subscribe((data) => {
+          this.petService.UpdatePetById(this.update_pet.type, this.update_pet.name, this.update_pet.attention, this.update_pet.race, this.update_pet.age,
+            this.update_pet.isAdopted, this.update_pet.userId, this.update_pet.publicationId, aux_id).subscribe()
+        })
+      }
+    );
+    this.publishService.listPublishByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
         this.listpublish = data;
-        console.log(this.listpublish);
-        console.log('lol');
         this.names = this.listpublish;
+        this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
+          this.listpets = data;
+          this.npets = this.listpets;
+        });
       });
-    }
-    else{
-      this.error = "Intente de nuevo";
-    }
-
+    
+  
+   
 
   }
 }

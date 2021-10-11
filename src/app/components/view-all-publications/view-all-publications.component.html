@@ -7,29 +7,28 @@
 </div>
 
 
-
 <div>
   <ul>
-
-    <div *ngFor="let name of names; let i = index" style="display: flex;
-    justify-content: center;
-    align-items: center; " >
-      <mat-card class="example-card" style="height:60%; width:60%; margin-bottom: 20px;" *ngIf="newvalor.value==name.Age||newvalor.value==''" >
-        <mat-card-header >
+    <div *ngFor="let name of names;let i = index" style="display: flex; justify-content: center; align-items: center; ">
+      <mat-card class="example-card" style="height:60%; width:60%; margin-bottom: 20px;">
+        <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{name.Name}}</mat-card-title>
-          <mat-card-subtitle>{{name.descripcion}}</mat-card-subtitle>
+          <mat-card-title *ngIf="listpets">{{listpets[i].name}}</mat-card-title>
+          <mat-card-subtitle>{{names[i].comment}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-             alt="Photo of a Shiba Inu" />
-        <h3>Race:{{name.Race}}     </h3>
-        <h3 >Ubication:{{name.Ubication}}</h3>
-        <h3 >Age:{{name.Age}}      </h3>
-        <h3>Fecha :{{name.Fecha}}   </h3>
-        <p>Comment:{{name.Commnet}}</p>
-
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
+          <h3 *ngIf="listpets">Especie: {{listpets[i].type}}</h3>
+          <h3 *ngIf="listpets && listpets[i].race !== '' ">Race: {{listpets[i].race}} </h3>
+          <h3 *ngIf="listpets" >Attention: {{listpets[i].attention}}</h3>
+          <h3 *ngIf="listpets">Age: {{listpets[i].age}}</h3>
+          <h3 *ngIf="listpets">Adopted: {{listpets[i].isAdopted}}</h3>
+          <h3>Date publication: {{names[i].datetime}}</h3>
       </mat-card>
     </div>
   </ul>
   <div *ngIf="names.length==0">No existen datos </div>
 </div>
+
+
+
+

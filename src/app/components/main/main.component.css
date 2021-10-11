@@ -8,4 +8,11 @@
 }
 
 .exampleModal { background-color:red }
+.red{
+  color: red;
+}
+.flexbox{
+  display: flex; 
+  flex-direction: row;
+}
 

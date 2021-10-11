@@ -1,30 +1,4 @@
 {
-  "users": [
-    {
-      "email": "Nightingale@gmail.com",
-      "password": "$2a$10$yxNdHfZico28Ad1Y8K.xDuEEMIYbGkzJkHtZdNhFuEO1S7qKw0LUy",
-      "username": "Florence",
-      "rol": "cliente",
-      "cantidad publicaciones": 0,
-      "edad": 21,
-      "direccion": "Florencia",
-      "telefono": "943135843",
-      "image": null,
-      "id": 1
-    },
-    {
-      "email": "ricardo@gmail.com",
-      "password": "Ricardo123456",
-      "username": "Florence",
-      "rol": "cliente",
-      "cantidad publicaciones": 2,
-      "edad": 21,
-      "direccion": "Florencia",
-      "telefono": "943135843",
-      "image": null,
-      "id": 2
-    }
-  ],
   "publicacion": [
     {
       "descripcion": "Cat",
@@ -51,76 +25,183 @@
       "id": 2
     }
   ],
-  "mascota": [
+  "users": [
     {
-      "descripcion": "Test mascota",
-      "raza": "pug",
-      "tamaño": 30,
-      "imagen": null,
-      "publicacionId": 1,
-      "id": 1
-    }
-  ],
-  "USER": [
-    {
-      "id": 0,
+      "email": "aaaaa@gmail.com",
+      "password": "$2a$10$u3wb.PzNZtuamd5W/c5E8OkCU39rhXv1hdHAgvuDCjHp.ag8RE3ua",
+      "id": 1,
       "type": "cliente",
       "user": "admin",
-      "password": "admin",
       "ruc": "",
       "dni": "4648654",
       "phone": "965428546",
-      "email": "aaaaa@gmail.com",
       "name": "Ricardo",
       "lastName": "Yalico",
-      "localityId": 0
+      "districtId": 2
+    },
+    {
+      "email": "cliente1@gmail.com",
+      "password": "$2a$10$W3JHMolwrYbGs3MdIHcUnOs..j4.zsjCTBjNQMXll7Gc0tMZn86C2",
+      "type": "cliente",
+      "user": "admin",
+      "ruc": "",
+      "dni": "4648654",
+      "phone": "965428546",
+      "name": "Ricardo",
+      "lastName": "Yalico",
+      "id": 2,
+      "districtId": 3
+    },
+    {
+      "email": "oz@gmail.com",
+      "password": "$2a$10$rQPWTdlIDsc05Ujfg/wbFO.0vNscoiGu4A2.icO70zkqVEHQYoj2u",
+      "name": "Hernan",
+      "lastname": "Razo",
+      "type": "cliente",
+      "user": "basic",
+      "dni": "12345678",
+      "phone": "945373426",
+      "id": 4,
+      "districtId": 4
     }
   ],
-  "PUBLICATIONS": [],
-  "PET": [],
-  "LOCALITY": [
+  "publications": [
+    {
+      "comment": "This is a comment!",
+      "datetime": "2021-10-08 01:51:05",
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "comment": "This is a comment!",
+      "datetime": "2021-10-08 01:51:05",
+      "userId": 4,
+      "id": 4
+    },
+    {
+      "comment": "Busco adoptante responsable",
+      "datetime": "2021-10-09 05:19:58",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "comment": "Ayuda con gatito, necesito a alguien que lo pueda adoptar",
+      "datetime": "2021-10-10 21:05:44",
+      "userId": 1,
+      "id": 11
+    },
+    {
+      "comment": "Cuiden de este cachorrito",
+      "datetime": "2021-10-10 18:51:37",
+      "userId": 1,
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "comment": "busco adoptante responsable",
+      "datetime": "2021-10-10 20:04:46",
+      "id": 13
+    }
+  ],
+  "pets": [
     {
       "id": 0,
-      "description": "This is a descriptión!",
-      "districtId": 0
+      "type": "perro",
+      "name": "Juanito",
+      "attention": "Yes",
+      "race": "chusquito",
+      "age": 2,
+      "isAdopted": "Yes",
+      "userId": 2,
+      "publicationId": 2
+    },
+    {
+      "id": 3,
+      "type": "perro",
+      "name": "Juanito",
+      "attention": "Yes",
+      "race": "chusquito",
+      "age": 2,
+      "isAdopted": "Yes",
+      "userId": 4,
+      "publicationId": 4
+    },
+    {
+      "type": "perro",
+      "name": "Cisco",
+      "attention": "yes",
+      "race": "Pug",
+      "age": "3",
+      "isAdopted": "No",
+      "userId": 1,
+      "publicationId": 7,
+      "id": 4
+    },
+    {
+      "type": "gato",
+      "name": "pupi",
+      "attention": "Yes",
+      "race": "",
+      "age": 2,
+      "isAdopted": "No",
+      "userId": 1,
+      "publicationId": 11,
+      "id": 7
+    },
+    {
+      "type": "Perro",
+      "name": "mumi",
+      "attention": "No",
+      "race": "pug",
+      "age": 1,
+      "isAdopted": "No",
+      "userId": 1,
+      "publicationId": 12,
+      "id": 8
+    },
+    {
+      "type": "Gato",
+      "name": "misha",
+      "attention": "Yes",
+      "race": "british",
+      "age": 6,
+      "isAdopted": "No",
+      "userId": 1,
+      "publicationId": 13,
+      "id": 9
     }
   ],
-  "DISTRICT": [
+  "districts": [
     {
       "id": 0,
       "district": "Ventanilla",
-      "departmentId": 0
-    }
-  ],
-  "DEPARTMENT": [
+      "description": "This is a descriptión!"
+    },
     {
-      "id": 0,
-      "departament": "Callao",
-      "countryId": 0
-    }
-  ],
-  "COUNTRY": [
+      "id": 1,
+      "district": "barranco",
+      "description": "This is a descriptión!"
+    },
     {
-      "id": 0,
-      "country": "Perú"
-    }
-  ],
-  "ADVERTISEMENT": [],
-  "LIST_ADVERTISEMENT": [
+      "id": 2,
+      "district": "miraflores",
+      "description": "This is a descriptión!"
+    },
     {
-      "id": 0,
-      "type": "advertisement provider"
-    }
-  ],
-  "TRANSACTION": [],
-  "DETAIL": [
+      "id": 3,
+      "district": "surquillo",
+      "description": "This is a descriptión!"
+    },
     {
-      "id": 0,
-      "transactionId": 0,
-      "membershipId": 0
+      "id": 4,
+      "district": "san isidro",
+      "description": "This is a descriptión!"
     }
   ],
-  "MEMBERSHIP": [
+  "advertisements": [],
+  "transactions": [],
+  "details": [],
+  "memberships": [
     {
       "id": 0,
       "price": 18,
@@ -129,11 +210,5 @@
       "listMemberShipId": 0
     }
   ],
-  "LIST_MEMBERSHIP": [
-    {
-      "id": 0,
-      "type": "client"
-    }
-  ],
-  "ADOPTION_REQUEST": []
+  "adoptionRequests": []
 }

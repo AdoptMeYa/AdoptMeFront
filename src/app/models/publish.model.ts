@@ -11,3 +11,9 @@ export class Publish {
   public Fecha: string;
   public id: number;
 }
+export class Publication {
+  public comment: string;  
+  public datetime: string;
+  public userId: number;
+  public id: number;
+}

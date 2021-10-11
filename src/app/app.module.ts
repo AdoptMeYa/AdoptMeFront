@@ -26,6 +26,7 @@ import {PublishService} from './services/publish.service';
 import { MainTogglenavComponent } from './components/main-togglenav/main-togglenav.component';
 import { ViewAllPublicationsComponent } from './components/view-all-publications/view-all-publications.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { SubscriptionsComponent } from './components/subscriptions/subscriptions
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -9,6 +9,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 100%;
   }
   
-  .aligner-item {
+.aligner-item {
     max-width: 50%;
-  }
+}
+.cdk-global-overlay-wrapper {
+  z-index: 1000 !important;
+}
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}

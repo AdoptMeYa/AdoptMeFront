@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
 import {Session, SessionContainer }from "../models/session.model";
+import { User } from "../models/user.model";
+import { distinctUntilChanged } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +15,10 @@ export class AuthService {
   login(email: string, password: string): Observable<Session> {
     return this.http.post<Session>(this.basePath + 'login', {email: email, password: password})
   }
-  signup(email: string, password: string): Observable<Session> {
+  signup(name: string, lastname: string, email: string, password: string, type: string, user: string, ruc: string, dni: string, phone: string, locationId: number): Observable<Session> {
     return this.http.post<Session>(this.basePath + 'signup', {
-      email: email, password: password
-    }
-    )
+      name: name, lastname: lastname, email: email, password: password, type: type, user: user, ruc: ruc, dni: dni, phone: phone, locationId: locationId
+    })
   }
 
   /*
