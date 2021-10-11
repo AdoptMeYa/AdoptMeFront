@@ -113,6 +113,7 @@
       "age": 2,
       "isAdopted": "Yes",
       "userId": 2,
+      "isPublished": true,
       "publicationId": 2
     },
     {
@@ -124,6 +125,7 @@
       "age": 2,
       "isAdopted": "Yes",
       "userId": 4,
+      "isPublished": true,
       "publicationId": 4
     },
     {
@@ -134,6 +136,7 @@
       "age": "3",
       "isAdopted": "No",
       "userId": 1,
+      "isPublished": true,
       "publicationId": 7,
       "id": 4
     },
@@ -145,6 +148,7 @@
       "age": 2,
       "isAdopted": "No",
       "userId": 1,
+      "isPublished": true,
       "publicationId": 11,
       "id": 7
     },
@@ -156,6 +160,7 @@
       "age": 1,
       "isAdopted": "No",
       "userId": 1,
+      "isPublished": true,
       "publicationId": 12,
       "id": 8
     },
@@ -167,6 +172,7 @@
       "age": 6,
       "isAdopted": "No",
       "userId": 1,
+      "isPublished": true,
       "publicationId": 13,
       "id": 9
     }
