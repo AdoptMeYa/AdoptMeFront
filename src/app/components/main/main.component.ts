@@ -76,7 +76,7 @@ export class MainComponent implements OnInit {
   }
   onSubmit(): void {
     this.submitted = true;
-    console.log(this.PublishForm.value)
+
     if (this.PublishForm.valid) {
       alert("Publicacion creada")
       const iduser = this.storageService.getCurrentUser().id;
@@ -124,8 +124,6 @@ export class MainComponent implements OnInit {
       })
  
     });
-    console.log(id);
-    console.log(i);
     const index = this.names.findIndex(d => d.id === name.id);
     this.names.splice(index, 1);
   }
@@ -141,10 +139,11 @@ export class MainComponent implements OnInit {
   onEdit(row: any, npets: any): void{
     this.update_publish.id = row.id;
     this.update_publish.userId = row.userId;
+
     this.update_pet.id = npets.id;
     this.update_pet.publicationId = npets.publicationId;
     this.update_pet.userId = npets.userId;
-    console.log(row.id, row.userId, npets.id, npets.publicationId, npets.userId)
+   
     this.PublishForm.controls['comment'.toString()].setValue(row.comment)
     this.PublishForm.controls['type'.toString()].setValue(npets.type)
     this.PublishForm.controls['name'.toString()].setValue(npets.name)
@@ -153,28 +152,20 @@ export class MainComponent implements OnInit {
     this.PublishForm.controls['age'.toString()].setValue(npets.age)
   }
 
-  getAllPublications(): void{
-    this.publishService.getPublication().subscribe(res => {
-      this.employeeData = res;
-    });
-  }
   updatePublication(): void{    
-    console.log('Actualizando...');     
     this.update_publish.comment = this.PublishForm.value.comment;
     this.update_publish.datetime = this.date;
     this.publishService.updatePublishbyId(this.update_publish.comment, this.update_publish.datetime, this.update_publish.userId, this.update_publish.id).subscribe(
       data => {
-        this.petService.ReadPetsByPublicationId(data.id).subscribe(cip =>{
+        this.petService.ReadPetsByPublicationId(data.id).subscribe(data =>{
           this.update_pet.age = this.PublishForm.value.age;
           this.update_pet.attention = this.PublishForm.value.attention;
           this.update_pet.isAdopted = this.PublishForm.value.isAdopted;
           this.update_pet.name = this.PublishForm.value.name;
           this.update_pet.race = this.PublishForm.value.race;
           this.update_pet.type = this.PublishForm.value.type;
-          let aux_id = cip.id;
-
           this.petService.UpdatePetById(this.update_pet.type, this.update_pet.name, this.update_pet.attention, this.update_pet.race, this.update_pet.age,
-            this.update_pet.isAdopted, this.update_pet.userId, this.update_pet.publicationId, aux_id).subscribe()
+            this.update_pet.isAdopted, this.update_pet.userId, this.update_pet.publicationId, this.update_pet.id).subscribe()
         })
       }
     );
@@ -185,10 +176,7 @@ export class MainComponent implements OnInit {
           this.listpets = data;
           this.npets = this.listpets;
         });
-      });
-    
-  
-   
-
+      }
+      );
   }
 }

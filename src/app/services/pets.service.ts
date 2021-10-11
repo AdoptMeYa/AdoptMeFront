@@ -34,8 +34,9 @@ export class PetsService {
   ReadPetsByUserId(id: number): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.basePath + this.apiEndPoint + "?userId=" + id.toString())
   }
-  UpdatePetById(type: string, name: string, attention: string, race: string, age: number, isAdopted: string, userId: number, publicationId: number, id: number): Observable<Publication> {
-    return this.http.put<Publication>(this.basePath + this.apiEndPoint + "/" + id.toString(), {
+  UpdatePetById(type: string, name: string, attention: string, race: string, 
+    age: number, isAdopted: string, userId: number, publicationId: number, id: number): Observable<Publication> {
+    return this.http.put<Publication>("http://localhost:3000/pets/" + id.toString(), {
       type: type,
       name: name,
       attention: attention,
@@ -44,8 +45,6 @@ export class PetsService {
       isAdopted: isAdopted,
       userId: userId,
       publicationId: publicationId
-
-
     })
   }
   DeletePet(id: number): Observable<Pet> {
