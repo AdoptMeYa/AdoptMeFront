@@ -46,14 +46,19 @@
                     </mat-error>
                 </mat-form-field>
 
+           
+
                 <mat-form-field class="flexbox" appearance="fill">
                     <mat-label>Type</mat-label>
-                    <mat-select [(value)]="selection" (selectionChange)="disable($event.value)">
-                      <mat-option value="cliente">Cliente</mat-option>
-                      <mat-option value="veterinario">Veterinario</mat-option>
-                      <mat-option value="proveedor">Proveedor</mat-option>
+                    <mat-select formControlName="type" [errorStateMatcher] = "matcher" > 
+                      <mat-option *ngFor="let pos of type_user" [value]="pos" (click)="disable(pos)">
+                        {{pos}}
+                      </mat-option>
                     </mat-select>
-                </mat-form-field>
+                    <mat-error *ngIf="submitted && signupForm.controls.type.hasError('required')">
+                      Field is mandatory
+                    </mat-error>
+                  </mat-form-field>
 
 
                 <mat-form-field class="flexbox" appearance="fill">

@@ -1,12 +1,11 @@
-
-
-
 <mat-toolbar color="primary" style=" justify-content:space-between; ">
-  <div >
+  <span>AdoptMeYaFrontend</span>
+  <div *ngIf="getRouter().url !== '/login' && getRouter().url != '/signup'">
     <button style="margin: 5px" type="button" class="btn btn-success" (click)="seeMyAllPublicaions()">Mis Publicaciones</button>
     <button style="margin: 5px" type="button" class="btn btn-success" (click)="seeAllPublicaions()">Search</button>
     <button style="margin: 5px" type="button" class="btn btn-success"(click)="showSubscriptions()" >Subscriptions</button>
   </div>
+  <span *ngIf="getRouter().url !== '/login' && getRouter().url != '/signup'"><button style="margin: 5px" type="button" class="btn btn-success" (click)="logout()">Logout</button></span>
 
-  <span >AdoptMeYaFrontend</span >
+  
 </mat-toolbar>

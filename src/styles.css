@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   
 .aligner-item {
-    max-width: 50%;
+    max-width: 100%;
 }
 .cdk-global-overlay-wrapper {
   z-index: 1000 !important;

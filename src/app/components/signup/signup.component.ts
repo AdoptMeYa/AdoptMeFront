@@ -1,14 +1,23 @@
 import {Component, OnInit } from "@angular/core";
-import {Validators, FormGroup, FormBuilder } from "@angular/forms";
+import {Validators, FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm } from "@angular/forms";
 import {AuthService} from "./../../services/auth.service";
 import {Router} from "@angular/router";
 import { Session } from "../../models/session.model";
+import { ErrorStateMatcher } from "@angular/material/core";
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  public matcher = new MyErrorStateMatcher();
+  public type_user: any[] = ['Cliente', 'Veterinario', 'Proveedor'];
   public signupForm: FormGroup;
   public submitted: Boolean = false;
   selection: string = "cliente";
@@ -29,18 +38,19 @@ export class SignupComponent implements OnInit {
     })
     this.signupForm.controls['ruc'].disable()
   }
-  disable($event){
-    if ($event == "cliente") {
-      this.signupForm.controls['ruc'].disable()
-    }
-    else{
+  disable(val: any){
+    if (val != "Cliente") {
       this.signupForm.controls['ruc'].enable()
     }
-    return $event;
+    else{
+      this.signupForm.controls['ruc'].disable()
+    }
   }
   onSubmit(): void {
     this.submitted = true;
     console.log("click signup")
+    console.log(this.signupForm.value)
+    if (this.signupForm.valid){
     
       let name: string = this.signupForm.value.name;
       let lastname: string = this.signupForm.value.lastname;
@@ -56,6 +66,7 @@ export class SignupComponent implements OnInit {
       this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, locationId).subscribe(
         data => this.correctSignup(data)
       )
+    }
     
   }
   private correctSignup(data: Session){

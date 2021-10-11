@@ -1,4 +1,30 @@
 {
+  "publicacion": [
+    {
+      "descripcion": "Cat",
+      "Name": "Misha",
+      "IsAtention": "No",
+      "Race": "British",
+      "Ubication": "AV El polo",
+      "Commnet": "Gata seria",
+      "Age": "3",
+      "IdUser": 1,
+      "Fecha": "2021-09-30",
+      "id": 1
+    },
+    {
+      "descripcion": "Dog",
+      "Name": "Cisco",
+      "IsAtention": "No",
+      "Race": "Pug",
+      "Ubication": "AV la encalada",
+      "Commnet": "perrito travieso y jugueton",
+      "Age": "1",
+      "IdUser": 2,
+      "Fecha": "2021-09-30",
+      "id": 2
+    }
+  ],
   "users": [
     {
       "email": "aaaaa@gmail.com",
@@ -37,6 +63,19 @@
       "phone": "945373426",
       "id": 4,
       "districtId": 4
+    },
+    {
+      "email": "thebest@gmail.com",
+      "password": "$2a$10$7xbubmWXOvEmMM0C7V0EDOcCFMWCU3Z2D3CVwSHYhPuAf0ltSYlq6",
+      "name": "Fifi",
+      "lastname": "thebest",
+      "type": "cliente",
+      "user": "basic",
+      "ruc": "12345676765",
+      "dni": "65654522",
+      "phone": "434353453",
+      "locationId": 0,
+      "id": 5
     }
   ],
   "publications": [
@@ -87,7 +126,6 @@
       "age": 2,
       "isAdopted": "Yes",
       "userId": 2,
-      "isPublished": true,
       "publicationId": 2
     },
     {
@@ -99,7 +137,6 @@
       "age": 2,
       "isAdopted": "Yes",
       "userId": 4,
-      "isPublished": true,
       "publicationId": 4
     },
     {
@@ -110,7 +147,6 @@
       "age": "3",
       "isAdopted": "No",
       "userId": 1,
-      "isPublished": true,
       "publicationId": 7,
       "id": 4
     },
@@ -122,7 +158,6 @@
       "age": 2,
       "isAdopted": "No",
       "userId": 1,
-      "isPublished": true,
       "publicationId": 11,
       "id": 7
     },
@@ -134,7 +169,6 @@
       "age": 1,
       "isAdopted": "No",
       "userId": 1,
-      "isPublished": true,
       "publicationId": 12,
       "id": 8
     },
@@ -145,7 +179,6 @@
       "race": "british",
       "age": 6,
       "userId": 1,
-      "isPublished": true,
       "publicationId": 13,
       "id": 9
     }
