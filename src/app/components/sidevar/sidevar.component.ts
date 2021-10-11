@@ -24,5 +24,8 @@ export class SidevarComponent implements OnInit {
     this.router.navigate(['main']);
   }
 
+  seeMyPerfil(): void{
+    this.router.navigate(['profile']);
+  }
 
 }

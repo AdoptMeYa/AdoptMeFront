@@ -1,0 +1,76 @@
+
+<div style='flex-direction: column' class="form">
+
+<div style='flex-direction: column;justify-content:center; '>
+
+  <div style="justify-content:center">
+    <mat-form-field appearance="fill">
+      <mat-label>email</mat-label>
+      <input [disabled]="true" #email matInput [value]="infUser.email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>password</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.password">
+    </mat-form-field>
+  </div>
+
+  <div style="justify-content:center">
+    <mat-form-field appearance="fill">
+      <mat-label>type</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.type">
+    </mat-form-field>
+    <span></span>
+    <mat-form-field appearance="fill">
+      <mat-label>user</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.user">
+    </mat-form-field>
+  </div>
+
+  <div style="justify-content:center">
+    <mat-form-field appearance="fill">
+      <mat-label>ruc</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.ruc">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>dni</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.dni">
+    </mat-form-field>
+  </div>
+
+  <div style="justify-content:center">
+
+    <mat-form-field  appearance="fill">
+      <mat-label>phone</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.phone">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>name</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.name">
+    </mat-form-field>
+
+  </div>
+
+  <div style="justify-content:center">
+    <mat-form-field appearance="fill">
+      <mat-label>last Name</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>District Id</mat-label>
+      <input [disabled]="true" matInput [value]="infUser.districtId">
+    </mat-form-field>
+
+
+  </div>
+  <mat-action-row style="justify-content: center">
+    <button class="btn btn-primary" (click)="editForm()">EDIT</button>
+  </mat-action-row>
+</div>
+
+
+
+
