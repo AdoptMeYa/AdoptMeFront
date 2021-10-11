@@ -8,6 +8,7 @@ import {MainTogglenavComponent } from './components/main-togglenav/main-togglena
 import {HeaderComponent} from './components/header/header.component';
 import {ViewAllPublicationsComponent } from './components/view-all-publications/view-all-publications.component';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component'
+
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'toggle', component: MainTogglenavComponent},
   {path: 'publications', component: ViewAllPublicationsComponent},
-  {path:'subscriptions',component:SubscriptionsComponent}
+  {path: 'subscriptions', component: SubscriptionsComponent}
 ];
 
 @NgModule({
