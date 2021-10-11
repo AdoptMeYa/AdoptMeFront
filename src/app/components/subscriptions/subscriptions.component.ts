@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class SubscriptionsComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -26,4 +26,6 @@ export class SubscriptionsComponent implements OnInit {
     this.router.navigate(['main']);
   }
 
+
 }
+

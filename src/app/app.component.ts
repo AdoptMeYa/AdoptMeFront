@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AdoptMeYaFrontend';
+  links = [
+    {
+      name: "Inicio",
+      url: ""
+    },
+    {
+      name: "Lista",
+      url: "list"
+    },
+    {
+      name: "Formulario",
+      url: "form"
+    }
+  ]
 }

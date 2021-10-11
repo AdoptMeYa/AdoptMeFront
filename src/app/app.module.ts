@@ -25,8 +25,9 @@ import { AuthInterceptor } from './interceptor/AuthInterceptor';
 import {PublishService} from './services/publish.service';
 import { MainTogglenavComponent } from './components/main-togglenav/main-togglenav.component';
 import { ViewAllPublicationsComponent } from './components/view-all-publications/view-all-publications.component';
-import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { SubscriptionsComponent} from './components/subscriptions/subscriptions.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SidevarComponent } from './components/sidevar/sidevar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     SignupComponent,
     MainTogglenavComponent,
     ViewAllPublicationsComponent,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+    SidevarComponent,
 
   ],
   imports: [
