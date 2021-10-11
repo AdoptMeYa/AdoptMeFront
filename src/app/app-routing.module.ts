@@ -7,7 +7,8 @@ import { AuthGuard } from './guards/AuthGuard';
 import {MainTogglenavComponent } from './components/main-togglenav/main-togglenav.component';
 import {HeaderComponent} from './components/header/header.component';
 import {ViewAllPublicationsComponent } from './components/view-all-publications/view-all-publications.component';
-import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component'
+import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component';
+import {MyProfileComponent} from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'toggle', component: MainTogglenavComponent},
   {path: 'publications', component: ViewAllPublicationsComponent},
-  {path: 'subscriptions', component: SubscriptionsComponent}
+  {path: 'subscriptions', component: SubscriptionsComponent},
+  {path: 'profile', component: MyProfileComponent},
 ];
 
 @NgModule({

@@ -1,0 +1,11 @@
+*{
+  display: flex;
+}
+
+div div div mat-form-field{
+  margin-left: 20px;
+}
+
+.form  {
+  margin-top: 20px;
+}
