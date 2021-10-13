@@ -25,44 +25,17 @@
           <h3 *ngIf="listpets">Adopted: {{listpets[i].isAdopted}}</h3>
           <h3>Date publication: {{names[i].datetime}}</h3>
         <mat-card-actions>
-          <button (click)="onAdopt(listpets[i].userId,listpets[i].publicationId)" id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Adopt</button>
+         <!--
+         <button (click)="onAdopt(listpets[i].userId,listpets[i].publicationId)" id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Adopt</button>
+         --->
+          <button  class="btn btn-info" (click)="onAdopt('Adopt',listpets[i].userId,listpets[i].publicationId)">Adopt</button>
         </mat-card-actions>
       </mat-card>
 
     </div>
   </ul>
+
   <div *ngIf="names.length==0">No existen datos </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Details of Adoption Request</h5>
-
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
-            <div style="display: flexbox; flex-direction: row;">
-
-
-              <mat-form-field class="flexbox" appearance="fill">
-                <mat-label>Enter Message</mat-label>
-                <mat-hint>Mandatory</mat-hint>
-                <input matInput type="text" formControlName="message" placeholder="Enter Message"/>
-              </mat-form-field>
-
-
-            </div>
-          </form>
-          <mat-card-actions class="modal-footer">
-            <button mat-raised-button type="button" class="btn btn-primary" (click)="sendAdoptionRequest()" >Send</button>
-          </mat-card-actions>
-        </div>
-      </div>
-
 
 </div>
 

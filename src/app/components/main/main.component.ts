@@ -17,10 +17,10 @@ export class MainComponent implements OnInit {
   public listpets: any;
   npets = [];
   constructor(
-    private storageService: StorageService, 
+    private storageService: StorageService,
     private router: Router,
     private publishService: PublishService,
-    private petService: PetsService, 
+    private petService: PetsService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -51,6 +51,7 @@ export class MainComponent implements OnInit {
       });
     });
   }
+  //inicia dialog formulario
   openDialog2(message, arrPub, arrPets): void{
     const dialogRef = this.dialog.open(PublicationsDialogComponent, {
       width: '350px',
@@ -68,6 +69,7 @@ export class MainComponent implements OnInit {
       });
     });
   }
+  //termina
   deletePublication(name: any): void{
     this.publishService.deletePublishById(name.id).subscribe(data => {
       alert('Publication deleted');
