@@ -5,7 +5,9 @@ import {StorageService} from '../../services/storage.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {AdoptionRequestModel} from '../../models/AdoptionRequest.model';
+import { MatDialog } from '@angular/material/dialog';
 import {AdoptionRequestService} from '../../services/adoption-request.service';
+import {AdoptionRequestDialogComponent} from '../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 
 @Component({
   selector: 'app-view-all-publications',
@@ -28,8 +30,8 @@ export class ViewAllPublicationsComponent implements OnInit {
   public listpets: any;
   public aux: any;
   constructor(private publishService: PublishService,
-    private petService: PetsService, private storageService: StorageService , private formBuilder: FormBuilder,
-              private userService: UserService,private adoptionRequestService: AdoptionRequestService) { }
+              private petService: PetsService, private storageService: StorageService , private formBuilder: FormBuilder,
+              private userService: UserService, private adoptionRequestService: AdoptionRequestService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.PublishForm = this.formBuilder.group({
@@ -42,11 +44,9 @@ export class ViewAllPublicationsComponent implements OnInit {
     });
     this.petService.ReadPets().subscribe((data) => {
       this.listpets = data;
-    })
+    });
   }
-  onSubmit(){
 
-  }
   filter(valor): void{
     this.indice = valor;
     console.log(valor);
@@ -55,25 +55,18 @@ export class ViewAllPublicationsComponent implements OnInit {
   getCurrentIdUser(){
     return this.storageService.getCurrentUser().id;
   }
-   onAdopt(userIdAt: number,publicationId: number){
-    this.userService.getUserById(userIdAt).subscribe(result => {
-      this.userName = result.name;
-      console.log(publicationId + 'from' + this.userName);
-    });
-    this.userIdAt = userIdAt;
-    this.publicationId = publicationId;
+
+   onAdopt(message, userIdAt: number, publicationId: number){
+     this.userService.getUserById(userIdAt).subscribe(result => {
+       this.userName = result.name;
+       console.log(publicationId + 'from' + this.userName);
+       const dialogRef = this.dialog.open(AdoptionRequestDialogComponent, {
+         width: '550px',
+         data : {info: message, userId_At: userIdAt, publicationIdAt: publicationId, userNameAt: this.userName}
+       });
+     });
+     this.userIdAt = userIdAt;
+     this.publicationId = publicationId;
 
  }
-  sendAdoptionRequest(){
-    if (this.PublishForm.value.message !== ''){
-      this.adoptionRequest.uerIdFrom = this.getCurrentIdUser();
-      this.adoptionRequest.useridAt = this.userIdAt;
-      this.adoptionRequest.message = this.PublishForm.value.message;
-      this.adoptionRequest.publicationId = this.publicationId;
-      this.adoptionRequest.date = this.date;
-      this.adoptionRequestService.postAdoptionRequest(this.adoptionRequest).subscribe();
-      alert('Adoption Request Sent to ' + this.userName);
-    }
-
-  }
 }
