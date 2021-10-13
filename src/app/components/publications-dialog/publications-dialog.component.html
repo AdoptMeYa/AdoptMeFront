@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Details of Pet</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onNoClick()"></button>
+</div>
+<div class="modal-body">
+    <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
+        <div style="display: flexbox; flex-direction: row;">
+
+        <mat-form-field class="flexbox" appearance="fill">
+            <mat-label>Enter Commentary</mat-label>
+            <textarea matInput type="text" formControlName="comment" placeholder="Descripción de tu publicacion"></textarea>
+            <mat-error class="red" *ngIf="submitted && PublishForm.controls.comment.hasError('required')">
+                Field is mandatory
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="flexbox" appearance="fill">
+            <mat-label>Enter Type of Pet</mat-label>
+            <mat-select formControlName="type" [errorStateMatcher] = "matcher1">
+                <mat-option *ngFor="let posi of type_pets" [value]="posi">
+                    {{posi}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && PublishForm.controls.type.hasError('required')">
+                Field is mandatory
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="flexbox" appearance="fill">
+            <mat-label>Enter Pet's name</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Nombre de la mascota"/>
+            <mat-error class="red" *ngIf="submitted && PublishForm.controls.name.hasError('required')">
+                Field is mandatory
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="flexbox" appearance="fill">
+            <mat-label>Select needs atention</mat-label>
+            <mat-select formControlName="attention" [errorStateMatcher] = "matcher1">
+                <mat-option *ngFor="let pos of need_atention" [value]="pos">
+                    {{pos}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && PublishForm.controls.attention.hasError('required')">
+                Field is mandatory
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="flexbox" appearance="fill">
+            <mat-label>Enter Pet's race</mat-label>
+            <mat-hint>Opcional</mat-hint>
+            <input matInput type="text" formControlName="race" placeholder="Enter Race"/>
+        </mat-form-field>
+        <mat-form-field class="flexbox" appearance="fill">
+            <mat-label>Enter Pet's Age</mat-label>
+            <input matInput type="number" placeholder="Age" formControlName="age">
+            <span matSuffix>years</span>
+            <mat-error class="red" *ngIf="submitted && PublishForm.controls.age.hasError('required')">
+              Field is mandatory
+            </mat-error>
+            <mat-error class="red" *ngIf="submitted && PublishForm.controls.age.hasError('min')">
+              The age cannot be less than 0
+            </mat-error>
+            <mat-error class="red" *ngIf="submitted && PublishForm.controls.age.hasError('max')">
+              The age cannot be more than 70
+            </mat-error>
+        </mat-form-field>
+
+      </div>
+    </form>
+    <mat-card-actions class="modal-footer">
+        <button mat-raised-button type="button" class="btn btn-primary" (click)="onNoClick()">Close</button>
+        <button *ngIf="data['info'] !== 'Edit'" mat-raised-button type="submit"  class="btn btn-primary" form="publish-form">Add</button>
+        <button *ngIf="data['info'] !== 'Add'" mat-raised-button type="button" class="btn btn-primary" (click)="updatePublication()">Update</button>
+    </mat-card-actions>
+</div>

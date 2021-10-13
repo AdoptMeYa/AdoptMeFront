@@ -1,11 +1,11 @@
-<button style="margin: 5px"  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" >Add Publication</button>
+<button style="margin: 5px" class="btn btn-success" type="button" (click)="openDialog('Add')" >Add Publication</button>
 
-<div *ngFor="let name of names;let i = index" style="display: flex; justify-content: center; align-items: center; ">
-  <mat-card  class="example-card" style="height:60%; width:60%; margin-bottom: 20px; ">
+<div *ngFor="let name of names;let i = index; let last = last" [ngClass]="{'last-child': last}" style="display: flex; justify-content: center; align-items: center;">
+  <mat-card  class="example-card" style="height:60%; width:60%;margin-bottom: 30px;">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title *ngIf="npets">{{npets[i].name}}</mat-card-title>
       <mat-card-subtitle>{{names[i].comment}}</mat-card-subtitle>
+      
     </mat-card-header>
       <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
       <h3 *ngIf="npets">Especie: {{npets[i].type}}</h3>
@@ -15,105 +15,14 @@
       <h3 *ngIf="npets">Adopted: {{npets[i].isAdopted}}</h3>
       <h3>Date publication: {{names[i].datetime}}</h3>
     <mat-card-actions>
-      <button id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onEdit(names[i], npets[i])">Edit</button>
-      <button id ="delete"mat-button (click)="deletePublication(names[i], names[i].id, i)">Delete </button>
+      <button id="edit" mat-button type="button" (click)="openDialog2('Edit', names[i], npets[i])">Edit</button>
+      <button id ="delete"mat-button (click)="deletePublication(names[i])">Delete </button>
     </mat-card-actions>
   </mat-card>
+
 </div>
 
-
-
 <!-- No exist publications -->
-<div *ngIf="isEmpty==0">Usted no cuenta con
-  ninguna publicación. Presione el botón "Publicar anuncio" para empezar a publicar.</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details of Pet</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
-          <div style="display: flexbox; flex-direction: row;">
-
-            <mat-form-field class="flexbox" appearance="fill">
-              <mat-label>Enter Commentary</mat-label>
-              <textarea matInput type="text" formControlName="comment" placeholder="Descripción de tu publicacion"></textarea>
-              <mat-error class="red" *ngIf="submitted && PublishForm.controls.comment.hasError('required')">
-                  Field is mandatory
-              </mat-error>
-            </mat-form-field>
-
-
-
-            <mat-form-field class="flexbox" appearance="fill">
-              <mat-label>Enter Type of Pet</mat-label>
-              <mat-select formControlName="type" [errorStateMatcher] = "matcher1">
-                <mat-option *ngFor="let posi of type_pets" [value]="posi">
-                  {{posi}}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="submitted && PublishForm.controls.type.hasError('required')">
-                Field is mandatory
-              </mat-error>
-            </mat-form-field>
-
-
-
-            <mat-form-field class="flexbox" appearance="fill">
-              <mat-label>Enter Pet's name</mat-label>
-              <input matInput type="text" formControlName="name" placeholder="Nombre de la mascota"/>
-              <mat-error class="red" *ngIf="submitted && PublishForm.controls.name.hasError('required')">
-                  Field is mandatory
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="flexbox" appearance="fill">
-              <mat-label>Select needs atention</mat-label>
-              <mat-select formControlName="attention" [errorStateMatcher] = "matcher1">
-                <mat-option *ngFor="let pos of need_atention" [value]="pos">
-                  {{pos}}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="submitted && PublishForm.controls.attention.hasError('required')">
-                Field is mandatory
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="flexbox" appearance="fill">
-              <mat-label>Enter Pet's race</mat-label>
-              <mat-hint>Opcional</mat-hint>
-              <input matInput type="text" formControlName="race" placeholder="Enter Race"/>
-            </mat-form-field>
-
-            <mat-form-field class="flexbox" appearance="fill">
-              <mat-label>Enter Pet's Age</mat-label>
-              <input matInput type="number" placeholder="Age" formControlName="age">
-              <span matSuffix>years</span>
-              <mat-error class="red" *ngIf="submitted && PublishForm.controls.age.hasError('required')">
-                Field is mandatory
-              </mat-error>
-              <mat-error class="red" *ngIf="submitted && PublishForm.controls.age.hasError('min')">
-                The age cannot be less than 0
-              </mat-error>
-              <mat-error class="red" *ngIf="submitted && PublishForm.controls.age.hasError('max')">
-                The age cannot be more than 70
-              </mat-error>
-
-            </mat-form-field>
-
-          </div>
-        </form>
-        <mat-card-actions class="modal-footer">
-          <button mat-raised-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button mat-raised-button type="submit" form="publish-form" class="btn btn-primary">Add</button>
-          <button mat-raised-button type="button" class="btn btn-primary" (click)="updatePublication()">Update</button>
-        </mat-card-actions>
-      </div>
-    </div>
-  </div>
+<div *ngIf="isEmpty==0">
+  Usted no cuenta con ninguna publicación. Presione el botón "Publicar anuncio" para empezar a publicar.
 </div>

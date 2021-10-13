@@ -1,0 +1,18 @@
+#delete{
+    background-color: red;
+    color:white;
+  }
+  #edit{
+    background-color: blue;
+    color:white;
+  }
+  
+  .exampleModal { background-color:red }
+  .red{
+    color: red;
+  }
+  .flexbox{
+    display: flex; 
+    flex-direction: row;
+  }
+  

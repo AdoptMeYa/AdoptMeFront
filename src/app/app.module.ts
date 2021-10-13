@@ -29,6 +29,7 @@ import { SubscriptionsComponent} from './components/subscriptions/subscriptions.
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SidevarComponent } from './components/sidevar/sidevar.component';
 import { MyProfileComponent, FormUserDialogComponent } from './components/my-profile/my-profile.component';
+import { PublicationsDialogComponent } from './components/publications-dialog/publications-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { MyProfileComponent, FormUserDialogComponent } from './components/my-pro
     SubscriptionsComponent,
     SidevarComponent,
     MyProfileComponent,
-    FormUserDialogComponent
+    FormUserDialogComponent,
+    PublicationsDialogComponent
 
   ],
   imports: [
