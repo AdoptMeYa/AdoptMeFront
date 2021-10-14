@@ -11,7 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class MyProfileComponent implements OnInit {
 
   infUser: any;
-  constructor(public dialog: MatDialog, private userService: UserService, private storageService: StorageService){}
+  constructor(public dialog: MatDialog, public userService: UserService, public storageService: StorageService){}
 
   ngOnInit(): void {
     this.getInfoCurrentUser();

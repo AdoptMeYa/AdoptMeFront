@@ -11,8 +11,10 @@ import {
 import { UserService } from '../../services/user.service';
 import { AdoptionRequestModel } from '../../models/AdoptionRequest.model';
 import { AdoptionRequestService } from '../../services/adoption-request.service';
+import {PublicationsDialogComponent} from "../publications-dialog/publications-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {AdoptionRequestDialogComponent} from "../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component";
 import {Router} from '@angular/router';
-
 @Component({
   selector: 'app-view-all-publications',
   templateUrl: './view-all-publications.component.html',
@@ -36,7 +38,6 @@ export class ViewAllPublicationsComponent implements OnInit {
   public PublishForm: FormGroup;
   public listpets: any;
   public aux: any;
-
   constructor(
     private publishService: PublishService,
     private petService: PetsService,
@@ -44,6 +45,7 @@ export class ViewAllPublicationsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private adoptionRequestService: AdoptionRequestService,
+    private dialog: MatDialog,
     private router: Router
   ) {}
 
@@ -53,6 +55,8 @@ export class ViewAllPublicationsComponent implements OnInit {
     })),
       this.getPublishandpets();
   }
+  onSubmit() {}
+
   filter(valor): void {
     this.indice = valor;
     console.log(valor);
@@ -64,38 +68,32 @@ export class ViewAllPublicationsComponent implements OnInit {
       this.isEmpty = result.length;
       this.petService.ReadPets().subscribe((data) => {
         this.listpets = data;
+        //console.log(this.listpets);
         this.unifiedData(this.names, this.listpets);
       });
     });
   }
 
-  // tslint:disable-next-line:typedef
-  getCurrentIdUser(){
+  getCurrentIdUser() {
     return this.storageService.getCurrentUser().id;
   }
+
+
 
   onAdopt(userIdAt: number, publicationId: number): void {
     this.userService.getUserById(userIdAt).subscribe((result) => {
       this.userName = result.name;
+      const dialogRef = this.dialog.open(AdoptionRequestDialogComponent, {
+        width: '350px',
+        data: {user_IdAt: userIdAt, publicationId_At: publicationId, userNameAt: this.userName}
+      });
       console.log(publicationId + 'from' + this.userName);
     });
     this.userIdAt = userIdAt;
     this.publicationId = publicationId;
   }
 
-  sendAdoptionRequest(): void {
-    if (this.PublishForm.value.message !== '') {
-      this.adoptionRequest.uerIdFrom = this.getCurrentIdUser();
-      this.adoptionRequest.useridAt = this.userIdAt;
-      this.adoptionRequest.message = this.PublishForm.value.message;
-      this.adoptionRequest.publicationId = this.publicationId;
-      this.adoptionRequest.date = this.date;
-      this.adoptionRequestService
-        .postAdoptionRequest(this.adoptionRequest)
-        .subscribe();
-      alert('Adoption Request Sent to ' + this.userName);
-    }
-  }
+
 
   filter2(kindanimal, gender, require): void {
     this.petService
@@ -105,12 +103,11 @@ export class ViewAllPublicationsComponent implements OnInit {
       });
   }
 
-  unifiedData(publicaciones, pets): void {
-    // tslint:disable-next-line:forin
+  unifiedData(publicaciones, pets) {
     for (const i in publicaciones) {
       for (const j in pets) {
         if (publicaciones[i].id === pets[j].publicationId) {
-          console.log(publicaciones[i], pets[j]);
+          console.log(publicaciones[i],pets[j])
         }
       }
     }

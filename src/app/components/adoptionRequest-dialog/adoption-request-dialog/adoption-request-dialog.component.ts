@@ -32,7 +32,7 @@ export class AdoptionRequestDialogComponent implements OnInit {
   }
   sendAdoptionRequest(){
     var useridAt = Number(this.data.userId_At);
-    var publicationIdAt = Number(this.data.publicationIdAt);
+    var publicationIdAt = Number(this.data.publicationId_At);
     if (this.PublishForm.value.message !== ''){
       this.adoptionRequest.uerIdFrom = this.getCurrentIdUser();
       this.adoptionRequest.useridAt = useridAt;
