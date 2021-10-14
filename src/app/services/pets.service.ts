@@ -50,6 +50,13 @@ export class PetsService {
   DeletePet(id: number): Observable<Pet> {
     return this.http.delete<Pet>("http://localhost:3000/pets/" + id.toString());
   }
+  filterPets(kindanimal:string,gender:string,require:string)
+  {
+    return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}&gender=${gender}&attention=${require}`)
+    .pipe(map((res: any)=>{
+      return res;
+    }))
+  }
 
   
 }
