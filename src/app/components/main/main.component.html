@@ -1,6 +1,7 @@
 <button style="margin: 5px" class="btn btn-success" type="button" (click)="openDialog('Add')" >Add Publication</button>
 
-<div *ngFor="let name of names;let i = index; let last = last" [ngClass]="{'last-child': last}" style="display: flex; justify-content: center; align-items: center;">
+<div *ngFor="let name of names;let i = index; let last = last" [ngClass]="{'last-child': last}" style="display: flex;
+justify-content: center; align-items: center;">
   <mat-card  class="example-card" style="height:60%; width:60%;margin-bottom: 30px;">
     <mat-card-header>
       <mat-card-title *ngIf="npets">{{npets[i].name}}</mat-card-title>
