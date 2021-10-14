@@ -11,6 +11,7 @@ import {
 import { UserService } from '../../services/user.service';
 import { AdoptionRequestModel } from '../../models/AdoptionRequest.model';
 import { AdoptionRequestService } from '../../services/adoption-request.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-view-all-publications',
@@ -35,13 +36,15 @@ export class ViewAllPublicationsComponent implements OnInit {
   public PublishForm: FormGroup;
   public listpets: any;
   public aux: any;
+
   constructor(
     private publishService: PublishService,
     private petService: PetsService,
     private storageService: StorageService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private adoptionRequestService: AdoptionRequestService
+    private adoptionRequestService: AdoptionRequestService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +53,6 @@ export class ViewAllPublicationsComponent implements OnInit {
     })),
       this.getPublishandpets();
   }
-  onSubmit() {}
-
   filter(valor): void {
     this.indice = valor;
     console.log(valor);
@@ -63,17 +64,17 @@ export class ViewAllPublicationsComponent implements OnInit {
       this.isEmpty = result.length;
       this.petService.ReadPets().subscribe((data) => {
         this.listpets = data;
-        //console.log(this.listpets);
         this.unifiedData(this.names, this.listpets);
       });
     });
   }
 
-  getCurrentIdUser() {
+  // tslint:disable-next-line:typedef
+  getCurrentIdUser(){
     return this.storageService.getCurrentUser().id;
   }
 
-  onAdopt(userIdAt: number, publicationId: number) {
+  onAdopt(userIdAt: number, publicationId: number): void {
     this.userService.getUserById(userIdAt).subscribe((result) => {
       this.userName = result.name;
       console.log(publicationId + 'from' + this.userName);
@@ -82,7 +83,7 @@ export class ViewAllPublicationsComponent implements OnInit {
     this.publicationId = publicationId;
   }
 
-  sendAdoptionRequest() {
+  sendAdoptionRequest(): void {
     if (this.PublishForm.value.message !== '') {
       this.adoptionRequest.uerIdFrom = this.getCurrentIdUser();
       this.adoptionRequest.useridAt = this.userIdAt;
@@ -96,7 +97,7 @@ export class ViewAllPublicationsComponent implements OnInit {
     }
   }
 
-  filter2(kindanimal, gender, require) {
+  filter2(kindanimal, gender, require): void {
     this.petService
       .filterPets(kindanimal, gender, require)
       .subscribe((data) => {
@@ -104,13 +105,19 @@ export class ViewAllPublicationsComponent implements OnInit {
       });
   }
 
-  unifiedData(publicaciones, pets) {
+  unifiedData(publicaciones, pets): void {
+    // tslint:disable-next-line:forin
     for (const i in publicaciones) {
       for (const j in pets) {
         if (publicaciones[i].id === pets[j].publicationId) {
-          console.log(publicaciones[i],pets[j])
+          console.log(publicaciones[i], pets[j]);
         }
       }
     }
+  }
+
+  goToPerfil(id: number): void{
+    this.userService.currentUser = id;
+    this.router.navigate(['profile']);
   }
 }

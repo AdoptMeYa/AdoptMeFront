@@ -17,7 +17,11 @@ export class MyProfileComponent implements OnInit {
     this.getInfoCurrentUser();
   }
   getInfoCurrentUser(): void{
-    this.infUser = this.storageService.getCurrentUser();
+    this.userService.getUserById(this.userService.currentUser).subscribe(
+      result => {
+        this.infUser = result;
+      }
+    );
     console.log(this.infUser);
   }
   editForm(): void{
@@ -92,17 +96,21 @@ export class MyProfileComponent implements OnInit {
             <mat-label>District Id</mat-label>
             <input  matInput #districtId [value]="infUser.districtId">
           </mat-form-field>
-
-
         </div>
+
+
+        <div>
         <mat-action-row style="justify-content: center">
           <button class="btn btn-primary"
                   (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, districtId.value )">SAVE</button>
           <button class="btn btn-primary" (click)="cancel()">CANCEL</button>
         </mat-action-row>
+        </div>
       </div>
-  `,
+    </div>
+  `
 })
+
 export class FormUserDialogComponent implements OnInit {
   infUser: any;
   constructor(public dialog: MatDialog, private userService: UserService, private storageService: StorageService){}

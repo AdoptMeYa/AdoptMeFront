@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
   selector: 'app-sidevar',
@@ -8,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class SidevarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService, private storageService: StorageService) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +27,7 @@ export class SidevarComponent implements OnInit {
   }
 
   seeMyPerfil(): void{
+    this.userService.currentUser = this.storageService.getCurrentUser().id;
     this.router.navigate(['profile']);
   }
 
