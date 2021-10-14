@@ -30,6 +30,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SidevarComponent } from './components/sidevar/sidevar.component';
 import { MyProfileComponent, FormUserDialogComponent } from './components/my-profile/my-profile.component';
 import { PublicationsDialogComponent } from './components/publications-dialog/publications-dialog.component';
+import { AdoptionRequestDialogComponent } from './components/adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { PublicationsDialogComponent } from './components/publications-dialog/pu
     SidevarComponent,
     MyProfileComponent,
     FormUserDialogComponent,
-    PublicationsDialogComponent
+    PublicationsDialogComponent,
+    AdoptionRequestDialogComponent
 
   ],
   imports: [
