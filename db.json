@@ -83,118 +83,133 @@
       "comment": "This is a comment!",
       "datetime": "2021-10-08 01:51:05",
       "userId": 2,
+      "petId":0,
       "id": 2
     },
     {
       "comment": "This is a comment!",
       "datetime": "2021-10-08 01:51:05",
       "userId": 4,
+      "petId":3,
       "id": 4
     },
     {
       "comment": "Busco adoptante responsable",
       "datetime": "2021-10-09 05:19:58",
       "userId": 1,
+      "petId":4,
       "id": 7
     },
     {
       "comment": "Ayuda con gatito, necesito a alguien que lo pueda adoptar",
       "datetime": "2021-10-10 21:05:44",
       "userId": 1,
+      "petId":7,
       "id": 11
     },
     {
       "comment": "Cuiden de este cachorrito",
       "datetime": "2021-10-10 18:51:37",
       "userId": 1,
+      "petId":8,
       "id": 12
     },
     {
       "userId": 1,
       "comment": "busco adoptante responsable",
       "datetime": "2021-10-11 02:45:43",
+      "petId":9,
       "id": 13
     },
     {
       "userId": 1,
       "comment": "Gatito bebe necesita ayuda",
       "datetime": "2021-10-13 00:05:58",
+      "petId":10,
       "id": 14
     }
   ],
   "pets": [
     {
-      "id": 0,
-      "type": "perro",
+      "id": 3,
+      "type": "Dog",
       "name": "Juanito",
-      "attention": "Yes",
+      "attention": "Require",
       "race": "chusquito",
       "age": 2,
       "isAdopted": "Yes",
       "userId": 2,
-      "publicationId": 2
+      "publicationId": 7,
+      "gender": "Female"
     },
     {
-      "id": 3,
-      "type": "perro",
-      "name": "Juanito",
-      "attention": "Yes",
+      "id": 0,
+      "type": "Dog",
+      "name": "Juan",
+      "attention": "Require",
       "race": "chusquito",
       "age": 2,
       "isAdopted": "Yes",
       "userId": 4,
-      "publicationId": 4
+      "publicationId": 2,
+      "gender": "Male"
     },
     {
-      "type": "perro",
+      "type": "Dog",
       "name": "Cisco",
-      "attention": "yes",
+      "attention": "Require",
       "race": "Pug",
       "age": "3",
       "isAdopted": "No",
       "userId": 1,
-      "publicationId": 7,
+      "publicationId": 4,
+      "gender": "Male",
       "id": 4
+
     },
     {
-      "type": "gato",
+      "type": "Cat",
       "name": "pupi",
-      "attention": "Yes",
+      "attention": "Require",
       "race": "",
       "age": 2,
       "isAdopted": "No",
       "userId": 1,
-      "publicationId": 11,
+      "publicationId": 12,
+      "gender": "Female",
       "id": 7
     },
     {
-      "type": "Perro",
+      "type": "Dog",
       "name": "mumi",
       "attention": "No",
       "race": "pug",
       "age": 1,
       "isAdopted": "No",
       "userId": 1,
-      "publicationId": 12,
+      "publicationId": 11,
+      "gender": "Female",
       "id": 8
     },
     {
-      "type": "Gato",
+      "type": "Cat",
       "name": "Misha",
-      "attention": "Yes",
+      "attention": "Require",
       "race": "british",
       "age": 6,
       "userId": 1,
       "publicationId": 13,
+      "gender": "Male",
       "id": 9
     },
     {
-      "type": "Gato",
+      "type": "Cat",
       "name": "yobi",
-      "attention": "Yes",
+      "attention": "Dont require",
       "race": "",
       "age": 1,
       "userId": 1,
+      "gender": "Female",
       "publicationId": 14,
       "id": 10
     }
