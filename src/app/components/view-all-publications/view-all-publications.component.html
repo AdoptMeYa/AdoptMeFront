@@ -1,71 +1,188 @@
-<div class="md-form mt-0" style="align-items: center; ">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" #newvalor>
-    <button type="button" class="btn btn-success"
-            (click)="filter(newvalor.value)"
-    >Filtrar
-    </button>
-</div>
-
-
 <div>
-  <ul>
-    <div *ngFor="let name of names;let i = index" style="display: flex; justify-content: center; align-items: center; ">
-      <!--Pongo el *ngIf para que no se muestre las publicaciones del CurrentUser porque adoptaremos mascotas de otros no de nostros mismos---->
-      <mat-card  *ngIf="listpets && listpets[i].userId!==this.getCurrentIdUser()" class="example-card" style="height:60%; width:60%; margin-bottom: 20px;" >
+  <div class="example-container" style="text-align: center">
+    <!--mat-form-field hintLabel="Max 10 characters" appearance="fill">
+      <mat-label>Enter some input</mat-label>
+      <input matInput #input maxlength="10" placeholder="Ex. Nougat" />
+      <mat-hint align="end">{{ input.value?.length || 0 }}/10</mat-hint>
+    </mat-form-field-->
+
+    <mat-form-field appearance="fill">
+      <mat-label>Kind of animal</mat-label>
+      <mat-select #kind>
+        <mat-option value="Dog">Dog</mat-option>
+        <mat-option value="Cat">Cat</mat-option>
+        <mat-option value="Parrot">Parrot</mat-option>
+        <mat-option value="Turtle">Turtle</mat-option>
+        <mat-option value="Rodents">Rodents</mat-option>
+        <mat-option value="Others">Others</mat-option>
+      </mat-select>
+      <!--mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select #gender>
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
+      </mat-select>
+      <!---mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Require attention</mat-label>
+      <mat-select #require>
+        <mat-option value="Require">Require</mat-option>
+        <mat-option value="Dont require">Dont require</mat-option>
+      </mat-select>
+      <!--mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
+    </mat-form-field>
+  
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="filter2(kind.value, gender.value, require.value)"
+    >
+      Filter
+    </button>
+  </div>
+
+    <!--div *ngFor="let name of names; let i = index" style="display: flex; justify-content: center; align-items: center">
+      <!--Pongo el *ngIf para que no se muestre las publicaciones del CurrentUser porque adoptaremos mascotas de otros no de nostros mismos->
+      <mat-card *ngIf="listpets && listpets[i].userId !== this.getCurrentIdUser() "
+        class="example-card"
+        style="height: 60%; width: 60%; margin-bottom: 20px"
+      >
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title *ngIf="listpets">{{listpets[i].name}}</mat-card-title>
-          <mat-card-subtitle>{{names[i].comment}}</mat-card-subtitle>
+          <mat-card-title *ngIf="listpets">{{
+            listpets[i].name
+          }}</mat-card-title>
+          <mat-card-subtitle>{{ names[i].comment }}</mat-card-subtitle>
         </mat-card-header>
-          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
-          <h3 *ngIf="listpets">Especie: {{listpets[i].type}}</h3>
-          <h3 *ngIf="listpets && listpets[i].race !== '' ">Race: {{listpets[i].race}} </h3>
-          <h3 *ngIf="listpets" >Attention: {{listpets[i].attention}}</h3>
-          <h3 *ngIf="listpets">Age: {{listpets[i].age}}</h3>
-          <h3 *ngIf="listpets">Adopted: {{listpets[i].isAdopted}}</h3>
-          <h3>Date publication: {{names[i].datetime}}</h3>
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <h3 *ngIf="listpets.type">Especie: {{ listpets[i].type }}</h3>
+        <h3 *ngIf="listpets && listpets[i].race !== ''">
+          Race: {{ listpets[i].race }}
+        </h3>
+        <h3 *ngIf="listpets.attention">Attention: {{ listpets[i].attention }}</h3>
+        <h3 *ngIf="listpets">Age: {{ listpets[i].age }}</h3>
+        <h3 *ngIf="listpets">Adopted: {{ listpets[i].isAdopted }}</h3>
+        <h3>Date publication: {{ names[i].datetime }}</h3>
         <mat-card-actions>
-          <button (click)="onAdopt(listpets[i].userId,listpets[i].publicationId)" id="edit" mat-button  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Adopt</button>
+          <button
+            (click)="onAdopt(listpets[i].userId, listpets[i].publicationId)"
+            id="edit"
+            mat-button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Adopt
+          </button>
         </mat-card-actions>
       </mat-card>
+    </div-->
+
+<div *ngFor="let name of names;let i = index">
+  <div *ngFor="let pet of listpets;let j = index">
+    <div *ngIf="names[i].id===listpets[j].publicationId" style="display: flex; justify-content: center; align-items: center">
+      <mat-card class="example-card" style="height: 60%; width: 60%; margin-bottom: 20px">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title *ngIf="listpets">{{pet.name}}</mat-card-title>
+        <mat-card-subtitle>{{ name.comment }}</mat-card-subtitle>
+      </mat-card-header>
+      <img
+        mat-card-image
+        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        alt="Photo of a Shiba Inu"
+      />
+      <h3 *ngIf="listpets.type">Especie: {{ pet.type }}</h3>
+      <h3 *ngIf="listpets && listpets.race !== ''">Race: {{ pet.race }}
+      </h3>
+      <h3 *ngIf="listpets.attention">Attention: {{ pet.attention }}</h3>
+      <h3 *ngIf="listpets">Age: {{ pet.age }}</h3>
+      <h3 *ngIf="listpets">Adopted: {{ pet.isAdopted }}</h3>
+      <h3>Date publication: {{ name.datetime }}</h3>
+      <mat-card-actions>
+        <button
+          (click)="onAdopt(listpets[i].userId, listpets[i].publicationId)"
+          id="edit"
+          mat-button
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Adopt
+        </button>
+      </mat-card-actions>
+    </mat-card>
 
     </div>
-  </ul>
-  <div *ngIf="names.length==0">No existen datos </div>
+    
+  </div> 
+</div>
 
+  <div *ngIf="listpets.length == 0">No existen datos</div>
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Details of Adoption Request</h5>
+          <h5 class="modal-title" id="exampleModalLabel">
+            Details of Adoption Request
+          </h5>
 
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
 
         <div class="modal-body">
-          <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate >
-            <div style="display: flexbox; flex-direction: row;">
-
-
+          <form
+            id="publish-form"
+            #lForm="ngForm"
+            [formGroup]="PublishForm"
+            (ngSubmit)="onSubmit()"
+            novalidate
+          >
+            <div style="display: flexbox; flex-direction: row">
               <mat-form-field class="flexbox" appearance="fill">
                 <mat-label>Enter Message</mat-label>
                 <mat-hint>Mandatory</mat-hint>
-                <input matInput type="text" formControlName="message" placeholder="Enter Message"/>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="message"
+                  placeholder="Enter Message"
+                />
               </mat-form-field>
-
-
             </div>
           </form>
           <mat-card-actions class="modal-footer">
-            <button mat-raised-button type="button" class="btn btn-primary" (click)="sendAdoptionRequest()" >Send</button>
+            <button
+              mat-raised-button
+              type="button"
+              class="btn btn-primary"
+              (click)="sendAdoptionRequest()">Send
+            </button>
           </mat-card-actions>
         </div>
       </div>
-
+    </div>
+  </div>
 
 </div>
-
-
-
-
