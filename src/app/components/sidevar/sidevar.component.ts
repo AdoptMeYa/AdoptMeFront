@@ -30,5 +30,8 @@ export class SidevarComponent implements OnInit {
     this.userService.currentUser = this.storageService.getCurrentUser().id;
     this.router.navigate(['profile']);
   }
+  seeMyAdvertisements(): void{
+  this.router.navigate(['adds']);
+  }
 
 }
