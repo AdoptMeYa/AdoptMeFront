@@ -49,11 +49,14 @@ import {NotificationComponent} from './components/notification/notification.comp
     MyProfileComponent,
     FormUserDialogComponent,
     PublicationsDialogComponent,
-    AdoptionRequestDialogComponent,
     MyAddsComponent,
     AddDialogComponent,
     EditDialogComponent,
-    NotificationComponent
+    NotificationComponent,
+    AdoptionRequestDialogComponent,
+    MyAddsComponent,
+    AddDialogComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,

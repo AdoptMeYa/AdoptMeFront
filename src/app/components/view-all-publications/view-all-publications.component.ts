@@ -15,6 +15,10 @@ import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DistrictService } from '../../services/district.service';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+import {PublicationsDialogComponent} from "../publications-dialog/publications-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {AdoptionRequestDialogComponent} from "../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component";
+
 
 @Component({
   selector: 'app-view-all-publications',
@@ -53,7 +57,9 @@ export class ViewAllPublicationsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private adoptionRequestService: AdoptionRequestService,
-    private districtService: DistrictService
+    private districtService: DistrictService,
+    private dialog: MatDialog,
+
   ) {}
 
   ngOnInit(): void {
@@ -95,24 +101,14 @@ export class ViewAllPublicationsComponent implements OnInit {
   onAdopt(userIdAt: number, publicationId: number) {
     this.userService.getUserById(userIdAt).subscribe((result) => {
       this.userName = result.name;
+      const dialogRef = this.dialog.open(AdoptionRequestDialogComponent, {
+        width: '350px',
+        data: {user_IdAt: userIdAt, publicationId_At: publicationId, userNameAt: this.userName}
+      });
       //console.log(publicationId + 'from' + this.userName);
     });
     this.userIdAt = userIdAt;
     this.publicationId = publicationId;
-  }
-
-  sendAdoptionRequest() {
-    if (this.PublishForm.value.message !== '') {
-      this.adoptionRequest.uerIdFrom = this.getCurrentIdUser();
-      this.adoptionRequest.useridAt = this.userIdAt;
-      this.adoptionRequest.message = this.PublishForm.value.message;
-      this.adoptionRequest.publicationId = this.publicationId;
-      this.adoptionRequest.date = this.date;
-      this.adoptionRequestService
-        .postAdoptionRequest(this.adoptionRequest)
-        .subscribe();
-      alert('Adoption Request Sent to ' + this.userName);
-    }
   }
 
   filter2(kindanimal, gender, require) {
@@ -123,15 +119,16 @@ export class ViewAllPublicationsComponent implements OnInit {
       this.myControl.value === ''
     ) {
       console.log('NADA');
-    }else if(this.myControl.value || (kindanimal === '' && gender === '' &&require === '' ))
-    {
+    } else if (
+      this.myControl.value ||
+      (kindanimal === '' && gender === '' && require === '')
+    ) {
       this.districtService
         .getDistrictByName(this.myControl.value)
         .subscribe((data) => {
           this.districts = data;
         });
-    }
-    else {
+    } else {
       this.petService
         .filterPets(kindanimal, gender, require)
         .subscribe((data) => {
@@ -145,4 +142,3 @@ export class ViewAllPublicationsComponent implements OnInit {
     }
   }
 }
-

@@ -14,6 +14,9 @@ import {AdoptionRequestDialogComponent} from './components/adoptionRequest-dialo
 import {MyAddsComponent} from './components/Adds/my-adds/my-adds.component';
 import {NotificationComponent} from './components/notification/notification.component';
 
+
+
+
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -25,9 +28,13 @@ const routes: Routes = [
   {path: 'publications', component: ViewAllPublicationsComponent},
   {path: 'subscriptions', component: SubscriptionsComponent},
   {path: 'profile', component: MyProfileComponent},
-  {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent},
   {path: 'adds', component: MyAddsComponent},
-  {path: 'notification', component: NotificationComponent}
+  {path: 'notification', component: NotificationComponent},
+  {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent},
+  {path: 'adds', component: MyAddsComponent}
+
+
+
 ];
 
 @NgModule({
