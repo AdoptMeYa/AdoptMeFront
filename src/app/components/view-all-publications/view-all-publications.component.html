@@ -46,25 +46,36 @@
       <button type="button" class="btn btn-success" (click)="filter2(kind.value, gender.value, require.value)">
         Filter
       </button>
-
     </div>
     <div>
-
       <div *ngFor="let name of names; let i = index">
         <div *ngFor="let pet of listpets; let j = index">
           <div *ngFor="let district of districts; let k = index">
-            <div *ngFor="let user of listUsers; let l =index">
-              <div *ngIf="names[i].userId === listUsers[l].id"
-                style="display: flex; justify-content: center; align-items: center">
-                <div *ngIf="names[i].id === listpets[j].publicationId"
-                  style="display: flex; justify-content: center; align-items: center">
-                  <div *ngIf="districts[k].id === listUsers[l].districtId"
-                    style="display: flex; justify-content: center; align-items: center">
+            <div *ngFor="let user of listUsers; let l = index">
+              <div *ngIf="names[i].userId === listUsers[l].id" style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                ">
+                <div *ngIf="names[i].id === listpets[j].publicationId" style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  ">
+                  <div *ngIf="districts[k].id === listUsers[l].districtId" style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    ">
                     <mat-card class="example-card" style="height: 100%; width: 70%; margin-bottom: 20px">
                       <mat-card-header>
                         <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title *ngIf="listpets">{{ pet.name }}</mat-card-title>
-                        <mat-card-subtitle>{{ name.comment }}</mat-card-subtitle>
+                        <mat-card-title *ngIf="listpets">{{
+                          pet.name
+                          }}</mat-card-title>
+                        <mat-card-subtitle>{{
+                          name.comment
+                          }}</mat-card-subtitle>
                       </mat-card-header>
                       <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
                         alt="Photo of a Shiba Inu" />
@@ -80,9 +91,16 @@
 
                       <h4>Date publication: {{ name.datetime }}</h4>
                       <mat-card-actions>
-                        <button (click)="onAdopt(listpets[i].userId, listpets[i].publicationId)" id="edit" mat-button
-                          type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button (click)="
+                            onAdopt(
+                              listpets[i].userId,
+                              listpets[i].publicationId
+                            )
+                          " id="edit" mat-button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           Adopt
+                        </button>
+                        <button mat-button type="button" (click)="goToPerfil(listpets[i].userId)">
+                          See User Profile
                         </button>
                       </mat-card-actions>
                     </mat-card>
@@ -95,38 +113,13 @@
       </div>
     </div>
 
-    <div *ngIf="listpets.length == 0 ||names.length == 0||districts.length == 0||listUsers.length == 0">No existen datos</div>
-     </div>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-    data-backdrop="false">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Details of Adoption Request
-          </h5>
-
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <form id="publish-form" #lForm="ngForm" [formGroup]="PublishForm" (ngSubmit)="onSubmit()" novalidate>
-            <div style="display: flexbox; flex-direction: row">
-              <mat-form-field class="flexbox" appearance="fill">
-                <mat-label>Enter Message</mat-label>
-                <mat-hint>Mandatory</mat-hint>
-                <input matInput type="text" formControlName="message" placeholder="Enter Message" />
-              </mat-form-field>
-            </div>
-          </form>
-          <mat-card-actions class="modal-footer">
-            <button mat-raised-button type="button" class="btn btn-primary" (click)="sendAdoptionRequest()">
-              Send
-            </button>
-          </mat-card-actions>
-        </div>
-      </div>
+    <div *ngIf="
+        listpets.length == 0 ||
+        names.length == 0 ||
+        districts.length == 0 ||
+        listUsers.length == 0
+      ">
+      No existen datos
     </div>
   </div>
 </div>
