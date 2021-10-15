@@ -8,36 +8,44 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { UserService } from '../../services/user.service';
 import { AdoptionRequestModel } from '../../models/AdoptionRequest.model';
 import { AdoptionRequestService } from '../../services/adoption-request.service';
-import {PublicationsDialogComponent} from "../publications-dialog/publications-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AdoptionRequestDialogComponent} from "../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component";
-import {Router} from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { DistrictService } from '../../services/district.service';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+
 @Component({
   selector: 'app-view-all-publications',
   templateUrl: './view-all-publications.component.html',
   styleUrls: ['./view-all-publications.component.css'],
 })
 export class ViewAllPublicationsComponent implements OnInit {
-  names = [];
   indice = 0;
   userName = '';
   userIdAt = 0;
-  listFinal: [{}];
   publicationId = 0;
   tzoffset = new Date().getTimezoneOffset() * 60000;
   localISOTime = new Date(Date.now() - this.tzoffset)
     .toISOString()
     .slice(0, -1);
   date = this.localISOTime.slice(0, 19).replace('T', ' ');
-  public isEmpty = 1;
   adoptionRequest: AdoptionRequestModel = new AdoptionRequestModel();
+  public isEmpty = 1;
   public submitted: boolean;
   public PublishForm: FormGroup;
-  public listpets: any;
+  dataPrueba: 'barranco';
   public aux: any;
+  //variables publication/districts/pets
+  public names = [];
+  public districts: any;
+  public listpets: any;
+  public listUsers: any;
+  //form autocmplete
+  myControl = new FormControl();
+  options: string[] = [];
+
   constructor(
     private publishService: PublishService,
     private petService: PetsService,
@@ -45,31 +53,37 @@ export class ViewAllPublicationsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private adoptionRequestService: AdoptionRequestService,
-    private dialog: MatDialog,
-    private router: Router
+    private districtService: DistrictService
   ) {}
 
   ngOnInit(): void {
     (this.PublishForm = this.formBuilder.group({
       message: ['', Validators.required],
     })),
-      this.getPublishandpets();
+      this.districtService.getAllDistricts().subscribe((then) => {
+        for (const i in then) {
+          if (then.hasOwnProperty(i)) {
+            var value = then[i];
+            this.options.push(value.district); //do something with value;
+          }
+        }
+      });
+
+    this.getAllData();
   }
   onSubmit() {}
-
-  filter(valor): void {
-    this.indice = valor;
-    console.log(valor);
-  }
-  // tslint:disable-next-line:typedef
-  getPublishandpets() {
+  getAllData() {
     this.publishService.getPublication().subscribe((result) => {
       this.names = result;
       this.isEmpty = result.length;
       this.petService.ReadPets().subscribe((data) => {
         this.listpets = data;
-        //console.log(this.listpets);
-        this.unifiedData(this.names, this.listpets);
+        this.districtService.getAllDistricts().subscribe((districts) => {
+          this.districts = districts;
+          this.userService.getallUser().subscribe((users) => {
+            this.listUsers = users;
+          });
+        });
       });
     });
   }
@@ -78,43 +92,57 @@ export class ViewAllPublicationsComponent implements OnInit {
     return this.storageService.getCurrentUser().id;
   }
 
-
-
-  onAdopt(userIdAt: number, publicationId: number): void {
+  onAdopt(userIdAt: number, publicationId: number) {
     this.userService.getUserById(userIdAt).subscribe((result) => {
       this.userName = result.name;
-      const dialogRef = this.dialog.open(AdoptionRequestDialogComponent, {
-        width: '350px',
-        data: {user_IdAt: userIdAt, publicationId_At: publicationId, userNameAt: this.userName}
-      });
-      console.log(publicationId + 'from' + this.userName);
+      //console.log(publicationId + 'from' + this.userName);
     });
     this.userIdAt = userIdAt;
     this.publicationId = publicationId;
   }
 
-
-
-  filter2(kindanimal, gender, require): void {
-    this.petService
-      .filterPets(kindanimal, gender, require)
-      .subscribe((data) => {
-        this.listpets = data;
-      });
-  }
-
-  unifiedData(publicaciones, pets) {
-    for (const i in publicaciones) {
-      for (const j in pets) {
-        if (publicaciones[i].id === pets[j].publicationId) {
-          console.log(publicaciones[i],pets[j])
-        }
-      }
+  sendAdoptionRequest() {
+    if (this.PublishForm.value.message !== '') {
+      this.adoptionRequest.uerIdFrom = this.getCurrentIdUser();
+      this.adoptionRequest.useridAt = this.userIdAt;
+      this.adoptionRequest.message = this.PublishForm.value.message;
+      this.adoptionRequest.publicationId = this.publicationId;
+      this.adoptionRequest.date = this.date;
+      this.adoptionRequestService
+        .postAdoptionRequest(this.adoptionRequest)
+        .subscribe();
+      alert('Adoption Request Sent to ' + this.userName);
     }
   }
 
-  goToPerfil(id: number): void{
-    this.userService.currentUser = id;
-    this.router.navigate(['profile']);
+  filter2(kindanimal, gender, require) {
+    if (
+      kindanimal === '' &&
+      gender === '' &&
+      require === '' &&
+      this.myControl.value === ''
+    ) {
+      console.log('NADA');
+    }else if(this.myControl.value || (kindanimal === '' && gender === '' &&require === '' ))
+    {
+      this.districtService
+        .getDistrictByName(this.myControl.value)
+        .subscribe((data) => {
+          this.districts = data;
+        });
+    }
+    else {
+      this.petService
+        .filterPets(kindanimal, gender, require)
+        .subscribe((data) => {
+          this.listpets = data;
+        });
+      this.districtService
+        .getDistrictByName(this.myControl.value)
+        .subscribe((data) => {
+          this.districts = data;
+        });
+    }
   }
 }
+

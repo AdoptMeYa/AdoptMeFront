@@ -25,6 +25,7 @@ export class PetsService {
       publicationId: publicationId 
     })
   }
+
   ReadPets(): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.basePath + this.apiEndPoint)
   }

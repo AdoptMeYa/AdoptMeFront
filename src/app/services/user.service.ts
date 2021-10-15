@@ -18,7 +18,14 @@ export class UserService {
   getUserById(id: number = this.currentUser): Observable<User> {
     return this.http.get<User>(this.basePath + this.apiEndPoint + id.toString());
   }
+  
   putUser(id: number, objUser: {}): Observable<User>{
     return this.http.put<User>(this.basePath + this.apiEndPoint + id.toString(), objUser );
   }
+
+  getallUser()
+  {
+    return this.http.get<User>(this.basePath + this.apiEndPoint );
+  }
+
 }
