@@ -34,6 +34,7 @@ import { AdoptionRequestDialogComponent } from './components/adoptionRequest-dia
 import { MyAddsComponent } from './components/Adds/my-adds/my-adds.component';
 import { AddDialogComponent } from './components/Adds/my-adds-dialogs/add-dialog/add-dialog.component';
 import { EditDialogComponent } from './components/Adds/my-adds-dialogs/edit-dialog/edit-dialog.component';
+import {NotificationComponent} from './components/notification/notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { EditDialogComponent } from './components/Adds/my-adds-dialogs/edit-dial
     AdoptionRequestDialogComponent,
     MyAddsComponent,
     AddDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

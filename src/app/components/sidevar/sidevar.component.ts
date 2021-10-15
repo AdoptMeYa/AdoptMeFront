@@ -33,5 +33,7 @@ export class SidevarComponent implements OnInit {
   seeMyAdvertisements(): void{
   this.router.navigate(['adds']);
   }
-
+  seeNotifications(): void{
+    this.router.navigate(['notification']);
+  }
 }

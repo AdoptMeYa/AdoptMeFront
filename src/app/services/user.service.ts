@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
 import { User } from "../models/user.model";
 import {StorageService} from './storage.service';
+import {AdoptionRequestModel} from '../models/AdoptionRequest.model';
+import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +17,13 @@ export class UserService {
   findAllUsers(): Observable<UserContainer> {
     return this.http.get<UserContainer>(this.basePath  + this.apiEndPoint);
   }*/
+  getUser(){
+    return this.http.get<User>(this.basePath + this.apiEndPoint)
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
+
   getUserById(id: number = this.currentUser): Observable<User> {
     return this.http.get<User>(this.basePath + this.apiEndPoint + id.toString());
   }

@@ -12,6 +12,7 @@ import {MyProfileComponent} from './components/my-profile/my-profile.component';
 // tslint:disable-next-line:max-line-length
 import {AdoptionRequestDialogComponent} from './components/adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 import {MyAddsComponent} from './components/Adds/my-adds/my-adds.component';
+import {NotificationComponent} from './components/notification/notification.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'subscriptions', component: SubscriptionsComponent},
   {path: 'profile', component: MyProfileComponent},
   {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent},
-  {path: 'adds', component: MyAddsComponent}
+  {path: 'adds', component: MyAddsComponent},
+  {path: 'notification', component: NotificationComponent}
 ];
 
 @NgModule({
