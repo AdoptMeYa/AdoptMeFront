@@ -87,3 +87,4 @@ export class MainComponent implements OnInit {
     this.router.navigate(['subscriptions']);
   }
 }
+
