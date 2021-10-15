@@ -31,6 +31,9 @@ import { SidevarComponent } from './components/sidevar/sidevar.component';
 import { MyProfileComponent, FormUserDialogComponent } from './components/my-profile/my-profile.component';
 import { PublicationsDialogComponent } from './components/publications-dialog/publications-dialog.component';
 import { AdoptionRequestDialogComponent } from './components/adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
+import { MyAddsComponent } from './components/Adds/my-adds/my-adds.component';
+import { AddDialogComponent } from './components/Adds/my-adds-dialogs/add-dialog/add-dialog.component';
+import { EditDialogComponent } from './components/Adds/my-adds-dialogs/edit-dialog/edit-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,8 +48,10 @@ import { AdoptionRequestDialogComponent } from './components/adoptionRequest-dia
     MyProfileComponent,
     FormUserDialogComponent,
     PublicationsDialogComponent,
-    AdoptionRequestDialogComponent
-
+    AdoptionRequestDialogComponent,
+    MyAddsComponent,
+    AddDialogComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
