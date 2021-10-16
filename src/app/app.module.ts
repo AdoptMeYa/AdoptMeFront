@@ -18,6 +18,10 @@ import { MainComponent } from './components/main/main.component';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
+import { AdoptionRequestService } from './services/adoption-request.service';
+import { AdvertisementService } from './services/advertisement.service';
+import { DistrictService } from './services/district.service';
+import { PetsService } from './services/pets.service';
 // guards
 import { AuthGuard } from './guards/AuthGuard';
 // interceptor
@@ -70,7 +74,8 @@ import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-pr
     HttpClientModule,
   ],
   providers: [
-    AuthService, StorageService, AuthGuard, UserService, PublishService,
+    AuthService, StorageService, AuthGuard, UserService, PublishService, AdoptionRequestService, 
+    AdvertisementService, DistrictService, PetsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

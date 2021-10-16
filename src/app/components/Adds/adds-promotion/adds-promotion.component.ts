@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AdvertisementService} from '../../../services/advertisement.service';
 import {StorageService} from '../../../services/storage.service';
-import {PublishService} from '../../../services/publish.service';
-import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-adds-promotion',
@@ -12,9 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class AddsPromotionComponent implements OnInit {
   public Adds: any;
   constructor(private advertisementService: AdvertisementService,
-    public storageService: StorageService,
-    private publishService: PublishService,
-    private dialog: MatDialog) { }
+    public storageService: StorageService) { }
 
   ngOnInit(): void {
     this.advertisementService.listAdvertisements().subscribe((data) => {
