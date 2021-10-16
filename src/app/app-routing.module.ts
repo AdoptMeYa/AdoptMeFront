@@ -14,6 +14,7 @@ import {AdoptionRequestDialogComponent} from './components/adoptionRequest-dialo
 import {MyAddsComponent} from './components/Adds/my-adds/my-adds.component';
 import {NotificationComponent} from './components/notification/notification.component';
 import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-promotion.component';
+import { UserGuard } from './guards/UserGuard';
 
 
 
@@ -24,16 +25,16 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   // si no hay usuario logeado, no se puede entrar a main
   {path: 'header', component: HeaderComponent, canActivate: [AuthGuard]},
-  {path: 'main', component: MainComponent},
-  {path: 'toggle', component: MainTogglenavComponent},
-  {path: 'publications', component: ViewAllPublicationsComponent},
-  {path: 'subscriptions', component: SubscriptionsComponent},
-  {path: 'profile', component: MyProfileComponent},
-  {path: 'adds', component: MyAddsComponent},
-  {path: 'notification', component: NotificationComponent},
-  {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent},
-  {path: 'adds', component: MyAddsComponent},
-  {path: 'addsPromo', component: AddsPromotionComponent}
+  {path: 'main', component: MainComponent, canActivate: [AuthGuard, UserGuard]},
+  {path: 'toggle', component: MainTogglenavComponent, canActivate: [AuthGuard]},
+  {path: 'publications', component: ViewAllPublicationsComponent, canActivate: [AuthGuard, UserGuard]},
+  {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]},
+  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard]},
+  {path: 'notification', component: NotificationComponent, canActivate: [AuthGuard]},
+  {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent, canActivate: [AuthGuard]},
+  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard]},
+  {path: 'addsPromo', component: AddsPromotionComponent, canActivate: [AuthGuard]}
 
 
 
