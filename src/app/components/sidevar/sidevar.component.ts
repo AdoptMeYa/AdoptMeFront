@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-
+import { StorageService } from '../../services/storage.service';
 @Component({
   selector: 'app-sidevar',
   templateUrl: './sidevar.component.html',
@@ -8,9 +8,15 @@ import {Router} from '@angular/router';
 })
 export class SidevarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private storageService: StorageService) { }
 
   ngOnInit(): void {
+  }
+  getRouter(): any{
+    return this.router;
+  }
+  getUser(): any {
+    return this.storageService.getCurrentUser();
   }
   seeAllPublicaions(): void{
     this.router.navigate(['publications']);

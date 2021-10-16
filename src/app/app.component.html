@@ -1,14 +1,19 @@
 
 
 <app-header ></app-header>
+
 <mat-drawer-container class="example-container" style="z-index: 50;position: fixed; height: 100%; width: 100%;">
-  <mat-drawer  mode="side" style="width:200px; background-color: #2f4cb1" opened  >
+  
+  <mat-drawer *ngIf="getRouter().url !== '/login' && getRouter().url !== '/signup' " mode="side" style="width:200px; background-color: #2f4cb1" opened  >
     <app-sidevar></app-sidevar>
   </mat-drawer>
+  
   <mat-drawer-content class="example-main" >
     <router-outlet style="z-index: 100"></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+
+
 <mat-sidenav></mat-sidenav>
 
 

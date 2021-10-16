@@ -4,7 +4,7 @@
       "email": "aaaaa@gmail.com",
       "password": "$2a$10$u3wb.PzNZtuamd5W/c5E8OkCU39rhXv1hdHAgvuDCjHp.ag8RE3ua",
       "id": 1,
-      "type": "cliente",
+      "type": "Client",
       "user": "admin",
       "ruc": "",
       "dni": "4648654",
@@ -16,7 +16,7 @@
     {
       "email": "cliente1@gmail.com",
       "password": "$2a$10$W3JHMolwrYbGs3MdIHcUnOs..j4.zsjCTBjNQMXll7Gc0tMZn86C2",
-      "type": "cliente",
+      "type": "Client",
       "user": "admin",
       "ruc": "",
       "dni": "4648654",
@@ -31,7 +31,7 @@
       "password": "$2a$10$rQPWTdlIDsc05Ujfg/wbFO.0vNscoiGu4A2.icO70zkqVEHQYoj2u",
       "name": "Hernan",
       "lastname": "Razo",
-      "type": "cliente",
+      "type": "Client",
       "user": "basic",
       "dni": "12345678",
       "phone": "945373426",
@@ -43,13 +43,39 @@
       "password": "$2a$10$7xbubmWXOvEmMM0C7V0EDOcCFMWCU3Z2D3CVwSHYhPuAf0ltSYlq6",
       "name": "Fifi",
       "lastname": "thebest",
-      "type": "cliente",
+      "type": "Client",
       "user": "basic",
       "ruc": "12345676765",
       "dni": "65654522",
       "phone": "434353453",
       "locationId": 0,
       "id": 5
+    },
+    {
+      "email": "vet@gmail.com",
+      "password": "$2a$10$BRQzJteN2CgQzmTqKhlMBe8rHu8Lc8wU.6MUTe7CbtrRR3M3/KUem",
+      "name": "jimmy",
+      "lastname": "veteri",
+      "type": "Veterinarian",
+      "user": "basic",
+      "ruc": "23232343435",
+      "dni": "54544343",
+      "phone": "765454334",
+      "locationId": 0,
+      "id": 6
+    },
+    {
+      "email": "supp@gmail.com",
+      "password": "$2a$10$PJ3ceIpCgbRZ4e8t.HguxuAnjSmIF0YC4/VtWhg7UtLjieuk6Wleu",
+      "name": "lion",
+      "lastname": "supplier",
+      "type": "Supplier",
+      "user": "basic",
+      "ruc": "12655443232",
+      "dni": "87645232",
+      "phone": "7676664521",
+      "locationId": 0,
+      "id": 7
     }
   ],
   "publications": [
@@ -217,7 +243,7 @@
   "advertisements": [
     {
       "id": 0,
-      "userId": 1,
+      "userId": 6,
       "dateTime": "2021-10-14 14:54:03",
       "title": "New advertisement!",
       "description": "add description",
@@ -227,7 +253,7 @@
     },
     {
       "id": 2,
-      "userId": 4,
+      "userId": 6,
       "dateTime": "21/04/2021 19:20",
       "title": "You like it",
       "description": "Only for this month",
@@ -236,7 +262,7 @@
       "promotion": true
     },
     {
-      "userId": 4,
+      "userId": 6,
       "dateTime": "2021-10-14 10:24:37",
       "title": "Buy i for a while",
       "description": "vcvcxvcx",
@@ -246,7 +272,7 @@
       "id": 3
     },
     {
-      "userId": 4,
+      "userId": 6,
       "dateTime": "2021-10-14 10:32:29",
       "title": "only for good owners",
       "description": "dfsfds",

@@ -17,10 +17,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SignupComponent implements OnInit {
   public matcher = new MyErrorStateMatcher();
-  public type_user: any[] = ['Cliente', 'Veterinario', 'Proveedor'];
+  public type_user: any[] = ['Client', 'Veterinarian', 'Supplier'];
   public signupForm: FormGroup;
   public submitted: Boolean = false;
-  selection: string = "cliente";
+  selection: string = "Client";
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthService,
               private router: Router) { }
@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
     this.signupForm.controls['ruc'].disable()
   }
   disable(val: any){
-    if (val != "Cliente") {
+    if (val != "Client") {
       this.signupForm.controls['ruc'].enable()
     }
     else{
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
       let lastname: string = this.signupForm.value.lastname;
       let email: string = this.signupForm.value.email;
       let password: string = this.signupForm.value.password;
-      let type: string = this.selection;
+      let type: string = this.signupForm.value.type;
       let ruc: string = this.signupForm.value.ruc;
       let dni: string = this.signupForm.value.dni;
       let phone: string = this.signupForm.value.phone
