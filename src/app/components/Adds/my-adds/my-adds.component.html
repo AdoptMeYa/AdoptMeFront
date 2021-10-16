@@ -1,7 +1,7 @@
 <button style="margin: 5px" class="btn btn-success" type="button" (click)="openDialogAdd('Add')" >Add Advertisement</button>
 
 <div *ngFor="let add of Adds;let i = index; let last = last" [ngClass]="{'last-child': last}" style="display: flex; justify-content: center; align-items: center; padding-bottom: 5% ">
-  <mat-card *ngIf="Adds[i].userId===this.storageService.getCurrentUser().id" class="example-card" style="height:30%; width:60%">
+  <mat-card  class="example-card" style="height:30%; width:60%">
    <!---
     "id": 0,
       "userId": 1,

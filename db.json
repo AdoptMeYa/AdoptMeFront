@@ -1,30 +1,4 @@
 {
-  "publicacion": [
-    {
-      "descripcion": "Cat",
-      "Name": "Misha",
-      "IsAtention": "No",
-      "Race": "British",
-      "Ubication": "AV El polo",
-      "Commnet": "Gata seria",
-      "Age": "3",
-      "IdUser": 1,
-      "Fecha": "2021-09-30",
-      "id": 1
-    },
-    {
-      "descripcion": "Dog",
-      "Name": "Cisco",
-      "IsAtention": "No",
-      "Race": "Pug",
-      "Ubication": "AV la encalada",
-      "Commnet": "perrito travieso y jugueton",
-      "Age": "1",
-      "IdUser": 2,
-      "Fecha": "2021-09-30",
-      "id": 2
-    }
-  ],
   "users": [
     {
       "email": "aaaaa@gmail.com",

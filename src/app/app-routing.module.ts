@@ -13,6 +13,7 @@ import {MyProfileComponent} from './components/my-profile/my-profile.component';
 import {AdoptionRequestDialogComponent} from './components/adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 import {MyAddsComponent} from './components/Adds/my-adds/my-adds.component';
 import {NotificationComponent} from './components/notification/notification.component';
+import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-promotion.component';
 
 
 
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: 'adds', component: MyAddsComponent},
   {path: 'notification', component: NotificationComponent},
   {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent},
-  {path: 'adds', component: MyAddsComponent}
+  {path: 'adds', component: MyAddsComponent},
+  {path: 'addsPromo', component: AddsPromotionComponent}
 
 
 
