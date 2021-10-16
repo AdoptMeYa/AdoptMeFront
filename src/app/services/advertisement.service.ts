@@ -22,7 +22,7 @@ export class AdvertisementService {
   }
   // tslint:disable-next-line:typedef
   listAdvertisementsByUserId(userId: number) {
-    return this.http.get<any>('http://localhost:3000/advertisements?userId=1');
+    return this.http.get<any>('http://localhost:3000/advertisements?userId=' + userId.toString());
   }
   listAdvertisements(): Observable<AdvertisementModel[]> {
     return this.http.get<AdvertisementModel[]>(this.basePath + this.apiEndPoint);

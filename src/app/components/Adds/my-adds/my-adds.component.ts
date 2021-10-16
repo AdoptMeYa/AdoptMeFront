@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AdvertisementService} from '../../../services/advertisement.service';
 import {StorageService} from '../../../services/storage.service';
 import {AdvertisementModel} from '../../../models/Advertisement.model';
-import {PublishService} from '../../../services/publish.service';
-import {PublicationsDialogComponent} from '../../publications-dialog/publications-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AddDialogComponent} from '../my-adds-dialogs/add-dialog/add-dialog.component';
 import {EditDialogComponent} from '../my-adds-dialogs/edit-dialog/edit-dialog.component';
@@ -20,12 +18,11 @@ export class MyAddsComponent implements OnInit {
   constructor(
     private advertisementService: AdvertisementService,
     public storageService: StorageService,
-    private publishService: PublishService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-        this.advertisementService.listAdvertisements().subscribe((data) => {
+        this.advertisementService.listAdvertisementsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
       // tslint:disable-next-line:forin
         for (const i in data){
         this.Adds = data;
@@ -41,7 +38,7 @@ export class MyAddsComponent implements OnInit {
        });
        dialogRef.afterClosed().subscribe(result => {
          console.log('The dialog was closed');
-         this.advertisementService.listAdvertisements().subscribe((data) => {
+         this.advertisementService.listAdvertisementsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
            // tslint:disable-next-line:forin
            for (const i in data){
              this.Adds = data;
@@ -59,7 +56,7 @@ export class MyAddsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.advertisementService.listAdvertisements().subscribe((data) => {
+      this.advertisementService.listAdvertisementsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
         // tslint:disable-next-line:forin
         for (const i in data){
           this.Adds = data;
@@ -70,7 +67,7 @@ export class MyAddsComponent implements OnInit {
   deleteAdvertisement(id: number){
   this.advertisementService.deleteAdvertisement(id).subscribe(res => {
     alert('Advertisement deleted');
-    this.advertisementService.listAdvertisements().subscribe((data) => {
+    this.advertisementService.listAdvertisementsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
       // tslint:disable-next-line:forin
       for (const i in data){
         this.Adds = data;
