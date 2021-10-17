@@ -15,8 +15,8 @@ import {MyAddsComponent} from './components/Adds/my-adds/my-adds.component';
 import {NotificationComponent} from './components/notification/notification.component';
 import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-promotion.component';
 import { UserGuard } from './guards/UserGuard';
-
-
+import { VetGuard } from './guards/VetGuard';
+import { SuppGuard } from './guards/SuppGuard';
 
 
 const routes: Routes = [
@@ -25,15 +25,14 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   // si no hay usuario logeado, no se puede entrar a main
   {path: 'header', component: HeaderComponent, canActivate: [AuthGuard]},
-  {path: 'main', component: MainComponent, canActivate: [AuthGuard, UserGuard]},
+  {path: 'main', component: MainComponent, canActivate: [AuthGuard]},
   {path: 'toggle', component: MainTogglenavComponent, canActivate: [AuthGuard]},
-  {path: 'publications', component: ViewAllPublicationsComponent, canActivate: [AuthGuard, UserGuard]},
+  {path: 'publications', component: ViewAllPublicationsComponent, canActivate: [AuthGuard]},
   {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]},
-  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard]},
+  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard, VetGuard]},
   {path: 'notification', component: NotificationComponent, canActivate: [AuthGuard]},
   {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent, canActivate: [AuthGuard]},
-  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard]},
   {path: 'addsPromo', component: AddsPromotionComponent, canActivate: [AuthGuard]}
 
 
