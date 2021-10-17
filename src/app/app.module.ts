@@ -25,6 +25,8 @@ import { PetsService } from './services/pets.service';
 // guards
 import { AuthGuard } from './guards/AuthGuard';
 import { UserGuard } from './guards/UserGuard';
+import { VetGuard } from './guards/VetGuard';
+import { SuppGuard } from './guards/SuppGuard';
 // interceptor
 import { AuthInterceptor } from './interceptor/AuthInterceptor';
 import {PublishService} from './services/publish.service';
@@ -76,7 +78,7 @@ import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-pr
   ],
   providers: [
     AuthService, StorageService, AuthGuard, UserService, PublishService, AdoptionRequestService, 
-    AdvertisementService, DistrictService, PetsService, UserGuard,
+    AdvertisementService, DistrictService, PetsService, UserGuard, VetGuard, SuppGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
