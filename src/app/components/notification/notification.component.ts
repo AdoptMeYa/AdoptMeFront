@@ -58,7 +58,19 @@ export class NotificationComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
 
+  deleteRequest(id: number): void{
+    this.adoptionService.deleteAdoptionRequest(id).subscribe(data => {
+      alert('Publication deleted');
+    });
+    const index = id;
+    this.requests.splice(index, 1);
+  }
 
+  // tslint:disable-next-line:typedef
+  UpdateAdoptionRequest(id: number, b: boolean){
+    this.adoptionService.updateAdoptionRequest(b, id).subscribe();
+    alert('Adoption Request Sent to ' + id);
+  }
   goToPerfil(id: number): void{
     this.userService.currentUser = id;
     this.router.navigate(['profile']);

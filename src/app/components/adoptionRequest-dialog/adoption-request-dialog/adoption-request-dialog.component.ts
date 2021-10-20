@@ -39,6 +39,7 @@ export class AdoptionRequestDialogComponent implements OnInit {
       this.adoptionRequest.message = this.PublishForm.value.message;
       this.adoptionRequest.publicationId = publicationIdAt;
       this.adoptionRequest.date = this.date;
+      this.adoptionRequest.approved = false;
       this.adoptionRequestService.postAdoptionRequest(this.adoptionRequest).subscribe();
       alert('Adoption Request Sent to ' + this.data.userNameAt);
     }

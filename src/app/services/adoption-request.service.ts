@@ -24,6 +24,14 @@ export class AdoptionRequestService {
         return res;
       }));
   }
-
+  updateAdoptionRequest(b: boolean, id: number): Observable<AdoptionRequestModel>{
+    return this.http.put<AdoptionRequestModel>('http://localhost:3000/adoptionRequests/' + id.toString(), {
+      approved: b
+    });
+  }
+  deleteAdoptionRequest(id: number): Observable<AdoptionRequestModel>
+  {
+    return this.http.delete<AdoptionRequestModel>('http://localhost:3000/adoptionRequests/' + id.toString());
+  }
 
 }
