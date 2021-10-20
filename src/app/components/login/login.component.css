@@ -1,11 +1,12 @@
-.login-board{
-    width: 100%; 
-    margin-bottom: 10px;
-}
 .red{
     color: red;
 }
 .flexbox{
     display: flex; 
     flex-direction: row;
+}
+.profile-img {
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 10px;
 }

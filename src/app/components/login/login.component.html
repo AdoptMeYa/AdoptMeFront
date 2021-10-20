@@ -1,41 +1,46 @@
-<div class="aligner">
-    <mat-card class="aligner-center-item">
-        <mat-card-title>
-            Login Form
-        </mat-card-title>
-
-        <mat-card-content class="login-board" >
-            <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-
-                <mat-form-field class="flexbox" appearance="fill">
-                    <mat-label>Enter your Email</mat-label>
-                    <input matInput  type="text" formControlName="email" placeholder="Email"/>
-                    <mat-error class="red" *ngIf="submitted && loginForm.controls.email.hasError('required')">
-                        Field is mandatory
-                    </mat-error>
-                    <mat-error class="red" *ngIf="submitted && loginForm.controls.email.hasError('email')">
-                        Not correct email
-                    </mat-error>
-                </mat-form-field>
-                
-                <mat-form-field class="flexbox" appearance="fill">
-                    <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password"/>
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error class="red" *ngIf="submitted && loginForm.controls.password.hasError('required')">
-                        Field is mandatory
-                    </mat-error>
+<div style=" 
+background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.52), rgba(255, 175, 1, 0.73)),url(../../../assets/login-background.png); height: 900px; background-repeat: no-repeat; background-position: center; background-size: cover;   ">
+<div style="display: flex; justify-content: center; height: 90%; margin-top: 70px;">
+    <mat-card style="height:500px">
+        <mat-card-content>
+         
+            <mat-card-title style="margin-left: 90px;">Login</mat-card-title>
+            <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate >
+                <div style="display: flex; flex-direction: column;">
+                    <img src="../../../assets/adoptme.jpg" height="200" alt="perrito" class="profile-img">
+                    <mat-form-field appearance="fill" >
+                        <mat-label>Enter your Email</mat-label>
+                        <input matInput  type="text" formControlName="email" placeholder="Email"/>
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error class="red" *ngIf="submitted && loginForm.controls.email.hasError('required')">
+                            Field is mandatory
+                        </mat-error>
+                        <mat-error class="red" *ngIf="submitted && loginForm.controls.email.hasError('email')">
+                            Not correct email
+                        </mat-error>
+                    </mat-form-field>
                     
-                </mat-form-field>
-                
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button type="submit" form="login-form">Log In</button>
-        </mat-card-actions>
-        <mat-hint>¿No tienes cuenta? <button mat-button (click)="GoSignup()"> Registrate</button></mat-hint>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password"/>
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        
+                        
+                        <mat-error class="red" *ngIf="submitted && loginForm.controls.password.hasError('required')">
+                            Field is mandatory
+                        </mat-error>
+                        
+                    </mat-form-field>
 
+                    <button mat-raised-button style="background-color: #ffc107;" type="submit" form="login-form">Log In</button>
+                    <mat-hint>¿No tienes cuenta? <button mat-button (click)="GoSignup()"> Registrate</button></mat-hint>
+                </div>
+            </form>
+        
+        </mat-card-content>
+        
     </mat-card>
+</div>
 </div>
