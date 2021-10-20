@@ -5,4 +5,5 @@ export class AdoptionRequestModel {
   message: string;
   publicationId: number;
   date: string;
+  approved: boolean;
 }
