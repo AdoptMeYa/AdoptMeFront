@@ -30,13 +30,10 @@ const routes: Routes = [
   {path: 'publications', component: ViewAllPublicationsComponent, canActivate: [AuthGuard]},
   {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]},
-  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard, VetGuard]},
+  {path: 'adds', component: MyAddsComponent, canActivate: [AuthGuard]},
   {path: 'notification', component: NotificationComponent, canActivate: [AuthGuard]},
   {path: 'adoptionRequestDialog', component: AdoptionRequestDialogComponent, canActivate: [AuthGuard]},
   {path: 'addsPromo', component: AddsPromotionComponent, canActivate: [AuthGuard]}
-
-
-
 ];
 
 @NgModule({

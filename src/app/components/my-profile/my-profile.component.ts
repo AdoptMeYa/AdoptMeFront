@@ -17,11 +17,9 @@ export class MyProfileComponent implements OnInit {
     this.getInfoCurrentUser();
   }
   getInfoCurrentUser(): void{
-    this.userService.getUserById(this.userService.currentUser).subscribe(
-      result => {
-        this.infUser = result;
-      }
-    );
+    
+   
+    this.infUser = this.storageService.getCurrentUser();
     console.log(this.infUser);
   }
   editForm(): void{

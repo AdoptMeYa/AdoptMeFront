@@ -1,10 +1,10 @@
 
 <mat-list role="list">
-  <mat-list-item>
+  <mat-list-item *ngIf="getUser().type !== 'Veterinarian'">
     <button  style="color:white" class="btn btn-success" (click)="seeAllPublicaions()" >PUBLICATIONS</button>
   </mat-list-item>
   
-  <mat-list-item >
+  <mat-list-item *ngIf="getUser().type !== 'Veterinarian'">
     <button  style="color:white" class="btn btn-success" (click)="seeMyAllPublicaions()">MY PUBLICATIONS</button>
   </mat-list-item>
   <mat-list-item >
