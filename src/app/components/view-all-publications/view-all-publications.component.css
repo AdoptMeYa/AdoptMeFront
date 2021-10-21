@@ -20,3 +20,35 @@
   .example-full-width {
     width: 35%;
   }
+
+body{
+  background-color: #FFA000;
+}
+  mat-card
+  {
+    background-color: #ffffff;
+  }
+  .mat-button{
+    color:#ffffff;
+    background-color: #FFA000;  
+  }
+
+
+  mat-card  mat-card-header mat-card-title {
+    color:#3f51b5;
+  }
+  mat-card  mat-card-header mat-card-subtitle {
+    color:rgb(0, 0, 0);
+  }
+
+  mat-card-header
+  {
+  }
+  mat-card
+  {
+    border-radius:15px  ;
+    border: dotted 1px #FFA000;
+  }
+  .mat-card   h4{
+    color:rgb(2, 1, 1);
+  }
