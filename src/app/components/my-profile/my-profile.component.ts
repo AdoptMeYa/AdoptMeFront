@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {StorageService} from '../../services/storage.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css']
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, OnDestroy {
 
   infUser: any;
   constructor(public dialog: MatDialog, public userService: UserService, public storageService: StorageService){}
@@ -17,94 +17,91 @@ export class MyProfileComponent implements OnInit {
     this.getInfoCurrentUser();
   }
   getInfoCurrentUser(): void{
-    
-   
-    this.infUser = this.storageService.getCurrentUser();
-    console.log(this.infUser);
+    this.userService.getUserById(this.userService.currentUser).subscribe(
+res => {
+  this.infUser = res;
+  console.log(this.infUser);
+}
+  );
   }
   editForm(): void{
     this.dialog.open(FormUserDialogComponent);
   }
+
+  ngOnDestroy(): void {
+    this.userService.currentUser = this.storageService.getCurrentUser().id;
+    console.log(this.infUser);
+  }
 }
+
 
 @Component({
   selector: 'app-dialog-elements-example-dialog',
   template: `
-    <div style='flex-direction: column' class="form">
+    <div style="display: flex; flex-wrap: wrap; gap:20px; width: 430px">
 
-      <div style='flex-direction: column;justify-content:center; '>
 
-        <div style="justify-content:center">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>email</mat-label>
             <input  matInput #email [value]="infUser.email">
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>password</mat-label>
             <input  matInput #password [value]="infUser.password">
           </mat-form-field>
-        </div>
 
-        <div style="justify-content:center">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>type</mat-label>
             <input  matInput #type [value]="infUser.type">
           </mat-form-field>
-          <span></span>
-          <mat-form-field appearance="fill">
+
+          <mat-form-field appearance="standard">
             <mat-label>user</mat-label>
             <input  matInput #user [value]="infUser.user">
           </mat-form-field>
-        </div>
 
-        <div style="justify-content:center">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>ruc</mat-label>
             <input  matInput #ruc [value]="infUser.ruc">
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>dni</mat-label>
             <input  matInput #dni [value]="infUser.dni">
           </mat-form-field>
-        </div>
 
-        <div style="justify-content:center">
 
-          <mat-form-field  appearance="fill">
+          <mat-form-field  appearance="standard">
             <mat-label>phone</mat-label>
             <input  matInput #phone [value]="infUser.phone">
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>name</mat-label>
             <input  matInput #name [value]="infUser.name">
           </mat-form-field>
 
-        </div>
 
-        <div style="justify-content:center">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>last Name</mat-label>
             <input  matInput #lastName [value]="infUser.lastName">
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="standard">
             <mat-label>District Id</mat-label>
             <input  matInput #districtId [value]="infUser.districtId">
           </mat-form-field>
-        </div>
 
 
-        <div>
-        <mat-action-row style="justify-content: center">
-          <button class="btn btn-primary"
+
+        <mat-card-actions>
+          <button mat-button
                   (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, districtId.value )">SAVE</button>
-          <button class="btn btn-primary" (click)="cancel()">CANCEL</button>
-        </mat-action-row>
-        </div>
-      </div>
+          <button mat-button  (click)="cancel()">CANCEL</button>
+
+        </mat-card-actions>
+
     </div>
   `
 })

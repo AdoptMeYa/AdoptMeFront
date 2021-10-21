@@ -1,11 +1,20 @@
-*{
-  display: flex;
+body {
+  background: transparent url(src/assets/images/background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-div div div mat-form-field{
-  margin-left: 20px;
-}
+@media screen and (max-width: 1253px) {
+  body {
+    margin-top:300px;
+    padding-bottom:200px;
+  }
 
-.form  {
-  margin-top: 20px;
+  body div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 }

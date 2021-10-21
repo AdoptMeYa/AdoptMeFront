@@ -18,6 +18,7 @@ import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 import { PublicationsDialogComponent } from '../publications-dialog/publications-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AdoptionRequestDialogComponent } from '../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-view-all-publications',
@@ -50,6 +51,7 @@ export class ViewAllPublicationsComponent implements OnInit {
   options: string[] = [];
 
   constructor(
+    private router: Router,
     private publishService: PublishService,
     private petService: PetsService,
     private storageService: StorageService,
@@ -107,13 +109,16 @@ export class ViewAllPublicationsComponent implements OnInit {
           userNameAt: this.userName,
         },
       });
-      //console.log(publicationId + 'from' + this.userName);
     });
     this.userIdAt = userIdAt;
     this.publicationId = publicationId;
   }
 
-  filter2(kindanimal, gender, require) {
+  goToPerfil(id): void{
+    this.userService.currentUser = id;
+    this.router.navigate(['profile']);
+  }
+  filter2(kindanimal, gender, require): void {
     if (!kindanimal && !gender && !require && !this.myControl.value) {
       console.log('Nothing to filter');
     } else if (
