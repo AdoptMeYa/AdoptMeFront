@@ -15,10 +15,9 @@ import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DistrictService } from '../../services/district.service';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
-import {PublicationsDialogComponent} from "../publications-dialog/publications-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AdoptionRequestDialogComponent} from "../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component";
-
+import { PublicationsDialogComponent } from '../publications-dialog/publications-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AdoptionRequestDialogComponent } from '../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 
 @Component({
   selector: 'app-view-all-publications',
@@ -58,8 +57,7 @@ export class ViewAllPublicationsComponent implements OnInit {
     private userService: UserService,
     private adoptionRequestService: AdoptionRequestService,
     private districtService: DistrictService,
-    private dialog: MatDialog,
-
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +101,11 @@ export class ViewAllPublicationsComponent implements OnInit {
       this.userName = result.name;
       const dialogRef = this.dialog.open(AdoptionRequestDialogComponent, {
         width: '350px',
-        data: {user_IdAt: userIdAt, publicationId_At: publicationId, userNameAt: this.userName}
+        data: {
+          user_IdAt: userIdAt,
+          publicationId_At: publicationId,
+          userNameAt: this.userName,
+        },
       });
       //console.log(publicationId + 'from' + this.userName);
     });
@@ -112,13 +114,8 @@ export class ViewAllPublicationsComponent implements OnInit {
   }
 
   filter2(kindanimal, gender, require) {
-    if (
-      kindanimal === '' &&
-      gender === '' &&
-      require === '' &&
-      this.myControl.value === ''
-    ) {
-      console.log('NADA');
+    if (!kindanimal && !gender && !require && !this.myControl.value) {
+      console.log('Nothing to filter');
     } else if (
       this.myControl.value ||
       (kindanimal === '' && gender === '' && require === '')
@@ -128,17 +125,40 @@ export class ViewAllPublicationsComponent implements OnInit {
         .subscribe((data) => {
           this.districts = data;
         });
+
+      if (kindanimal || gender || require) {
+        console.log('hhh');
+
+        this.districtService
+          .getDistrictByName(this.myControl.value)
+          .subscribe((data) => {
+            this.districts = data;
+
+            console.log(data);
+
+            this.petService
+              .filterPets(kindanimal, gender, require)
+              .subscribe((dat) => {
+                this.listpets = dat;
+              });
+          });
+      }
+    } else if (this.myControl.value && (kindanimal || gender || require)) {
     } else {
-      this.petService
-        .filterPets(kindanimal, gender, require)
-        .subscribe((data) => {
-          this.listpets = data;
-        });
-      this.districtService
-        .getDistrictByName(this.myControl.value)
-        .subscribe((data) => {
-          this.districts = data;
-        });
+      if (this.myControl.value) {
+        console.log('dad');
+        this.districtService
+          .getDistrictByName(this.myControl.value)
+          .subscribe((dat) => {
+            this.districts = dat;
+          });
+      } else {
+        this.petService
+          .filterPets(kindanimal, gender, require)
+          .subscribe((data) => {
+            this.listpets = data;
+          });
+      }
     }
   }
 }

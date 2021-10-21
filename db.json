@@ -112,13 +112,6 @@
       "id": 7
     },
     {
-      "comment": "Ayuda con gatito, necesito a alguien que lo pueda adoptar",
-      "datetime": "2021-10-10 21:05:44",
-      "userId": 1,
-      "petId": 7,
-      "id": 11
-    },
-    {
       "comment": "Cuiden de este cachorrito",
       "datetime": "2021-10-10 18:51:37",
       "userId": 1,
@@ -149,6 +142,7 @@
       "age": 2,
       "userId": 2,
       "publicationId": 7,
+      "gender": "Male",
       "id": 3
     },
     {
@@ -186,18 +180,6 @@
       "publicationId": 12,
       "gender": "Female",
       "id": 7
-    },
-    {
-      "type": "Dog",
-      "name": "mumi",
-      "attention": "No",
-      "race": "pug",
-      "age": 1,
-      "isAdopted": "No",
-      "userId": 1,
-      "publicationId": 11,
-      "gender": "Female",
-      "id": 8
     },
     {
       "type": "Cat",
@@ -437,15 +419,6 @@
       "publicationId": 2,
       "date": "2021-10-11 09:40:41",
       "id": 3,
-      "approved": false
-    },
-    {
-      "uerIdFrom": 2,
-      "useridAt": 1,
-      "message": "I am interested to adopt it!",
-      "publicationId": 11,
-      "date": "2021-10-11 09:43:38",
-      "id": 4,
       "approved": false
     },
     {

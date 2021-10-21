@@ -3,8 +3,14 @@
     <div class="example-container" style="text-align: center">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>District</mat-label>
-        <input type="text" placeholder="Pick one" aria-label="District" matInput [formControl]="myControl"
-          [matAutocomplete]="auto" />
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="District"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of options" [value]="option">
             {{ option }}
@@ -14,7 +20,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Kind of animal</mat-label>
-        <mat-select #kind>
+        <mat-select #kindanimal>
           <mat-option value="Dog">Dog</mat-option>
           <mat-option value="Cat">Cat</mat-option>
           <mat-option value="Parrot">Parrot</mat-option>
@@ -43,7 +49,11 @@
         <!--mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
       </mat-form-field>
 
-      <button type="button" class="btn btn-success" (click)="filter2(kind.value, gender.value, require.value)">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="filter2(kindanimal.value, gender.value, require.value)"
+      >
         Filter
       </button>
     </div>
@@ -52,54 +62,80 @@
         <div *ngFor="let pet of listpets; let j = index">
           <div *ngFor="let district of districts; let k = index">
             <div *ngFor="let user of listUsers; let l = index">
-              <div *ngIf="names[i].userId === listUsers[l].id" style="
+              <div
+                *ngIf="names[i].userId === listUsers[l].id"
+                style="
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                ">
-                <div *ngIf="names[i].id === listpets[j].publicationId" style="
+                "
+              >
+                <div
+                  *ngIf="names[i].id === listpets[j].publicationId"
+                  style="
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                  ">
-                  <div *ngIf="districts[k].id === listUsers[l].districtId" style="
+                  "
+                >
+                  <div
+                    *ngIf="districts[k].id === listUsers[l].districtId"
+                    style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
-                    ">
-                    <mat-card class="example-card" style="height: 100%; width: 70%; margin-bottom: 20px">
+                    "
+                  >
+                    <mat-card
+                      class="example-card"
+                      style="height: 100%; width: 70%; margin-bottom: 20px"
+                    >
                       <mat-card-header>
                         <div mat-card-avatar class="example-header-image"></div>
                         <mat-card-title *ngIf="listpets">{{
                           pet.name
-                          }}</mat-card-title>
+                        }}</mat-card-title>
                         <mat-card-subtitle>{{
                           name.comment
-                          }}</mat-card-subtitle>
+                        }}</mat-card-subtitle>
                       </mat-card-header>
-                      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                        alt="Photo of a Shiba Inu" />
-                      <h4 *ngIf="listpets.type">Especie: {{ pet.type }}</h4>
-                      <h4 *ngIf="listpets && listpets.race !== ''">
+                      <img
+                        mat-card-image
+                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                        alt="Photo of a Shiba Inu"
+                      />
+                      <h4 >Especie: {{ pet.type }}</h4>
+
+                      <h4>
                         Race: {{ pet.race }}
                       </h4>
                       <h4>Attention: {{ pet.attention }}</h4>
                       <h4>Age: {{ pet.age }}</h4>
-                      <h4>Adopted: {{ pet.isAdopted }}</h4>
                       <h4>Gender: {{ pet.gender }}</h4>
                       <h4>District: {{ district.district }}</h4>
 
                       <h4>Date publication: {{ name.datetime }}</h4>
                       <mat-card-actions>
-                        <button (click)="
+                        <button
+                          (click)="
                             onAdopt(
                               listpets[i].userId,
                               listpets[i].publicationId
                             )
-                          " id="edit" mat-button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          "
+                          id="edit"
+                          mat-button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                        >
                           Adopt
                         </button>
-                        <button mat-button type="button" (click)="goToPerfil(listpets[i].userId)">
+                        <button
+                          mat-button
+                          type="button"
+                          (click)="goToPerfil(listpets[i].userId)"
+                        >
                           See User Profile
                         </button>
                       </mat-card-actions>
@@ -112,14 +148,6 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf="
-        listpets.length == 0 ||
-        names.length == 0 ||
-        districts.length == 0 ||
-        listUsers.length == 0
-      ">
-      No existen datos
-    </div>
+    <div *ngIf="listpets.length == 0 || names.length == 0 || listUsers.length == 0 ||districts.length==1">No existen datos</div>
   </div>
 </div>
