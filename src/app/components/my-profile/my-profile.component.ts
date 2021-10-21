@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {StorageService} from '../../services/storage.service';
 import {MatDialog} from '@angular/material/dialog';
+import {LocationService} from '../../services/location.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -11,10 +12,19 @@ import {MatDialog} from '@angular/material/dialog';
 export class MyProfileComponent implements OnInit, OnDestroy {
 
   infUser: any;
-  constructor(public dialog: MatDialog, public userService: UserService, public storageService: StorageService){}
+  district: any;
+  // tslint:disable-next-line:max-line-length
+  constructor(public locationService: LocationService, public dialog: MatDialog, public userService: UserService, public storageService: StorageService){}
 
   ngOnInit(): void {
     this.getInfoCurrentUser();
+  }
+  // tslint:disable-next-line:typedef
+  getDistrict(id): string {
+    this.locationService.getLocation(id).subscribe(result => {
+      this.district = result.district;
+    });
+    return this.district.toString();
   }
   getInfoCurrentUser(): void{
     this.userService.getUserById(this.userService.currentUser).subscribe(
@@ -123,6 +133,7 @@ export class FormUserDialogComponent implements OnInit {
     this.userService.putUser(this.storageService.getCurrentUser().id,
       {email, password, type, user, ruc, dni, phone, name, lastName, districtId});
   }
+
   cancel(): void{
     this.dialog.closeAll();
   }

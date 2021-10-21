@@ -64,7 +64,7 @@
 
         <mat-form-field appearance="standard">
           <mat-label>District Id</mat-label>
-          <input readonly matInput [value]="infUser.districtId">
+          <input readonly matInput [value]="this.getDistrict(infUser.districtId)">
         </mat-form-field>
 
       <mat-action-row style="justify-content: center" *ngIf="this.userService.currentUser===this.storageService.getCurrentUser().id">
