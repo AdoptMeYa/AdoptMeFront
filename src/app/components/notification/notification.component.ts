@@ -18,6 +18,9 @@ export class NotificationComponent implements OnInit {
   public pets: any;
   uerIdFrom: 0;
   useridAt: 0;
+  tzoffset = (new Date()).getTimezoneOffset() * 60000;
+  localISOTime = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0, -1);
+  date = this.localISOTime.slice(0, 19).replace('T', ' ');
   constructor(
     private adoptionService: AdoptionRequestService,
     private storageService: StorageService,
@@ -67,9 +70,10 @@ export class NotificationComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  UpdateAdoptionRequest(id: number, b: boolean){
-    this.adoptionService.updateAdoptionRequest(b, id).subscribe();
+  UpdateAdoptionRequest(id: number, uerIdFrom: number, useridAt: number, message: string, publicationId: number, b: boolean){
+    this.adoptionService.updateAdoptionRequest(b, id, uerIdFrom, useridAt, message, publicationId, this.date).subscribe();
     alert('Adoption Request Sent to ' + id);
+    this.getRequests();
   }
   goToPerfil(id: number): void{
     this.userService.currentUser = id;

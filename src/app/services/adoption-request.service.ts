@@ -24,9 +24,15 @@ export class AdoptionRequestService {
         return res;
       }));
   }
-  updateAdoptionRequest(b: boolean, id: number): Observable<AdoptionRequestModel>{
+  // tslint:disable-next-line:max-line-length
+  updateAdoptionRequest(b: boolean, id: number, uerIdFrom: number, useridAt: number, message: string, publicationId: number, date: string): Observable<AdoptionRequestModel>{
     return this.http.put<AdoptionRequestModel>('http://localhost:3000/adoptionRequests/' + id.toString(), {
-      approved: b
+      approved: b,
+      uerIdFrom: uerIdFrom,
+      useridAt: useridAt,
+      message: message,
+      publicationId: publicationId,
+      date: date
     });
   }
   deleteAdoptionRequest(id: number): Observable<AdoptionRequestModel>
