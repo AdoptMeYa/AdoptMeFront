@@ -1,4 +1,4 @@
-<div>
+<div class="allpublication">
   <div style="z-index: 1">
     <div class="example-container" style="text-align: center">
       <mat-form-field class="example-full-width" appearance="fill">
@@ -57,7 +57,7 @@
         Filter
       </button>
     </div>
-    <div>
+    <div class="cards">
       <div *ngFor="let name of names; let i = index">
         <div *ngFor="let pet of listpets; let j = index">
           <div *ngFor="let district of districts; let k = index">
@@ -90,32 +90,44 @@
                       class="example-card"
                       style="height: 100%; width: 70%; margin-bottom: 20px"
                     >
-                      <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title *ngIf="listpets">{{
-                          pet.name
-                        }}</mat-card-title>
-                        <mat-card-subtitle>{{
-                          name.comment
-                        }}</mat-card-subtitle>
-                      </mat-card-header>
-                      <img
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title *ngIf="listpets">{{
+                        pet.name
+                      }}</mat-card-title>
+
+                      <mat-card-subtitle>{{
+                        name.comment
+                      }}</mat-card-subtitle>
+                     
+                      <mat-card-subtitle style="font-size: 12px;">
+                        {{
+                        
+                          name.datetime 
+                       }}</mat-card-subtitle>
+                    
+
+                    </mat-card-header>
+
+                    <img
                         mat-card-image
                         src="https://material.angular.io/assets/img/examples/shiba2.jpg"
                         alt="Photo of a Shiba Inu"
                       />
-                      <h4 >Especie: {{ pet.type }}</h4>
+                      <div style="text-align:justify; align-items: center;">
 
-                      <h4>
-                        Race: {{ pet.race }}
-                      </h4>
-                      <h4>Attention: {{ pet.attention }}</h4>
-                      <h4>Age: {{ pet.age }}</h4>
-                      <h4>Gender: {{ pet.gender }}</h4>
-                      <h4>District: {{ district.district }}</h4>
-
-                      <h4>Date publication: {{ name.datetime }}</h4>
-                      <mat-card-actions>
+                      <div style="display: grid;
+                      grid-template-columns: repeat(2, 1fr);
+                      ">
+                      
+                        <h4>{{ pet.race }}</h4>
+                        <h4>Attention: {{ pet.attention }}</h4>
+                        <h4> {{ pet.age }} years</h4>
+                        <h4>Gender: {{ pet.gender }}</h4>
+                        <h4>District: {{ district.district }}</h4>
+                      </div>
+                      </div>
+                      <mat-card-actions style="text-align: center;">
                         <button
                           (click)="
                             onAdopt(
