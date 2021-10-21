@@ -3,7 +3,10 @@
 
   <span *ngIf="getRouter().url !== '/login' && getRouter().url != '/signup'">
     <button style="margin: 5px" type="button" class="btn btn-success" (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>  Logout
+      
+      <div style="display: flex; justify-items: center;">
+        <mat-icon>exit_to_app</mat-icon> <span> Logout</span>
+      </div>
     </button>
   </span>
 
