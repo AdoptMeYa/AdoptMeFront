@@ -13,6 +13,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
 
   infUser: any;
   district: any;
+  location: any;
   // tslint:disable-next-line:max-line-length
   constructor(public locationService: LocationService, public dialog: MatDialog, public userService: UserService, public storageService: StorageService){}
 
@@ -20,19 +21,24 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     this.getInfoCurrentUser();
   }
   // tslint:disable-next-line:typedef
-  getDistrict(id): string {
+  getDistrict(id): void {
     this.locationService.getLocation(id).subscribe(result => {
       this.district = result.district;
     });
-    return this.district.toString();
+    this.district.toString();
   }
   getInfoCurrentUser(): void{
     this.userService.getUserById(this.userService.currentUser).subscribe(
-res => {
-  this.infUser = res;
-  console.log(this.infUser);
-}
-  );
+      res => {
+        this.infUser = res;
+        console.log(this.infUser);
+        this.locationService.getLocation(this.infUser.districtId).subscribe(
+          data => {
+            console.log("hola");
+            console.log(data.district);
+            this.location = data.district
+        });
+    });
   }
   editForm(): void{
     this.dialog.open(FormUserDialogComponent);
@@ -99,15 +105,15 @@ res => {
           </mat-form-field>
 
           <mat-form-field appearance="standard">
-            <mat-label>District Id</mat-label>
-            <input  matInput #districtId [value]="infUser.districtId">
+            <mat-label>District</mat-label>
+            <input  matInput #districtId [value]="location">
           </mat-form-field>
 
 
 
         <mat-card-actions>
           <button mat-button
-                  (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, districtId.value )">SAVE</button>
+                  (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, this.infUser.districtId)">SAVE</button>
           <button mat-button  (click)="cancel()">CANCEL</button>
 
         </mat-card-actions>
@@ -118,14 +124,26 @@ res => {
 
 export class FormUserDialogComponent implements OnInit {
   infUser: any;
-  constructor(public dialog: MatDialog, private userService: UserService, private storageService: StorageService){}
+  location: any;
+  constructor(public dialog: MatDialog, private userService: UserService, private storageService: StorageService,
+    private locationService: LocationService){}
 
   ngOnInit(): void {
     this.getInfoCurrentUser();
   }
   getInfoCurrentUser(): void{
-    this.infUser = this.storageService.getCurrentUser();
-    console.log(this.infUser);
+
+
+    this.userService.getUserById(this.userService.currentUser).subscribe(
+      res => {
+        this.infUser = res;
+        console.log(this.infUser);
+        this.locationService.getLocation(this.infUser.districtId).subscribe(
+          data => {
+            console.log(data.district);
+            this.location = data.district
+        });
+    });
   }
   save(email, password, type, user, ruc, dni, phone, name, lastName, districtId): void{
     this.dialog.closeAll();

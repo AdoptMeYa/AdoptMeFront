@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class LocationService {
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line:typedef
   getLocation(id): Observable<Location>{
