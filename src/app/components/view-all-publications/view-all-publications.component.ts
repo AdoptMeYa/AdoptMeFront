@@ -117,6 +117,7 @@ export class ViewAllPublicationsComponent implements OnInit {
   goToPerfil(id): void{
     this.userService.currentUser = id;
     this.router.navigate(['profile']);
+    console.log(this.userService.currentUser);
   }
   filter2(kindanimal, gender, require): void {
     if (!kindanimal && !gender && !require && !this.myControl.value) {
