@@ -53,10 +53,54 @@ export class PetsService {
   }
   filterPets(kindanimal:string,gender:string,require:string)
   {
-    return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}&gender=${gender}&attention=${require}`)
-    .pipe(map((res: any)=>{
-      return res;
-    }))
+    if (!kindanimal && !gender) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?attention=${require}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else if (!require && !gender) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else if (!kindanimal && !require ) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?gender=${gender}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else if (!kindanimal ) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?gender=${gender}&attention=${require}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else if (!gender ) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}&attention=${require}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else if (!require ) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}&gender=${gender}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else if (
+      !kindanimal &&
+      !gender  &&
+      !require 
+    ) {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    } else {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}&gender=${gender}&attention=${require}`)
+      .pipe(map((res: any)=>{
+        return res;
+      }))
+    }
+ 
+  
+  
   }
 
   
