@@ -1,77 +1,84 @@
 
-<div style='flex-direction: column' class="form">
 
-<div style='flex-direction: column;justify-content:center; '>
+<body  style='width: 100%; height: 100%;display: flex;justify-content: center; align-items: center;'>
 
-  <div style="justify-content:center">
-    <mat-form-field appearance="fill">
-      <mat-label>email</mat-label>
-      <input [disabled]="true" #email matInput [value]="infUser.email">
-    </mat-form-field>
+<div style="display: flex; flex-wrap: wrap; gap:20px" class="content">
 
-    <mat-form-field appearance="fill">
-      <mat-label>password</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.password">
-    </mat-form-field>
-  </div>
-
-  <div style="justify-content:center">
-    <mat-form-field appearance="fill">
-      <mat-label>type</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.type">
-    </mat-form-field>
-    <span></span>
-    <mat-form-field appearance="fill">
-      <mat-label>user</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.user">
-    </mat-form-field>
-  </div>
-
-  <div style="justify-content:center">
-    <mat-form-field appearance="fill">
-      <mat-label>ruc</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.ruc">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>dni</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.dni">
-    </mat-form-field>
-  </div>
-
-  <div style="justify-content:center">
-
-    <mat-form-field  appearance="fill">
-      <mat-label>phone</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.phone">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>name</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.name">
-    </mat-form-field>
-
-  </div>
-
-  <div style="justify-content:center">
-    <mat-form-field appearance="fill">
-      <mat-label>last Name</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.lastName">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>District Id</mat-label>
-      <input [disabled]="true" matInput [value]="infUser.districtId">
-    </mat-form-field>
-  </div>
-
-  <mat-action-row style="justify-content: center" *ngIf="this.userService.currentUser===this.storageService.getCurrentUser().id">
-    <button class="btn btn-primary" (click)="editForm()">EDIT</button>
-  </mat-action-row>
-
-  </div>
+<div>
+<mat-card style="max-width: 500px; ">
+  <img mat-card-image src="https://mt-asesores.com/wp-content/uploads/2014/02/photodune-659275-happy-business-man-xs.jpg">
+</mat-card>
 </div>
 
+<div>
+<mat-card>
 
+    <div style="display: flex; flex-wrap: wrap; gap:20px; width: 430px">
+
+        <mat-form-field appearance="standard">
+          <mat-label>email</mat-label>
+          <input readonly matInput [value]="infUser.email">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" *ngIf="infUser.id==this.storageService.getCurrentUser().id">
+          <mat-label>password</mat-label>
+          <input readonly matInput [value]="infUser.password">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>type</mat-label>
+          <input readonly matInput [value]="infUser.type">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>user</mat-label>
+          <input readonly matInput [value]="infUser.user">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>ruc</mat-label>
+          <input readonly matInput [value]="infUser.ruc">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>dni</mat-label>
+          <input readonly matInput [value]="infUser.dni">
+        </mat-form-field>
+
+
+        <mat-form-field  appearance="standard">
+          <mat-label>phone</mat-label>
+          <input readonly matInput [value]="infUser.phone">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>name</mat-label>
+          <input readonly matInput [value]="infUser.name">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="standard">
+          <mat-label>last Name</mat-label>
+          <input readonly matInput [value]="infUser.lastName">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>District Id</mat-label>
+          <input readonly matInput [value]="infUser.districtId">
+        </mat-form-field>
+
+      <mat-action-row style="justify-content: center" *ngIf="this.userService.currentUser===this.storageService.getCurrentUser().id">
+        <button class="btn" style="background-color: #FFC107; color: white" (click)="editForm()">EDIT</button>
+      </mat-action-row>
+
+    </div>
+
+
+</mat-card>
+</div>
+
+</div>
+
+</body>
 
 

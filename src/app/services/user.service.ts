@@ -12,7 +12,9 @@ export class UserService {
   private basePath: string = "http://localhost:3000/"
   apiEndPoint: string = "users/";
   public currentUser = this.storageService.getCurrentUser().id;
-  constructor(private http: HttpClient, private storageService: StorageService) { }
+  constructor(private http: HttpClient, private storageService: StorageService) {
+    console.log(this.currentUser);
+  }
   /*
   findAllUsers(): Observable<UserContainer> {
     return this.http.get<UserContainer>(this.basePath  + this.apiEndPoint);
@@ -27,7 +29,7 @@ export class UserService {
   getUserById(id: number = this.currentUser): Observable<User> {
     return this.http.get<User>(this.basePath + this.apiEndPoint + id.toString());
   }
-  
+
   putUser(id: number, objUser: {}): Observable<User>{
     return this.http.put<User>(this.basePath + this.apiEndPoint + id.toString(), objUser );
   }
