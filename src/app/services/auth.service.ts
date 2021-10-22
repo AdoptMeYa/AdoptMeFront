@@ -15,9 +15,9 @@ export class AuthService {
   login(email: string, password: string): Observable<Session> {
     return this.http.post<Session>(this.basePath + 'login', {email: email, password: password})
   }
-  signup(name: string, lastname: string, email: string, password: string, type: string, user: string, ruc: string, dni: string, phone: string, locationId: number): Observable<Session> {
+  signup(name: string, lastname: string, email: string, password: string, type: string, user: string, ruc: string, dni: string, phone: string, districtId: number): Observable<Session> {
     return this.http.post<Session>(this.basePath + 'signup', {
-      name: name, lastname: lastname, email: email, password: password, type: type, user: user, ruc: ruc, dni: dni, phone: phone, locationId: locationId
+      name: name, lastname: lastname, email: email, password: password, type: type, user: user, ruc: ruc, dni: dni, phone: phone, districtId: districtId
     })
   }
 

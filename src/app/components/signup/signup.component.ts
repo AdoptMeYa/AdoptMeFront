@@ -157,8 +157,10 @@ export class SignupComponent implements OnInit {
           break 
         default:
           break;
+        
       }
-      this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, locationId).subscribe(
+      let districtId: any = locationId;
+      this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, districtId).subscribe(
         data => this.correctSignup(data)
       )
     }

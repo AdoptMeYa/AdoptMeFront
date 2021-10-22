@@ -14,5 +14,8 @@ export class LocationService {
   getLocation(id): Observable<Location>{
     return this.http.get<Location>('http://localhost:3000/districts/' + id.toString());
   }
+  getLocationToForm(id): Observable<Location>{
+    return this.http.get<Location>('http://localhost:3000/districts/' + id.toString());
+  }
 
 }

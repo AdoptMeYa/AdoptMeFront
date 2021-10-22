@@ -9,5 +9,5 @@ export class User {
     public ruc: string
     public dni: string
     public phone: string
-    public locationId: number
+    public districtId: number
 }
