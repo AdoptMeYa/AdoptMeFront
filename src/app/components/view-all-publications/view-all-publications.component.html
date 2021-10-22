@@ -99,13 +99,13 @@
                       <mat-card-subtitle>{{
                         name.comment
                       }}</mat-card-subtitle>
-                     
+
                       <mat-card-subtitle style="font-size: 12px;">
                         {{
-                        
-                          name.datetime 
+
+                          name.datetime
                        }}</mat-card-subtitle>
-                    
+
 
                     </mat-card-header>
 
@@ -119,7 +119,7 @@
                       <div style="display: grid;
                       grid-template-columns: repeat(2, 1fr);
                       ">
-                      
+
                         <h4>{{ pet.race }}</h4>
                         <h4>Attention: {{ pet.attention }}</h4>
                         <h4> {{ pet.age }} years</h4>
@@ -146,7 +146,7 @@
                         <button
                           mat-button
                           type="button"
-                          (click)="goToPerfil(listpets[i].userId)"
+                          (click)="goToPerfil(name.userId)"
                         >
                           See User Profile
                         </button>
