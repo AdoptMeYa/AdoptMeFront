@@ -51,12 +51,14 @@
 
       <button
         type="button"
-        class="btn btn-success"
+        class="btn"
         (click)="filter2(kindanimal.value, gender.value, require.value)"
+        style="background-color: #FFC107; color: rgb(0, 0, 0)"
       >
         Filter
       </button>
     </div>
+    
     <div class="cards">
       <div *ngFor="let name of names; let i = index">
         <div *ngFor="let pet of listpets; let j = index">
@@ -90,44 +92,42 @@
                       class="example-card"
                       style="height: 100%; width: 70%; margin-bottom: 20px"
                     >
-                    <mat-card-header>
-                      <div mat-card-avatar class="example-header-image"></div>
-                      <mat-card-title *ngIf="listpets">{{
-                        pet.name
-                      }}</mat-card-title>
-
-                      <mat-card-subtitle>{{
-                        name.comment
-                      }}</mat-card-subtitle>
                      
-                      <mat-card-subtitle style="font-size: 12px;">
-                        {{
-                        
-                          name.datetime 
-                       }}</mat-card-subtitle>
+
                     
+                      <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
 
-                    </mat-card-header>
-
-                    <img
+                        <mat-card-title *ngIf="listpets">
+                          {{ pet.name }}
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                          {{ name.comment }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle style="font-size: 12px">
+                          {{ name.datetime }}
+                        </mat-card-subtitle>
+                      </mat-card-header>
+                      <img
                         mat-card-image
                         src="https://material.angular.io/assets/img/examples/shiba2.jpg"
                         alt="Photo of a Shiba Inu"
-                      />
-                      <div style="text-align:justify; align-items: center;">
-
-                      <div style="display: grid;
-                      grid-template-columns: repeat(2, 1fr);
-                      ">
-                      
-                        <h4>{{ pet.race }}</h4>
-                        <h4>Attention: {{ pet.attention }}</h4>
-                        <h4> {{ pet.age }} years</h4>
-                        <h4>Gender: {{ pet.gender }}</h4>
-                        <h4>District: {{ district.district }}</h4>
+                      />  
+                      <div style="text-align: justify; align-items: center">
+                        <div
+                          style="
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                          "
+                        >
+                          <h4>{{ pet.race }}</h4>
+                          <h4>Attention: {{ pet.attention }}</h4>
+                          <h4>{{ pet.age }} years</h4>
+                          <h4>Gender: {{ pet.gender }}</h4>
+                          <h4>District: {{ district.district }}</h4>
+                        </div>
                       </div>
-                      </div>
-                      <mat-card-actions style="text-align: center;">
+                      <mat-card-actions style="text-align: center">
                         <button
                           (click)="
                             onAdopt(
@@ -160,6 +160,15 @@
         </div>
       </div>
     </div>
-    <div *ngIf="listpets.length == 0 || names.length == 0 || listUsers.length == 0 ||districts.length==1">No existen datos</div>
+    <div
+      *ngIf="
+        listpets.length == 0 ||
+        names.length == 0 ||
+        listUsers.length == 0 ||
+        districts.length == 1
+      "
+    >
+      No existen datos
+    </div>
   </div>
 </div>
