@@ -13,7 +13,7 @@ export class UserService {
   apiEndPoint: string = "users/";
   public currentUser = this.storageService.getCurrentUser().id;
   constructor(private http: HttpClient, private storageService: StorageService) {
-  
+
   }
   /*
   findAllUsers(): Observable<UserContainer> {

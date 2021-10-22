@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {StorageService} from '../../services/storage.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -9,7 +9,7 @@ import {LocationService} from '../../services/location.service';
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css']
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, OnDestroy {
 
   infUser: any;
   district: any;
@@ -20,9 +20,12 @@ export class MyProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getInfoCurrentUser();
   }
+  ngOnDestroy(): void{
+    this.userService.currentUser = this.storageService.getCurrentUser().id;
+  }
   // tslint:disable-next-line:typedef
   getInfoCurrentUser(): void{
-    this.userService.getUserById(this.storageService.getCurrentUser().id).subscribe(
+    this.userService.getUserById(this.userService.currentUser).subscribe(
       data => {
         this.infUser = data;
         console.log(this.infUser);
@@ -31,14 +34,14 @@ export class MyProfileComponent implements OnInit {
             console.log("hola");
             console.log(data.district);
             this.location = data.district
-        });
-    });
+          });
+      });
   }
   editForm(): void{
     this.dialog.open(FormUserDialogComponent);
   }
 
- 
+
 }
 
 
@@ -46,67 +49,51 @@ export class MyProfileComponent implements OnInit {
   selector: 'app-dialog-elements-example-dialog',
   template: `
     <div style="display: flex; flex-wrap: wrap; gap:20px; width: 430px">
-          <mat-form-field appearance="standard">
-            <mat-label>email</mat-label>
-            <input  matInput #email [value]="infUser.email">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>password</mat-label>
-            <input  matInput #password [value]="infUser.password">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>type</mat-label>
-            <input  matInput #type [value]="infUser.type">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>user</mat-label>
-            <input  matInput #user [value]="infUser.user">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>ruc</mat-label>
-            <input  matInput #ruc [value]="infUser.ruc">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>dni</mat-label>
-            <input  matInput #dni [value]="infUser.dni">
-          </mat-form-field>
-
-
-          <mat-form-field  appearance="standard">
-            <mat-label>phone</mat-label>
-            <input  matInput #phone [value]="infUser.phone">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>name</mat-label>
-            <input  matInput #name [value]="infUser.name">
-          </mat-form-field>
-
-
-          <mat-form-field appearance="standard">
-            <mat-label>last Name</mat-label>
-            <input  matInput #lastName [value]="infUser.lastName">
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>District</mat-label>
-            <input  matInput #districtId [value]="location">
-          </mat-form-field>
-
-
-
-        <mat-card-actions>
-          <button mat-button
-                  (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, districtId.value)">SAVE</button>
-          <button mat-button  (click)="cancel()">CANCEL</button>
-
-        </mat-card-actions>
-
+      <mat-form-field appearance="standard">
+        <mat-label>email</mat-label>
+        <input  matInput #email [value]="infUser.email">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>password</mat-label>
+        <input  matInput #password [value]="infUser.password">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>type</mat-label>
+        <input  matInput #type [value]="infUser.type">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>user</mat-label>
+        <input  matInput #user [value]="infUser.user">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>ruc</mat-label>
+        <input  matInput #ruc [value]="infUser.ruc">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>dni</mat-label>
+        <input  matInput #dni [value]="infUser.dni">
+      </mat-form-field>
+      <mat-form-field  appearance="standard">
+        <mat-label>phone</mat-label>
+        <input  matInput #phone [value]="infUser.phone">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>name</mat-label>
+        <input  matInput #name [value]="infUser.name">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>last Name</mat-label>
+        <input  matInput #lastName [value]="infUser.lastName">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>District</mat-label>
+        <input  matInput #districtId [value]="location">
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-button
+                (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, districtId.value)">SAVE</button>
+        <button mat-button  (click)="cancel()">CANCEL</button>
+      </mat-card-actions>
     </div>
   `
 })
@@ -115,7 +102,7 @@ export class FormUserDialogComponent implements OnInit {
   infUser: any;
   location: any;
   constructor(public dialog: MatDialog, private userService: UserService, private storageService: StorageService,
-    private locationService: LocationService){}
+              private locationService: LocationService){}
 
   ngOnInit(): void {
     this.getInfoCurrentUser();
@@ -123,7 +110,7 @@ export class FormUserDialogComponent implements OnInit {
   getInfoCurrentUser(): void{
 
 
-    this.userService.getUserByIdToForm(this.storageService.getCurrentUser().id).subscribe(
+    this.userService.getUserByIdToForm(this.userService.currentUser).subscribe(
       res => {
         this.infUser = res;
         console.log(this.infUser);
@@ -131,8 +118,8 @@ export class FormUserDialogComponent implements OnInit {
           data => {
             console.log(data.district);
             this.location = data.district
-        });
-    });
+          });
+      });
   }
   save(email, password, type, user, ruc, dni, phone, name, lastName, districtId): void{
     //this.dialog.closeAll();
@@ -195,28 +182,28 @@ export class FormUserDialogComponent implements OnInit {
         break
       case "San Borja":
         locationId = 18
-        break 
+        break
       case "San Isidro":
         locationId = 19
-        break 
+        break
       case "San Juan de Lurigancho":
         locationId = 20
-        break 
+        break
       case "San Juan de Miraflores":
         locationId = 21
-        break 
+        break
       case "San Martin de Porres":
         locationId = 22
-        break 
+        break
       case "San Isidro":
         locationId = 23
-        break 
+        break
       case "Ventanilla":
         locationId = 24
         break
       case "Villa El Salvador":
         locationId = 25
-        break 
+        break
       default:
         break;
     }
