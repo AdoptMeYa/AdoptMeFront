@@ -1,27 +1,27 @@
 
 <mat-list role="list">
   <mat-list-item *ngIf="getUser().type !== 'Veterinarian'">
-    <button  style="color:white" class="btn btn-success" (click)="seeAllPublicaions()" >PUBLICATIONS</button>
+    <button mat-button style="color:white"  (click)="seeAllPublicaions()" >PUBLICATIONS</button>
   </mat-list-item>
-  
+
   <mat-list-item *ngIf="getUser().type !== 'Veterinarian'">
-    <button  style="color:white" class="btn btn-success" (click)="seeMyAllPublicaions()">MY PUBLICATIONS</button>
+    <button  mat-button style="color:white" (click)="seeMyAllPublicaions()">MY PUBLICATIONS</button>
   </mat-list-item>
   <mat-list-item >
-    <button style="color:white" class="btn btn-success" (click)="seeMyPerfil()">MY PROFILE</button>
+    <button mat-button style="color:white"  (click)="seeMyPerfil()">MY PROFILE</button>
   </mat-list-item>
-  
+
   <mat-list-item *ngIf="getUser().type !== 'Client' ">
-    <button  style="color:white" class="btn btn-success" (click)="seeMyAdvertisements()" >ADVERTISEMENTS</button>
+    <button  mat-button style="color:white"  (click)="seeMyAdvertisements()" >ADVERTISEMENTS</button>
   </mat-list-item>
-  
+
   <mat-list-item >
-    <button  style="color:white" class="btn btn-success " (click)="seeMyAdvertisementsWithPromotion()" >PROMOTIONS</button>
+    <button  mat-button style="color:white"  (click)="seeMyAdvertisementsWithPromotion()" >PROMOTIONS</button>
   </mat-list-item>
   <mat-list-item>
-    <button style="color:white" class="btn btn-success" (click)="seeNotifications()" >NOTIFICATION</button>
+    <button mat-button style="color:white"  (click)="seeNotifications()" >NOTIFICATION</button>
   </mat-list-item>
   <mat-list-item >
-    <button  style="color:white" class="btn btn-success"  (click)="showSubscriptions()">SUBSCRIPTIONS</button>
+    <button  mat-button style="color:white"   (click)="showSubscriptions()">SUBSCRIPTIONS</button>
   </mat-list-item >
 </mat-list>
