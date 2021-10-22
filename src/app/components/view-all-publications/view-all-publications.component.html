@@ -43,12 +43,10 @@
         <!--mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
       </mat-form-field>
 
-      <button type="button" class="btn" (click)="filter2(kindanimal.value, gender.value, require.value)"
-        style="background-color: #ffc107; color: rgb(0, 0, 0)">
+      <button type="button" class="btn btn-success" (click)="filter2(kindanimal.value, gender.value, require.value)">
         Filter
       </button>
     </div>
-
     <div class="cards">
       <div *ngFor="let name of names; let i = index">
         <div *ngFor="let pet of listpets; let j = index">
@@ -72,17 +70,18 @@
                     <mat-card class="example-card" style="height: 100%; width: 70%; margin-bottom: 20px">
                       <mat-card-header>
                         <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title *ngIf="listpets">{{
+                          pet.name
+                          }}</mat-card-title>
 
-                        <mat-card-title *ngIf="listpets">
-                          {{ pet.name }}
-                        </mat-card-title>
-                        <mat-card-subtitle>
-                          {{ name.comment }}
-                        </mat-card-subtitle>
+                        <mat-card-subtitle>{{
+                          name.comment
+                          }}</mat-card-subtitle>
+
                         <mat-card-subtitle style="font-size: 12px">
-                          {{ name.datetime }}
-                        </mat-card-subtitle>
+                          {{ name.datetime }}</mat-card-subtitle>
                       </mat-card-header>
+
                       <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
                         alt="Photo of a Shiba Inu" />
                       <div style="text-align: justify; align-items: center">
