@@ -1,6 +1,9 @@
-<div class="allpublication">
-  <div style="z-index: 1">
-    <div class="example-container" style="text-align: center">
+
+  <div  class="container">
+
+
+    <mat-card class="filters" >
+
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>District</mat-label>
         <input
@@ -49,14 +52,17 @@
         <!--mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
       </mat-form-field>
 
+
       <button
         type="button"
-        class="btn"style=" background-color: #FFA000"
+        class="btn"
         (click)="filter2(kindanimal.value, gender.value, require.value)"
       >
         Filter
       </button>
-    </div>
+
+    </mat-card>
+
     <div class="cards">
       <div *ngFor="let name of names; let i = index">
         <div *ngFor="let pet of listpets; let j = index">
@@ -64,48 +70,27 @@
             <div *ngFor="let user of listUsers; let l = index">
               <div
                 *ngIf="names[i].userId === listUsers[l].id"
-                style="
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                "
+
               >
                 <div
                   *ngIf="names[i].id === listpets[j].publicationId"
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                  "
+
                 >
                   <div
                     *ngIf="districts[k].id === listUsers[l].districtId"
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                    "
+
                   >
                     <mat-card
                       class="example-card"
-                      style="height: 100%; width: 70%; margin-bottom: 20px"
                     >
+
                     <mat-card-header>
-                      <div mat-card-avatar class="example-header-image"></div>
-                      <mat-card-title *ngIf="listpets">{{
-                        pet.name
-                      }}</mat-card-title>
 
-                      <mat-card-subtitle>{{
-                        name.comment
-                      }}</mat-card-subtitle>
+                      <mat-card-title style="color: #303F9F" *ngIf="listpets">{{pet.name}}</mat-card-title>
 
-                      <mat-card-subtitle style="font-size: 12px;">
-                        {{
+                      <mat-card-subtitle>{{name.comment}}</mat-card-subtitle>
 
-                          name.datetime
-                       }}</mat-card-subtitle>
-
+                      <mat-card-subtitle style="font-size: 12px;">{{name.datetime}}</mat-card-subtitle>
 
                     </mat-card-header>
 
@@ -114,20 +99,25 @@
                         src="https://material.angular.io/assets/img/examples/shiba2.jpg"
                         alt="Photo of a Shiba Inu"
                       />
-                      <div style="text-align:justify; align-items: center;">
 
-                      <div style="display: grid;
-                      grid-template-columns: repeat(2, 1fr);
-                      ">
+                      <div class="information">
 
-                        <h4>{{ pet.race }}</h4>
-                        <h4>Attention: {{ pet.attention }}</h4>
-                        <h4> {{ pet.age }} years</h4>
-                        <h4>Gender: {{ pet.gender }}</h4>
-                        <h4>District: {{ district.district }}</h4>
+                        <div>
+                          <h4>Race: {{ pet.race }}</h4>
+                          <h4>Attention: {{ pet.attention }}</h4>
+                        </div>
+                        <div>
+                          <h4>Age: {{ pet.age }} years</h4>
+                          <h4>Gender: {{ pet.gender }}</h4>
+                        </div>
+                        <div>
+                          <h4>District: {{ district.district }}</h4>
+                        </div>
                       </div>
-                      </div>
-                      <mat-card-actions style="text-align: center;">
+
+
+                      <mat-card-actions class="publ_action">
+
                         <button
                           (click)="
                             onAdopt(
@@ -143,6 +133,7 @@
                         >
                           Adopt
                         </button>
+
                         <button
                           mat-button
                           type="button"
@@ -151,7 +142,10 @@
                           See User Profile
                         </button>
                       </mat-card-actions>
+
+
                     </mat-card>
+
                   </div>
                 </div>
               </div>
@@ -160,6 +154,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="listpets.length == 0 || names.length == 0 || listUsers.length == 0 ||districts.length==1">No existen datos</div>
+
   </div>
-</div>
+
+

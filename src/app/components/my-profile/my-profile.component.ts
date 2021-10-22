@@ -210,7 +210,10 @@ export class FormUserDialogComponent implements OnInit {
 
 
     this.userService.putUser(this.storageService.getCurrentUser().id,
-      {email, password, type, user, ruc, dni, phone, name, lastName, districtId}).subscribe();
+      {email, password, type, user, ruc, dni, phone, name, lastName, districtId}).subscribe(
+      this.getInfoCurrentUser
+  );
+    this.dialog.closeAll();
   }
 
   cancel(): void{
