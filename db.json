@@ -15,16 +15,16 @@
     },
     {
       "email": "cliente1@gmail.com",
-      "password": "$2a$10$W3JHMolwrYbGs3MdIHcUnOs..j4.zsjCTBjNQMXll7Gc0tMZn86C2",
+      "password": "$2a$10$AcDRhpv0uBQS8bXTk1/SOu0hZuEkVooXali3rnqQzUuNY7q/7EeI2",
       "type": "Client",
       "user": "admin",
       "ruc": "",
       "dni": "4648654",
       "phone": "965428546",
-      "name": "Ricardo",
+      "name": "Ricahar",
       "lastName": "Yalico",
-      "id": 2,
-      "districtId": 3
+      "districtId": 3,
+      "id": 2
     },
     {
       "email": "oz@gmail.com",
@@ -112,13 +112,6 @@
       "id": 7
     },
     {
-      "comment": "Cuiden de este cachorrito",
-      "datetime": "2021-10-10 18:51:37",
-      "userId": 2,
-      "petId": 8,
-      "id": 12
-    },
-    {
       "userId": 2,
       "comment": "busco adoptante responsable",
       "datetime": "2021-10-11 02:45:43",
@@ -138,6 +131,12 @@
       "datetime": "2021-10-13 00:05:57",
       "petId": 9,
       "id": 15
+    },
+    {
+      "comment": "sdsdfs",
+      "datetime": "2021-10-22 12:36:39",
+      "userId": 7,
+      "id": 16
     }
   ],
   "pets": [
@@ -178,18 +177,6 @@
     },
     {
       "type": "Cat",
-      "name": "pupi",
-      "attention": "Require",
-      "race": "",
-      "age": 2,
-      "isAdopted": "No",
-      "userId": 2,
-      "publicationId": 12,
-      "gender": "Female",
-      "id": 7
-    },
-    {
-      "type": "Cat",
       "name": "Misha",
       "attention": "Require",
       "race": "british",
@@ -209,6 +196,17 @@
       "gender": "Female",
       "publicationId": 14,
       "id": 10
+    },
+    {
+      "type": "Gato",
+      "name": "sadads",
+      "attention": "No",
+      "race": "4648654",
+      "age": 3,
+      "isAdopted": "No",
+      "userId": 7,
+      "publicationId": 16,
+      "id": 11
     }
   ],
   "districts": [
@@ -383,6 +381,26 @@
       "urlToImage": "https://www.lasamarillasdezipaquira.com/oc-content/uploads/1/352.jpg",
       "promotion": true,
       "id": 4
+    },
+    {
+      "userId": 7,
+      "dateTime": "2021-10-22 11:02:43",
+      "title": "sadasd",
+      "description": "asdasda",
+      "discount": null,
+      "urlToImage": "asd",
+      "promotion": true,
+      "id": 5
+    },
+    {
+      "userId": 7,
+      "dateTime": "2021-10-22 12:36:55",
+      "title": "74647349",
+      "description": "951083038",
+      "discount": null,
+      "urlToImage": "https://blog.mailrelay.com/wp-content/uploads/2018/03/anuncios-publicitarios.png",
+      "promotion": true,
+      "id": 6
     }
   ],
   "transactions": [],
@@ -407,15 +425,6 @@
       "approved": false
     },
     {
-      "uerIdFrom": 4,
-      "useridAt": 2,
-      "message": "",
-      "publicationId": 4,
-      "date": "2021-10-11 09:35:29",
-      "id": 1,
-      "approved": false
-    },
-    {
       "approved": true,
       "id": 2
     },
@@ -426,15 +435,6 @@
       "publicationId": 2,
       "date": "2021-10-11 09:40:41",
       "id": 3,
-      "approved": false
-    },
-    {
-      "uerIdFrom": 4,
-      "useridAt": 2,
-      "message": "I like this poor pet :(",
-      "publicationId": 12,
-      "date": "2021-10-11 09:47:22",
-      "id": 5,
       "approved": false
     },
     {
@@ -484,15 +484,6 @@
     {
       "uerIdFrom": 4,
       "useridAt": 2,
-      "message": "please, i like it",
-      "publicationId": 12,
-      "date": "2021-10-14 01:42:16",
-      "id": 13,
-      "approved": false
-    },
-    {
-      "uerIdFrom": 4,
-      "useridAt": 2,
       "message": "ghjhgfd",
       "publicationId": 7,
       "date": "2021-10-14 17:37:32",
@@ -507,6 +498,15 @@
       "date": "2021-10-14 23:40:24",
       "id": 15,
       "approved": false
+    },
+    {
+      "uerIdFrom": 2,
+      "useridAt": null,
+      "message": "hola",
+      "publicationId": 7,
+      "date": "2021-10-22 12:34:29",
+      "approved": false,
+      "id": 16
     }
   ]
 }
