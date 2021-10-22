@@ -10,7 +10,6 @@ import {LocationService} from '../../services/location.service';
   styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent implements OnInit, OnDestroy {
-
   infUser: any;
   district: any;
   location: any;
