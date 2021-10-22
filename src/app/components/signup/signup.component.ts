@@ -20,14 +20,14 @@ export class SignupComponent implements OnInit {
   public matcher = new MyErrorStateMatcher();
   public matcher1 = new MyErrorStateMatcher();
   public type_user: any[] = ['Client', 'Veterinarian', 'Supplier'];
-  public location: any[] = ['Barranco',  'Callao', 'Chorrillos', 
-                            'Comas', 'Jesus Maria', 'La Molina',
-                            'La Victoria', 'Lima', 'Lince', 
-                            'Los Olivos', 'Lurin', 'Miraflores', 
-                            'Puenta Piedra', 'Rimac', 'Santiago de Surco', 
-                            'San Borja', 'San Isidro', 'San Juan de Lurigancho', 
-                            'San Juan de Miraflores', 'San Martin de Porres', 'Surquillo', 
-                            'Ventanilla', 'Villa El Salvador']
+  public location: any[] = ['Barranco',  'Callao', 'Chorrillos',
+    'Comas', 'Jesus Maria', 'La Molina',
+    'La Victoria', 'Lima', 'Lince',
+    'Los Olivos', 'Lurin', 'Miraflores',
+    'Puenta Piedra', 'Rimac', 'Santiago de Surco',
+    'San Borja', 'San Isidro', 'San Juan de Lurigancho',
+    'San Juan de Miraflores', 'San Martin de Porres', 'Surquillo',
+    'Ventanilla', 'Villa El Salvador']
   public signupForm: FormGroup;
   public submitted: Boolean = false;
   selection: string = "Client";
@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
     console.log("click signup")
     console.log(this.signupForm.value)
     if (this.signupForm.valid){
-    
+
       let name: string = this.signupForm.value.name;
       let lastname: string = this.signupForm.value.lastname;
       let email: string = this.signupForm.value.email;
@@ -75,7 +75,7 @@ export class SignupComponent implements OnInit {
       let my_location = this.signupForm.value.location
       let locationId: number = 0;
 
-      
+
       switch (my_location) {
         case 'Ventanilla':
           locationId = 0
@@ -133,36 +133,38 @@ export class SignupComponent implements OnInit {
           break
         case "San Borja":
           locationId = 18
-          break 
+          break
         case "San Isidro":
           locationId = 19
-          break 
+          break
         case "San Juan de Lurigancho":
           locationId = 20
-          break 
+          break
         case "San Juan de Miraflores":
           locationId = 21
-          break 
+          break
         case "San Martin de Porres":
           locationId = 22
-          break 
+          break
         case "San Isidro":
           locationId = 23
-          break 
+          break
         case "Ventanilla":
           locationId = 24
           break
         case "Villa El Salvador":
           locationId = 25
-          break 
+          break
         default:
           break;
+
       }
-      this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, locationId).subscribe(
+      let districtId: any = locationId;
+      this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, districtId).subscribe(
         data => this.correctSignup(data)
       )
     }
-    
+
   }
   private correctSignup(data: Session){
     console.log("signup correcto");
