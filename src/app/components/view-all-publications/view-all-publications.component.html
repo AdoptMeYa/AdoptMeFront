@@ -3,8 +3,14 @@
     <div class="example-container" style="text-align: center">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>District</mat-label>
-        <input type="text" placeholder="Pick one" aria-label="District" matInput [formControl]="myControl"
-          [matAutocomplete]="auto" />
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="District"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of options" [value]="option">
             {{ option }}
@@ -43,7 +49,11 @@
         <!--mat-hint align="end">Here's the dropdown arrow ^</mat-hint-->
       </mat-form-field>
 
-      <button type="button" class="btn btn-success" (click)="filter2(kindanimal.value, gender.value, require.value)">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="filter2(kindanimal.value, gender.value, require.value)"
+      >
         Filter
       </button>
     </div>
@@ -52,60 +62,92 @@
         <div *ngFor="let pet of listpets; let j = index">
           <div *ngFor="let district of districts; let k = index">
             <div *ngFor="let user of listUsers; let l = index">
-              <div *ngIf="names[i].userId === listUsers[l].id" style="
+              <div
+                *ngIf="names[i].userId === listUsers[l].id"
+                style="
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                ">
-                <div *ngIf="names[i].id === listpets[j].publicationId" style="
+                "
+              >
+                <div
+                  *ngIf="names[i].id === listpets[j].publicationId"
+                  style="
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                  ">
-                  <div *ngIf="districts[k].id === listUsers[l].districtId" style="
+                  "
+                >
+                  <div
+                    *ngIf="districts[k].id === listUsers[l].districtId"
+                    style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
-                    ">
-                    <mat-card class="example-card" style="height: 100%; width: 70%; margin-bottom: 20px">
-                      <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title *ngIf="listpets">{{
-                          pet.name
-                          }}</mat-card-title>
+                    "
+                  >
+                    <mat-card
+                      class="example-card"
+                      style="height: 100%; width: 70%; margin-bottom: 20px"
+                    >
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title *ngIf="listpets">{{
+                        pet.name
+                      }}</mat-card-title>
 
-                        <mat-card-subtitle>{{
-                          name.comment
-                          }}</mat-card-subtitle>
+                      <mat-card-subtitle>{{
+                        name.comment
+                      }}</mat-card-subtitle>
 
-                        <mat-card-subtitle style="font-size: 12px">
-                          {{ name.datetime }}</mat-card-subtitle>
-                      </mat-card-header>
+                      <mat-card-subtitle style="font-size: 12px;">
+                        {{
 
-                      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                        alt="Photo of a Shiba Inu" />
-                      <div style="text-align: justify; align-items: center">
-                        <div style="
-                            display: grid;
-                            grid-template-columns: repeat(2, 1fr);
-                          ">
-                          <h4>{{ pet.race }}</h4>
-                          <h4>Attention: {{ pet.attention }}</h4>
-                          <h4>{{ pet.age }} years</h4>
-                          <h4>Gender: {{ pet.gender }}</h4>
-                          <h4>District: {{ district.district }}</h4>
-                        </div>
+                          name.datetime
+                       }}</mat-card-subtitle>
+
+
+                    </mat-card-header>
+
+                    <img
+                        mat-card-image
+                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                        alt="Photo of a Shiba Inu"
+                      />
+                      <div style="text-align:justify; align-items: center;">
+
+                      <div style="display: grid;
+                      grid-template-columns: repeat(2, 1fr);
+                      ">
+
+                        <h4>{{ pet.race }}</h4>
+                        <h4>Attention: {{ pet.attention }}</h4>
+                        <h4> {{ pet.age }} years</h4>
+                        <h4>Gender: {{ pet.gender }}</h4>
+                        <h4>District: {{ district.district }}</h4>
                       </div>
-                      <mat-card-actions style="text-align: center">
-                        <button (click)="
+                      </div>
+                      <mat-card-actions style="text-align: center;">
+                        <button
+                          (click)="
                             onAdopt(
                               listpets[i].userId,
                               listpets[i].publicationId
                             )
-                          " id="edit" mat-button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          "
+                          id="edit"
+                          mat-button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                        >
                           Adopt
                         </button>
-                        <button mat-button type="button" (click)="goToPerfil(name.userId)">
+                        <button
+                          mat-button
+                          type="button"
+                          (click)="goToPerfil(name.userId)"
+                        >
                           See User Profile
                         </button>
                       </mat-card-actions>
@@ -118,13 +160,6 @@
         </div>
       </div>
     </div>
-    <div *ngIf="
-        listpets.length == 0 ||
-        names.length == 0 ||
-        listUsers.length == 0 ||
-        districts.length == 1
-      ">
-      No existen datos
-    </div>
+    <div *ngIf="listpets.length == 0 || names.length == 0 || listUsers.length == 0 ||districts.length==1">No existen datos</div>
   </div>
 </div>
