@@ -8,4 +8,5 @@ export class Pet {
     isAdopted: string;
     userId: number;
     publicationId: number;
+    gender: string;
 }

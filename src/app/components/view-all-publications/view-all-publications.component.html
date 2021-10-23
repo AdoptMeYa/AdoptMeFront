@@ -1,25 +1,24 @@
-
   <div  class="container">
 
 
     <mat-card class="filters" >
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>District</mat-label>
-        <input
-          type="text"
-          placeholder="Pick one"
-          aria-label="District"
-          matInput
-          [formControl]="myControl"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+<!--      <mat-form-field class="example-full-width" appearance="fill">-->
+<!--        <mat-label>District</mat-label>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          placeholder="Pick one"-->
+<!--          aria-label="District"-->
+<!--          matInput-->
+<!--          [formControl]="myControl"-->
+<!--          [matAutocomplete]="auto"-->
+<!--          #district-->
+<!--        <mat-autocomplete #auto="matAutocomplete">-->
+<!--          <mat-option *ngFor="let option of options" [value]="option">-->
+<!--            {{ option }}-->
+<!--          </mat-option>-->
+<!--        </mat-autocomplete>-->
+<!--      </mat-form-field>-->
 
       <mat-form-field appearance="fill">
         <mat-label>Kind of animal</mat-label>
@@ -45,7 +44,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Require attention</mat-label>
-        <mat-select #require>
+        <mat-select #attention>
           <mat-option value="Require">Require</mat-option>
           <mat-option value="Dont require">Dont require</mat-option>
         </mat-select>
@@ -56,107 +55,80 @@
       <button
         type="button"
         class="btn"
-        (click)="filter2(kindanimal.value, gender.value, require.value)"
+        (click)="toFilter(kindanimal.value, gender.value, attention.value)"
       >
         Filter
       </button>
 
     </mat-card>
 
+    <div class="cards" >
+
+      <div *ngFor="let publicationModel of publicationArray">
+
+      <mat-card class="example-card" >
+
+        <mat-card-header>
+
+          <mat-card-title style="color: #303F9F" >{{publicationModel.name}}</mat-card-title>
+
+          <mat-card-subtitle>{{publicationModel.comment}}</mat-card-subtitle>
+
+          <mat-card-subtitle style="font-size: 12px;">{{publicationModel.datetime}}</mat-card-subtitle>
+
+        </mat-card-header>
+
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+
+        <div class="information">
+
+          <div>
+            <h4>Race: {{ publicationModel.race }}</h4>
+            <h4>Attention: {{ publicationModel.attention }}</h4>
+          </div>
+          <div>
+            <h4>Age: {{ publicationModel.age }} years</h4>
+            <h4>Gender: {{ publicationModel.gender }}</h4>
+          </div>
+          <div>
+            <h4>District: {{ publicationModel.district }}</h4>
+          </div>
+        </div>
 
 
-    <div class="cards">
-      <div *ngFor="let name of names; let i = index">
-        <div *ngFor="let pet of listpets; let j = index">
-          <div *ngFor="let district of districts; let k = index">
-            <div *ngFor="let user of listUsers; let l = index">
-              <div
-                *ngIf="names[i].userId === listUsers[l].id"
-
-              >
-                <div
-                  *ngIf="names[i].id === listpets[j].publicationId"
-
-                >
-                  <div
-                    *ngIf="districts[k].id === listUsers[l].districtId"
-
-                  >
-
-
-                    <mat-card
-                      class="example-card"
-                    >
-
-                    <mat-card-header>
-
-                      <mat-card-title style="color: #303F9F" *ngIf="listpets">{{pet.name}}</mat-card-title>
-
-                      <mat-card-subtitle>{{name.comment}}</mat-card-subtitle>
-
-                      <mat-card-subtitle style="font-size: 12px;">{{name.datetime}}</mat-card-subtitle>
-
-                    </mat-card-header>
-
-                    <img
-                        mat-card-image
-                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                        alt="Photo of a Shiba Inu"
-                      />
-
-                      <div class="information">
-
-                        <div>
-                          <h4>Race: {{ pet.race }}</h4>
-                          <h4>Attention: {{ pet.attention }}</h4>
-                        </div>
-                        <div>
-                          <h4>Age: {{ pet.age }} years</h4>
-                          <h4>Gender: {{ pet.gender }}</h4>
-                        </div>
-                        <div>
-                          <h4>District: {{ district.district }}</h4>
-                        </div>
-                      </div>
-
-
-                      <mat-card-actions class="publ_action">
-
-                        <button
-                          (click)="
+        <mat-card-actions class="publ_action">
+          <button
+            (click)="
                             onAdopt(
                               listpets[i].userId,
                               listpets[i].publicationId
                             )
                           "
-                          id="edit"
-                          mat-button
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                        >
-                          Adopt
-                        </button>
+            id="edit"
+            mat-button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Adopt
+          </button>
+          <button
+            mat-button
+            type="button"
+            (click)="goToPerfil(name.userId)"
+          >
+            See User Profile
+          </button>
+        </mat-card-actions>
 
-                        <button
-                          mat-button
-                          type="button"
-                          (click)="goToPerfil(name.userId)"
-                        >
-                          See User Profile
-                        </button>
-                      </mat-card-actions>
 
-
-                    </mat-card>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      </mat-card>
       </div>
+
     </div>
 
   </div>
