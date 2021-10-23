@@ -22,12 +22,12 @@ export class PetsService {
       age: age,
       isAdopted: isAdopted,
       userId: userId,
-      publicationId: publicationId 
+      publicationId: publicationId
     })
   }
 
   ReadPets(): Observable<Pet[]> {
-    return this.http.get<Pet[]>(this.basePath + this.apiEndPoint)
+    return this.http.get<Pet[]>(this.basePath + this.apiEndPoint);
   }
   ReadPetsByPublicationId(id: number): Observable<Pet> {
     return this.http.get<Pet>(this.basePath + this.apiEndPoint + "?publicationId=" + id.toString())
@@ -35,7 +35,7 @@ export class PetsService {
   ReadPetsByUserId(id: number): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.basePath + this.apiEndPoint + "?userId=" + id.toString())
   }
-  UpdatePetById(type: string, name: string, attention: string, race: string, 
+  UpdatePetById(type: string, name: string, attention: string, race: string,
     age: number, isAdopted: string, userId: number, publicationId: number, id: number): Observable<Publication> {
     return this.http.put<Publication>("http://localhost:3000/pets/" + id.toString(), {
       type: type,
@@ -86,7 +86,7 @@ export class PetsService {
     } else if (
       !kindanimal &&
       !gender  &&
-      !require 
+      !require
     ) {
       return this.http.get<Pet[]>(`http://localhost:3000/pets`)
       .pipe(map((res: any)=>{
@@ -98,10 +98,10 @@ export class PetsService {
         return res;
       }))
     }
- 
-  
-  
+
+
+
   }
 
-  
+
 }

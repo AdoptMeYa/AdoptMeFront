@@ -19,6 +19,11 @@ import { PublicationsDialogComponent } from '../publications-dialog/publications
 import { MatDialog } from '@angular/material/dialog';
 import { AdoptionRequestDialogComponent } from '../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 import {Router} from '@angular/router';
+import { PublicationModel } from '../../models/publication.model';
+import { Pet } from '../../models/pet.model';
+import {FilterService} from '../../services/filter.service';
+
+
 
 @Component({
   selector: 'app-view-all-publications',
@@ -41,14 +46,19 @@ export class ViewAllPublicationsComponent implements OnInit {
   public PublishForm: FormGroup;
   dataPrueba: 'barranco';
   public aux: any;
-  //variables publication/districts/pets
+  // variables publication/districts/pets
   public names = [];
   public districts: any;
   public listpets: any;
   public listUsers: any;
-  //form autocmplete
+  // form autocmplete
   myControl = new FormControl();
   options: string[] = [];
+  // variables temporales
+  publishCollection = [];
+  petCollection: Pet[];
+  publicationModelArray: PublicationModel[] = [];
+  publicationArray: PublicationModel[];
 
   constructor(
     private router: Router,
@@ -59,26 +69,58 @@ export class ViewAllPublicationsComponent implements OnInit {
     private userService: UserService,
     private adoptionRequestService: AdoptionRequestService,
     private districtService: DistrictService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public filterService: FilterService
   ) {}
 
   ngOnInit(): void {
-    (this.PublishForm = this.formBuilder.group({
-      message: ['', Validators.required],
-    })),
-      this.districtService.getAllDistricts().subscribe((then) => {
-        for (const i in then) {
-          if (then.hasOwnProperty(i)) {
-            var value = then[i];
-            this.options.push(value.district);
-          }
-        }
-      });
 
-    this.getAllData();
+    this.getPublicationCollection();
+    this.getPetCollection();
+
   }
-  onSubmit() {}
-  getAllData() {
+  toFilter(kindanimal, gender, attention): void{
+    this.filterService.getPets(kindanimal, gender, attention).subscribe(
+      result => {
+        this.petCollection = result;
+        console.log(this.petCollection);
+        this.publicationArray.length = 0;
+        this.filterPetProps();
+      }
+    );
+  }
+  filterPetProps(): void{
+    for (const publish of this.publishCollection){
+      for (const pet of this.petCollection){
+        if (publish.id === pet.publicationId){
+          this.publicationModelArray.push(new PublicationModel(
+            publish.id, pet.id, pet.name, publish.comment, publish.dateTime,
+            pet.race, pet.attention, pet.age, pet.gender, 'sad'
+          ));
+          break;
+        }
+      }
+      this.publicationArray = this.publicationModelArray;
+    }
+  }
+  getPublicationCollection(): void{
+    this.publishService.listPublish().subscribe(
+      result => {
+        this.publishCollection = result;
+      }
+    );
+  }
+  getPetCollection(): void{
+    this.petService.ReadPets().subscribe(
+      result => {
+        this.petCollection = result;
+        this.filterPetProps();
+        console.log(this.publicationArray);
+      }
+    );
+
+  }
+  getAllData(): void{
     this.publishService.getPublication().subscribe((result) => {
       this.names = result;
       this.isEmpty = result.length;
