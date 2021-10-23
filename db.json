@@ -105,13 +105,6 @@
       "id": 4
     },
     {
-      "comment": "fsdfdsfsfe",
-      "datetime": "2021-10-09 05:19:58",
-      "userId": 4,
-      "petId": 4,
-      "id": 7
-    },
-    {
       "userId": 2,
       "comment": "busco adoptante responsable",
       "datetime": "2021-10-11 02:45:43",
@@ -137,20 +130,15 @@
       "datetime": "2021-10-22 12:36:39",
       "userId": 7,
       "id": 16
+    },
+    {
+      "comment": "This a description",
+      "datetime": "2021-10-22 22:42:59",
+      "userId": 4,
+      "id": 17
     }
   ],
   "pets": [
-    {
-      "type": "Dog",
-      "name": "Juanito",
-      "attention": "Require",
-      "race": "chusquito",
-      "age": 2,
-      "userId": 2,
-      "publicationId": 7,
-      "gender": "Male",
-      "id": 3
-    },
     {
       "id": 0,
       "type": "Dog",
@@ -207,6 +195,17 @@
       "userId": 7,
       "publicationId": 16,
       "id": 11
+    },
+    {
+      "type": "Perro",
+      "name": "Luca",
+      "attention": "No",
+      "race": "Caninus",
+      "age": 2,
+      "isAdopted": "No",
+      "userId": 4,
+      "publicationId": 17,
+      "id": 12
     }
   ],
   "districts": [
@@ -480,33 +479,6 @@
       "date": "2021-10-13 11:59:13",
       "id": 10,
       "approved": false
-    },
-    {
-      "uerIdFrom": 4,
-      "useridAt": 2,
-      "message": "ghjhgfd",
-      "publicationId": 7,
-      "date": "2021-10-14 17:37:32",
-      "id": 14,
-      "approved": false
-    },
-    {
-      "uerIdFrom": 4,
-      "useridAt": 2,
-      "message": "adopttt",
-      "publicationId": 7,
-      "date": "2021-10-14 23:40:24",
-      "id": 15,
-      "approved": false
-    },
-    {
-      "uerIdFrom": 2,
-      "useridAt": null,
-      "message": "hola",
-      "publicationId": 7,
-      "date": "2021-10-22 12:34:29",
-      "approved": false,
-      "id": 16
     }
   ]
 }

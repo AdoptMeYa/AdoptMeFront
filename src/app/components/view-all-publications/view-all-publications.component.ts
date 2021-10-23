@@ -70,7 +70,7 @@ export class ViewAllPublicationsComponent implements OnInit {
         for (const i in then) {
           if (then.hasOwnProperty(i)) {
             var value = then[i];
-            this.options.push(value.district); //do something with value;
+            this.options.push(value.district);
           }
         }
       });
