@@ -25,6 +25,9 @@ export class FilterService {
     else if (kindanimal !== undefined && attention !== undefined){
       return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}&attention=${attention}`);
     }
+    else if (gender !== undefined && attention !== undefined){
+      return this.http.get<Pet[]>(`http://localhost:3000/pets?gender=${gender}&attention=${attention}`);
+    }
     else if (kindanimal !== undefined ){
       return this.http.get<Pet[]>(`http://localhost:3000/pets?type=${kindanimal}`);
     }
@@ -33,6 +36,9 @@ export class FilterService {
     }
     else if (attention !== undefined){
       return this.http.get<Pet[]>(`http://localhost:3000/pets?&attention=${attention}`);
+    }
+    else {
+      return this.http.get<Pet[]>(`http://localhost:3000/pets`);
     }
   }
 }

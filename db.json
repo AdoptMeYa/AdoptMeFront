@@ -33,10 +33,12 @@
       "lastname": "Razo",
       "type": "Client",
       "user": "basic",
-      "dni": "12345678",
+      "dni": "445555",
       "phone": "945373426",
       "id": 4,
-      "districtId": 4
+      "districtId": 4,
+      "ruc": "undefined",
+      "lastName": "undefined"
     },
     {
       "email": "thebest@gmail.com",
@@ -479,6 +481,15 @@
       "date": "2021-10-13 11:59:13",
       "id": 10,
       "approved": false
+    },
+    {
+      "uerIdFrom": 4,
+      "useridAt": null,
+      "message": "sdsdfsdf",
+      "publicationId": 2,
+      "date": "2021-10-23 17:36:30",
+      "approved": false,
+      "id": 11
     }
   ]
 }

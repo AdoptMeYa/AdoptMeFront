@@ -2,27 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { PublishService } from '../../services/publish.service';
 import { PetsService } from 'src/app/services/pets.service';
 import { StorageService } from '../../services/storage.service';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-} from '@angular/forms';
-import { AdoptionRequestModel } from '../../models/AdoptionRequest.model';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AdoptionRequestService } from '../../services/adoption-request.service';
 import { UserService } from '../../services/user.service';
-import { map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { DistrictService } from '../../services/district.service';
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
-import { PublicationsDialogComponent } from '../publications-dialog/publications-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AdoptionRequestDialogComponent } from '../adoptionRequest-dialog/adoption-request-dialog/adoption-request-dialog.component';
 import {Router} from '@angular/router';
 import { PublicationModel } from '../../models/publication.model';
 import { Pet } from '../../models/pet.model';
 import {FilterService} from '../../services/filter.service';
-
+import { UserLocation } from '../../models/userLocation.model';
+import { LocationService } from '../../services/location.service';
+import { Location } from '../../models/location.model';
 
 
 @Component({
@@ -40,107 +32,167 @@ export class ViewAllPublicationsComponent implements OnInit {
     .toISOString()
     .slice(0, -1);
   date = this.localISOTime.slice(0, 19).replace('T', ' ');
-  adoptionRequest: AdoptionRequestModel = new AdoptionRequestModel();
   public isEmpty = 1;
-  public submitted: boolean;
   public PublishForm: FormGroup;
-  dataPrueba: 'barranco';
-  public aux: any;
-  // variables publication/districts/pets
-  public names = [];
-  public districts: any;
-  public listpets: any;
-  public listUsers: any;
-  // form autocmplete
+  // to Form
   myControl = new FormControl();
-  options: string[] = [];
-  // variables temporales
+  optionsDistrict: Location[];
+
+  // to Filter
   publishCollection = [];
   petCollection: Pet[];
   publicationModelArray: PublicationModel[] = [];
-  publicationArray: PublicationModel[];
+  publicationTempArray: PublicationModel[] = [];
+  publicationArray: PublicationModel[] = [];
+  userCollection = [];
+  districtCollection: Location[];
+  UserLocationModelArray: UserLocation[] = [];
+  UserLocationTempArray: UserLocation[] = [];
+  arrayPublications: PublicationModel[] = [];
 
   constructor(
     private router: Router,
-    private publishService: PublishService,
-    private petService: PetsService,
-    private storageService: StorageService,
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private adoptionRequestService: AdoptionRequestService,
-    private districtService: DistrictService,
+    public publishService: PublishService,
+    public petService: PetsService,
+    public storageService: StorageService,
+    public formBuilder: FormBuilder,
+    public userService: UserService,
+    public adoptionRequestService: AdoptionRequestService,
+    public districtService: DistrictService,
     private dialog: MatDialog,
-    public filterService: FilterService
+    public filterService: FilterService,
+    public locationService: LocationService
   ) {}
 
   ngOnInit(): void {
-
     this.getPublicationCollection();
+    this.getUserCollection();
+    this.getLocationCollection();
     this.getPetCollection();
+  }
+
+  toFilter(kindanimal, gender, attention, district): void{
+    if (district !== undefined || district !== ''){
+      this.locationService.getLocationDistrict(district).subscribe(
+        res => {
+          this.districtCollection = res;
+          console.log(this.districtCollection);
+          console.log(this.arrayPublications);
+          this.filterService.getPets(kindanimal, gender, attention).subscribe(
+            result => {
+              this.petCollection = result;
+              this.publicationModelArray.length = 0;
+              this.publicationTempArray.length = 0;
+              this.UserLocationModelArray.length = 0;
+              this.UserLocationTempArray.length = 0;
+              this.publicationArray.length = 0;
+              this.arrayPublications.length = 0;
+              this.filterPetProps();
+            }
+          );
+        }
+      );
+    }
+    else{
+      this.filterService.getPets(kindanimal, gender, attention).subscribe(
+        result => {
+          this.petCollection = result;
+          this.publicationModelArray.length = 0;
+          // this.publicationTempArray.length = 0;
+          this.UserLocationModelArray.length = 0;
+          // this.UserLocationTempArray.length = 0;
+          this.publicationArray.length = 0;
+          // this.arrayPublications.length = 0;
+          this.getUserCollection();
+          this.getLocationCollection();
+          this.filterPetProps();
+        }
+      );
+    }
+
 
   }
-  toFilter(kindanimal, gender, attention): void{
-    this.filterService.getPets(kindanimal, gender, attention).subscribe(
-      result => {
-        this.petCollection = result;
-        console.log(this.petCollection);
-        this.publicationArray.length = 0;
-        this.filterPetProps();
-      }
-    );
-  }
+
   filterPetProps(): void{
+
     for (const publish of this.publishCollection){
       for (const pet of this.petCollection){
         if (publish.id === pet.publicationId){
           this.publicationModelArray.push(new PublicationModel(
-            publish.id, pet.id, pet.name, publish.comment, publish.dateTime,
+            publish.id, pet.id, publish.userId, pet.name, publish.comment, publish.datetime,
             pet.race, pet.attention, pet.age, pet.gender, 'sad'
           ));
           break;
         }
       }
-      this.publicationArray = this.publicationModelArray;
+      this.publicationTempArray = this.publicationModelArray;
     }
-  }
+
+    for (const user of this.userCollection){
+      for (const location of this.districtCollection){
+        if (user.districtId === location.id){
+          this.UserLocationModelArray.push(new UserLocation(
+            user.id, location.id, location.district
+          ));
+          break;
+        }
+      }
+      this.UserLocationTempArray = this.UserLocationModelArray;
+    }
+    console.log(this.publicationTempArray);
+    console.log(this.UserLocationTempArray);
+
+    for (const publish of this.publicationTempArray){
+       for (const userLocation of this.UserLocationTempArray){
+         if (publish.idUser === userLocation.idUser){
+           this.publicationArray.push(new PublicationModel(
+             publish.idPublication, publish.idPet, publish.idUser, publish.name, publish.comment, publish.datetime,
+             publish.race, publish.attention, publish.age, publish.gender, userLocation.district
+           ));
+           break;
+         }
+       }
+       this.arrayPublications = this.publicationArray;
+     }
+
+    }
+
   getPublicationCollection(): void{
-    this.publishService.listPublish().subscribe(
+    this.publishService.getPublications().subscribe(
       result => {
         this.publishCollection = result;
       }
     );
   }
+
+  getUserCollection(): void{
+    this.userService.getUsers().subscribe(
+      result => {
+        this.userCollection = result;
+      }
+    );
+  }
+
+  getLocationCollection(): void{
+    this.locationService.getLocations().subscribe(
+      result => {
+        this.districtCollection = result;
+        this.optionsDistrict = result;
+      }
+    );
+  }
+
   getPetCollection(): void{
     this.petService.ReadPets().subscribe(
       result => {
         this.petCollection = result;
         this.filterPetProps();
-        console.log(this.publicationArray);
       }
     );
 
   }
-  getAllData(): void{
-    this.publishService.getPublication().subscribe((result) => {
-      this.names = result;
-      this.isEmpty = result.length;
-      this.petService.ReadPets().subscribe((data) => {
-        this.listpets = data;
-        this.districtService.getAllDistricts().subscribe((districts) => {
-          this.districts = districts;
-          this.userService.getallUser().subscribe((users) => {
-            this.listUsers = users;
-          });
-        });
-      });
-    });
-  }
 
-  getCurrentIdUser() {
-    return this.storageService.getCurrentUser().id;
-  }
-
-  onAdopt(userIdAt: number, publicationId: number) {
+  onAdopt(userIdAt: number, publicationId: number): void {
     this.userService.getUserById(userIdAt).subscribe((result) => {
       this.userName = result.name;
       const dialogRef = this.dialog.open(AdoptionRequestDialogComponent, {
@@ -156,57 +208,9 @@ export class ViewAllPublicationsComponent implements OnInit {
     this.publicationId = publicationId;
   }
 
-  goToPerfil(id): void{
+  goToProfile(id): void{
     this.userService.currentUser = id;
     console.log(id);
     this.router.navigate(['profile']);
-  }
-  filter2(kindanimal, gender, require): void {
-    if (!kindanimal && !gender && !require && !this.myControl.value) {
-      console.log('Nothing to filter');
-    } else if (
-      this.myControl.value ||
-      (kindanimal === '' && gender === '' && require === '')
-    ) {
-      this.districtService
-        .getDistrictByName(this.myControl.value)
-        .subscribe((data) => {
-          this.districts = data;
-        });
-
-      if (kindanimal || gender || require) {
-        console.log('hhh');
-
-        this.districtService
-          .getDistrictByName(this.myControl.value)
-          .subscribe((data) => {
-            this.districts = data;
-
-            console.log(data);
-
-            this.petService
-              .filterPets(kindanimal, gender, require)
-              .subscribe((dat) => {
-                this.listpets = dat;
-              });
-          });
-      }
-    } else if (this.myControl.value && (kindanimal || gender || require)) {
-    } else {
-      if (this.myControl.value) {
-        console.log('dad');
-        this.districtService
-          .getDistrictByName(this.myControl.value)
-          .subscribe((dat) => {
-            this.districts = dat;
-          });
-      } else {
-        this.petService
-          .filterPets(kindanimal, gender, require)
-          .subscribe((data) => {
-            this.listpets = data;
-          });
-      }
-    }
   }
 }
