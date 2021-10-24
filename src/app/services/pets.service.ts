@@ -13,7 +13,7 @@ export class PetsService {
   apiEndPoint = 'pets';
   constructor(private http: HttpClient) { }
 
-  CreatePet(type: string, name: string, attention: string, race: string, age: number, isAdopted: string, userId: number, publicationId: number): Observable<Pet> {
+  CreatePet(type: string, name: string, attention: string, race: string, age: number, isAdopted: string, userId: number, publicationId: number, gender: string): Observable<Pet> {
     return this.http.post<Pet>(this.basePath + this.apiEndPoint, {
       type: type,
       name: name,
@@ -22,7 +22,8 @@ export class PetsService {
       age: age,
       isAdopted: isAdopted,
       userId: userId,
-      publicationId: publicationId
+      publicationId: publicationId,
+      gender: gender
     })
   }
 
@@ -36,7 +37,7 @@ export class PetsService {
     return this.http.get<Pet[]>(this.basePath + this.apiEndPoint + "?userId=" + id.toString())
   }
   UpdatePetById(type: string, name: string, attention: string, race: string,
-    age: number, isAdopted: string, userId: number, publicationId: number, id: number): Observable<Publication> {
+    age: number, isAdopted: string, userId: number, publicationId: number, id: number, gender: string): Observable<Publication> {
     return this.http.put<Publication>("http://localhost:3000/pets/" + id.toString(), {
       type: type,
       name: name,
@@ -45,7 +46,8 @@ export class PetsService {
       age: age,
       isAdopted: isAdopted,
       userId: userId,
-      publicationId: publicationId
+      publicationId: publicationId,
+      gender: gender
     })
   }
   DeletePet(id: number): Observable<Pet> {

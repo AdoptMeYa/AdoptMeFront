@@ -63,6 +63,9 @@ export class PublishService {
       datetime
     });
   }
+  patchPublish(id: number, petId) {
+    return this.http.patch<Publication>('http://localhost:3000/publications/' + id.toString(), {petId: petId});
+  }
   CreatePublish(comment: string, datetime: string, userId: number): Observable<Publication>{
     return this.http.post<Publication>(this.basePath + this.apiEndPoint, {
       comment,

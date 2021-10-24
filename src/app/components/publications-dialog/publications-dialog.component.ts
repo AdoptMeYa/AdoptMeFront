@@ -29,8 +29,10 @@ export interface DialogData2 {
 })
 export class PublicationsDialogComponent implements OnInit {
   public matcher1 = new MyErrorStateMatcher();
-  public need_atention: any[] = ['Yes', 'No'];
-  public type_pets: any[] = ['Perro', 'Gato', 'Tortuga', 'Canario', 'Loro', 'Hamster', 'Pez', 'Otro']
+  public matcher2 = new MyErrorStateMatcher();
+  public need_atention: any[] = ['Require', 'Dont require'];
+  public type_pets: any[] = ['Dog', 'Cat', 'Parrot', 'Turtle', 'Rodents', 'Others']
+  public list_gender: any[] = ['Male', 'Female']
   public user: User;
   // get current date
   tzoffset = (new Date()).getTimezoneOffset() * 60000;
@@ -43,39 +45,27 @@ export class PublicationsDialogComponent implements OnInit {
   public: Publication = new Publication();
   pet: Pet = new Pet();
   names = [];
-  employeeData !: any;
-  Descriptions = [];
+  npets = [];
   public submitted: boolean;
   public listpublish: any;
   public listpets: any;
-  npets = [];
-  constructor(
-    private storageService: StorageService,
-    private publishService: PublishService,
-    private formBuilder: FormBuilder,
-    private petService: PetsService,
+  constructor(private storageService: StorageService, private publishService: PublishService,
+    private formBuilder: FormBuilder, private petService: PetsService,
     public dialogRef: MatDialogRef<PublicationsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     @Inject(MAT_DIALOG_DATA) public data2: DialogData2) { }
   onNoClick(): void {
-      this.dialogRef.close();
+    this.dialogRef.close();
   }
   ngOnInit(): void {
     this.PublishForm = this.formBuilder.group({
-      // PUBLICATION
       comment: ['', Validators.required],
-      // datetime
-      // userid
-      //id
-      // PET
       type: ['', Validators.required],
       name: ['', Validators.required],
       attention: ['', Validators.required],
       race: [''],
-      age: ['', [Validators.required, Validators.min(0), Validators.max(70)]]
-      // is adopted: no
-      // userId
-      // publicationId
+      age: ['', [Validators.required, Validators.min(0), Validators.max(70)]],
+      gender: ['', [Validators.required]]
     });
     if (this.data2['info'] == 'Edit') {
       this.update_publish.id = this.data2['arrPub'].id
@@ -89,17 +79,19 @@ export class PublicationsDialogComponent implements OnInit {
       this.PublishForm.controls['attention'.toString()].setValue(this.data2['arrPets'].attention)
       this.PublishForm.controls['race'.toString()].setValue(this.data2['arrPets'].race)
       this.PublishForm.controls['age'.toString()].setValue(this.data2['arrPets'].age)
+      this.PublishForm.controls['gender'.toString()].setValue(this.data2['arrPets'].gender)
+
     }
   }
   onSubmit(): void {
     this.submitted = true;
+    console.log(this.PublishForm.value)
     if (this.PublishForm.valid) {
       alert("Publicacion creada")
-      const iduser = this.storageService.getCurrentUser().id;
       this.public.comment = this.PublishForm.value.comment;
       this.public.datetime = this.date;
-      this.public.userId = iduser;
-      this.publishService.CreatePublish(this.public.comment, this.public.datetime, iduser).subscribe(
+      this.public.userId = this.storageService.getCurrentUser().id;
+      this.publishService.CreatePublish(this.public.comment, this.public.datetime, this.public.userId).subscribe(
         data => this.correctPublication(data)
       );
     }
@@ -111,10 +103,16 @@ export class PublicationsDialogComponent implements OnInit {
     this.pet.race = this.PublishForm.value.race;
     this.pet.age = this.PublishForm.value.age;
     this.pet.isAdopted = "No";
+    this.pet.gender = this.PublishForm.value.gender;
     this.pet.userId = data.userId;
     this.pet.publicationId = data.id;
     this.petService.CreatePet(this.pet.type, this.pet.name, this.pet.attention,
-      this.pet.race, this.pet.age, this.pet.isAdopted, this.pet.userId, this.pet.publicationId).subscribe();
+      this.pet.race, this.pet.age, this.pet.isAdopted, this.pet.userId, this.pet.publicationId, this.pet.gender).subscribe(
+        (data) => {
+          console.log(data)
+          this.publishService.patchPublish(this.pet.publicationId, data.id).subscribe()
+        }
+      );
   }
 
   updatePublication(): void {
@@ -132,20 +130,20 @@ export class PublicationsDialogComponent implements OnInit {
             this.update_pet.name = this.PublishForm.value.name;
             this.update_pet.race = this.PublishForm.value.race;
             this.update_pet.type = this.PublishForm.value.type;
+            this.update_pet.gender = this.PublishForm.value.gender;
             this.petService.UpdatePetById(this.update_pet.type, this.update_pet.name, this.update_pet.attention, this.update_pet.race, this.update_pet.age,
-              this.update_pet.isAdopted, this.update_pet.userId, this.update_pet.publicationId, this.update_pet.id).subscribe()
+              this.update_pet.isAdopted, this.update_pet.userId, this.update_pet.publicationId, this.update_pet.id, this.update_pet.gender).subscribe()
           })
         }
       );
       this.publishService.listPublishByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
-          this.listpublish = data;
-          this.names = this.listpublish;
-          this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
-            this.listpets = data;
-            this.npets = this.listpets;
-          });
-        }
-        );
+        this.listpublish = data;
+        this.names = this.listpublish;
+        this.petService.ReadPetsByUserId(this.storageService.getCurrentUser().id).subscribe((data) => {
+          this.listpets = data;
+          this.npets = this.listpets;
+        });
+      });
     }
   }
 }

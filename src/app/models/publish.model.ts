@@ -15,5 +15,6 @@ export class Publication {
   public comment: string;
   public datetime: string;
   public userId: number;
+  public petId: number;
   public id: number;
 }

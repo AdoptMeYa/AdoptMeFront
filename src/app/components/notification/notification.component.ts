@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 export class NotificationComponent implements OnInit {
  requests: [];
  users: [];
-  publications: [];
+  public publications: [];
   public pets: any;
   uerIdFrom: 0;
   useridAt: 0;
@@ -33,9 +33,7 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
    this.getRequests();
    this.getUsers();
-   this.publishService.getPublication().subscribe((result) => {
-     this.publications = result;
-   });
+
    this.petService.ReadPets().subscribe((data) => {
      this.pets = data;
    });

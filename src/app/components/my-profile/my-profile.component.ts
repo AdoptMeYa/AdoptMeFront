@@ -82,7 +82,7 @@ export class MyProfileComponent implements OnInit, OnDestroy{
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>last Name</mat-label>
-        <input  matInput #lastName [value]="infUser.lastName">
+        <input  matInput #lastname [value]="infUser.lastname">
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>District</mat-label>
@@ -90,7 +90,7 @@ export class MyProfileComponent implements OnInit, OnDestroy{
       </mat-form-field>
       <mat-card-actions>
         <button mat-button
-                (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastName.value, districtId.value)">SAVE</button>
+                (click)="save(email.value, password.value, type.value, user.value, ruc.value, dni.value, phone.value, name.value, lastname.value, districtId.value)">SAVE</button>
         <button mat-button  (click)="cancel()">CANCEL</button>
       </mat-card-actions>
     </div>
@@ -118,7 +118,7 @@ export class FormUserDialogComponent implements OnInit {
           });
       });
   }
-  save(email, password, type, user, ruc, dni, phone, name, lastName, districtId): void{
+  save(email, password, type, user, ruc, dni, phone, name, lastname, districtId): void{
 
     console.log(districtId);
     let locationId: any = 0;
@@ -209,7 +209,7 @@ export class FormUserDialogComponent implements OnInit {
 
 
     this.userService.patchUser(this.storageService.getCurrentUser().id,
-      {email, type, user, ruc, dni, phone, name, lastName, districtId}).subscribe(
+      {email, type, user, ruc, dni, phone, name, lastname, districtId}).subscribe(
   );
     location.reload();
     this.dialog.closeAll();

@@ -14,7 +14,7 @@
                                 <mat-error class="red" *ngIf="submitted && signupForm.controls.name.hasError('required')">Field is mandatory</mat-error>
                             </mat-form-field>
                             
-                            <mat-form-field   appearance="fill">
+                            <mat-form-field appearance="fill">
                                 <mat-label>Lastname</mat-label>
                                 <input matInput type="text" formControlName="lastname" placeholder="Lastname"/>
                                 <mat-icon class="amber-color" matSuffix>account_circle</mat-icon>
@@ -22,7 +22,7 @@
                             </mat-form-field>
                         </div>
                         <div class="row-flex">
-                            <mat-form-field appearance="fill" style="margin-right: 20px;" >
+                            <mat-form-field class="my-margin-right" appearance="fill">
                                 <mat-label>Email</mat-label>
                                 <input matInput  type="text" formControlName="email" placeholder="Email"/>
                                 <mat-icon class="amber-color" matSuffix>email</mat-icon>
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="row-flex">
-                            <mat-form-field appearance="fill" style="margin-right: 20px;">
+                            <mat-form-field class="my-margin-right" appearance="fill">
                                 <mat-label>Type</mat-label>
                                 
                                 <mat-select formControlName="type" [errorStateMatcher] = "matcher" > 
@@ -65,7 +65,7 @@
                             </mat-form-field>
                         </div>
                         <div class="row-flex">
-                            <mat-form-field   appearance="fill" style="margin-right: 20px;" >
+                            <mat-form-field class="my-margin-right" appearance="fill">
                                 <mat-label>DNI</mat-label>
                                 <input matInput type="text" formControlName="dni" placeholder="DNI"/>
                                 <mat-icon class="amber-color" matSuffix>credit_card</mat-icon>

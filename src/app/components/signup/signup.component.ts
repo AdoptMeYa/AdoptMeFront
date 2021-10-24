@@ -4,6 +4,7 @@ import {AuthService} from "./../../services/auth.service";
 import {Router} from "@angular/router";
 import { Session } from "../../models/session.model";
 import { ErrorStateMatcher } from "@angular/material/core";
+import { LocationService } from "src/app/services/location.service";
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -33,6 +34,7 @@ export class SignupComponent implements OnInit {
   selection: string = "Client";
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthService,
+              private locationService: LocationService,
               private router: Router) { }
 
   ngOnInit() {
@@ -62,7 +64,6 @@ export class SignupComponent implements OnInit {
     console.log("click signup")
     console.log(this.signupForm.value)
     if (this.signupForm.valid){
-
       let name: string = this.signupForm.value.name;
       let lastname: string = this.signupForm.value.lastname;
       let email: string = this.signupForm.value.email;
@@ -73,98 +74,12 @@ export class SignupComponent implements OnInit {
       let phone: string = this.signupForm.value.phone
       let user: string = "basic";
       let my_location = this.signupForm.value.location
-      let locationId: number = 0;
-
-
-      switch (my_location) {
-        case 'Ventanilla':
-          locationId = 0
-          break;
-        case 'Barranco':
-          locationId = 1
-          break
-        case 'Miraflores':
-          locationId = 2
-          break
-        case 'Surquillo':
-          locationId = 3
-          break
-        case "San Isidro":
-          locationId = 4
-          break
-        case 'Callao':
-          locationId = 5
-          break
-        case 'Chorrillos':
-          locationId = 6
-          break
-        case 'Comas':
-          locationId = 7
-          break
-        case "Jesus Maria":
-          locationId = 8
-          break
-        case "La Molina":
-          locationId = 9
-          break
-        case "La Victoria":
-          locationId = 10
-          break
-        case 'Lima':
-          locationId = 11
-          break
-        case 'Lince':
-          locationId = 12
-          break
-        case "Los Olivos":
-          locationId = 13
-          break
-        case 'Lurin':
-          locationId = 14
-          break
-        case "Puenta Piedra":
-          locationId = 15
-          break
-        case "Rimac":
-          locationId = 16
-          break
-        case "Santiago de Surco":
-          locationId = 17
-          break
-        case "San Borja":
-          locationId = 18
-          break
-        case "San Isidro":
-          locationId = 19
-          break
-        case "San Juan de Lurigancho":
-          locationId = 20
-          break
-        case "San Juan de Miraflores":
-          locationId = 21
-          break
-        case "San Martin de Porres":
-          locationId = 22
-          break
-        case "San Isidro":
-          locationId = 23
-          break
-        case "Ventanilla":
-          locationId = 24
-          break
-        case "Villa El Salvador":
-          locationId = 25
-          break
-        default:
-          break;
-
-      }
-      let districtId: any = locationId;
-      this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, districtId).subscribe(
-        data => this.correctSignup(data)
-      )
+      this.locationService.getLocationDistrict(my_location).subscribe((data) => {
+        console.log(data)
+        this.authenticationService.signup(name, lastname, email, password, type, user, ruc, dni, phone, data[0].id).subscribe((data) => 
+        this.correctSignup(data))
+      })
     }
-
   }
   private correctSignup(data: Session){
     console.log("signup correcto");
