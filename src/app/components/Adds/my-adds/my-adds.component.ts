@@ -5,7 +5,7 @@ import {AdvertisementModel} from '../../../models/Advertisement.model';
 import {MatDialog} from '@angular/material/dialog';
 import {AddDialogComponent} from '../my-adds-dialogs/add-dialog/add-dialog.component';
 import {EditDialogComponent} from '../my-adds-dialogs/edit-dialog/edit-dialog.component';
-
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-my-adds',
   templateUrl: './my-adds.component.html',
@@ -18,7 +18,9 @@ export class MyAddsComponent implements OnInit {
   constructor(
     private advertisementService: AdvertisementService,
     public storageService: StorageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    // tslint:disable-next-line:variable-name
+    private _config: NgbCarouselConfig
   ) { }
 
   ngOnInit(): void {
@@ -29,8 +31,11 @@ export class MyAddsComponent implements OnInit {
         console.log(this.Adds);
       }
     });
-
-
+    this._config.interval = 3000;
+    this._config.pauseOnHover = true;
+    this._config.showNavigationArrows = false;
+    this._config.showNavigationIndicators = false;
+    this._config.animation=true;
   }
      openDialogAdd(Add){
        const dialogRef = this.dialog.open(AddDialogComponent, {

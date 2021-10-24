@@ -1,33 +1,30 @@
-<button style="margin: 5px" class="btn btn-success" type="button" (click)="openDialogAdd('Add')" >Add Advertisement</button>
+<div class="slider">
 
-<div *ngFor="let add of Adds;let i = index; let last = last" [ngClass]="{'last-child': last}" style="display: flex; justify-content: center; align-items: center; padding-bottom: 5% ">
-  <mat-card  class="example-card" style="height:30%; width:60%">
-   <!---
-    "id": 0,
-      "userId": 1,
-      "dateTime": "29/09/2021 16:20",
-      "title": "this is a title",
-      "description": "add description",
-      "discount": 10,
-      "urlToImage": "https://www.lasamarillasdezipaquira.com/oc-content/uploads/1/352.jpg",
-      "promotion": false
-   ---->
+  <ngb-carousel >
 
-    <mat-card-header >
+    <ng-template *ngFor="let add of Adds;let i = index; let last = last" [ngClass]="{'last-child': last}"  ngbSlide>
 
-      <mat-card-title *ngIf="add">{{ Adds[i].title }}</mat-card-title>
+      <mat-card  class="card"  >
+        <p>Advertising space</p>
+        <mat-card-header >
 
-    </mat-card-header>
+          <mat-card-title *ngIf="add">{{ Adds[i].title }}</mat-card-title>
 
-      <img alt="image of advertisement"  mat-card-image src="{{Adds[i].urlToImage}}" />
-    <mat-card-content>Description: {{Adds[i].description}} </mat-card-content>
-    <mat-card-content>DateTime: {{Adds[i].dateTime}} </mat-card-content>
-    <mat-card-content>Discount: {{Adds[i].discount}} </mat-card-content>
-    <mat-card-content>Any Promotion: {{Adds[i].promotion}} </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button type="button" class="btn btn-danger" (click)="editAdvertisement('edit',Adds[i])" >Edit</button>
-      <button mat-raised-button type="button" class="btn btn-danger" (click)="deleteAdvertisement(Adds[i].id)" >Delete</button>
-    </mat-card-actions>
-  </mat-card>
+        </mat-card-header>
+
+        <img alt="image of advertisement" style="max-width: 40vh"  mat-card-image src="{{Adds[i].urlToImage}}" />
+        <mat-card-content>Description: {{Adds[i].description}} </mat-card-content>
+        <mat-card-content>DateTime: {{Adds[i].dateTime}} </mat-card-content>
+        <mat-card-content>Discount: {{Adds[i].discount}} </mat-card-content>
+        <mat-card-content>Any Promotion: {{Adds[i].promotion}} </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button type="button" class="btn btn-danger" (click)="editAdvertisement('edit',Adds[i])" >Edit</button>
+          <button mat-raised-button type="button" class="btn btn-danger" (click)="deleteAdvertisement(Adds[i].id)" >Delete</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </ng-template >
+
+  </ngb-carousel>
 
 </div>
