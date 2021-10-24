@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Publish, Publication } from '../models/publish.model';
-import { map } from "rxjs/operators"
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,48 +24,51 @@ export class PublishService {
 
   ): Observable<Publish> {
     return this.http.post<Publish>(this.basePath + this.apiEndPoint , {
-      descripcion: descripcion,
-      Name: Name,
-      IsAtention: IsAtention,
-      Race: Race,
-      Ubication: Ubication,
-      Commnet: Commnet,
-      Age: Age,
-      IdUser: IdUser,
-      Fecha: Fecha
-    })
+      descripcion,
+      Name,
+      IsAtention,
+      Race,
+      Ubication,
+      Commnet,
+      Age,
+      IdUser,
+      Fecha
+    });
+  }
+  getPublications(): Observable<Publication[]> {
+    return this.http.get<Publication[]>(this.basePath + this.apiEndPoint);
   }
   listPublish(): Observable<Publish[]> {
     return this.http.get<Publish[]>(this.basePath + this.apiEndPoint);
   }
   listPublishByUserId(userId: number): Observable<Publish[]> {
-    return this.http.get<Publish[]>(this.basePath + this.apiEndPoint + "?userId=" + userId.toString());
+    return this.http.get<Publish[]>(this.basePath + this.apiEndPoint + '?userId=' + userId.toString());
   }
 
-  deletePublishById(id: number):Observable<Publish>
+  deletePublishById(id: number): Observable<Publish>
   {
-    return this.http.delete<Publish>("http://localhost:3000/publications/" + id.toString());
+    return this.http.delete<Publish>('http://localhost:3000/publications/' + id.toString());
   }
-  getPublication(){
-    return this.http.get<Publish[]>("http://localhost:3000/publications")
-      .pipe(map((res: any)=>{
+  getPublication(): Observable<Publish[]>{
+    return this.http.get<Publish[]>('http://localhost:3000/publications')
+      .pipe(map((res: any) => {
         return res;
-      }))
+      }));
   }
 
-  updatePublishbyId(comment: string, datetime: string, userId: number ,id: number): Observable<Publication>{
-    return this.http.put<Publication>("http://localhost:3000/publications/"+id.toString(), {
-      userId: userId,
-      comment: comment,
-      datetime: datetime
-    })
+  updatePublishbyId(comment: string, datetime: string, userId: number , id: number): Observable<Publication>{
+    return this.http.put<Publication>('http://localhost:3000/publications/' + id.toString(), {
+      userId,
+      comment,
+      datetime
+    });
   }
   CreatePublish(comment: string, datetime: string, userId: number): Observable<Publication>{
     return this.http.post<Publication>(this.basePath + this.apiEndPoint, {
-      comment: comment,
-      datetime: datetime,
-      userId: userId
-    })
+      comment,
+      datetime,
+      userId
+    });
   }
-  
+
 }

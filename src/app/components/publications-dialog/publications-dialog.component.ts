@@ -51,7 +51,7 @@ export class PublicationsDialogComponent implements OnInit {
   npets = [];
   constructor(
     private storageService: StorageService,
-    private publishService: PublishService, 
+    private publishService: PublishService,
     private formBuilder: FormBuilder,
     private petService: PetsService,
     public dialogRef: MatDialogRef<PublicationsDialogComponent>,
@@ -101,7 +101,7 @@ export class PublicationsDialogComponent implements OnInit {
       this.public.userId = iduser;
       this.publishService.CreatePublish(this.public.comment, this.public.datetime, iduser).subscribe(
         data => this.correctPublication(data)
-      )
+      );
     }
   }
   private correctPublication(data: Publication): void{
@@ -110,7 +110,7 @@ export class PublicationsDialogComponent implements OnInit {
     this.pet.attention = this.PublishForm.value.attention
     this.pet.race = this.PublishForm.value.race;
     this.pet.age = this.PublishForm.value.age;
-    this.pet.isAdopted = "No"
+    this.pet.isAdopted = "No";
     this.pet.userId = data.userId;
     this.pet.publicationId = data.id;
     this.petService.CreatePet(this.pet.type, this.pet.name, this.pet.attention,

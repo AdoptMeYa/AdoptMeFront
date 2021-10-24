@@ -1,24 +1,23 @@
   <div  class="container">
 
-
     <mat-card class="filters" >
 
-<!--      <mat-form-field class="example-full-width" appearance="fill">-->
-<!--        <mat-label>District</mat-label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          placeholder="Pick one"-->
-<!--          aria-label="District"-->
-<!--          matInput-->
-<!--          [formControl]="myControl"-->
-<!--          [matAutocomplete]="auto"-->
-<!--          #district-->
-<!--        <mat-autocomplete #auto="matAutocomplete">-->
-<!--          <mat-option *ngFor="let option of options" [value]="option">-->
-<!--            {{ option }}-->
-<!--          </mat-option>-->
-<!--        </mat-autocomplete>-->
-<!--      </mat-form-field>-->
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>District</mat-label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="District"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          #district>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let itemDistrict of optionsDistrict" [value]="itemDistrict.district">
+            {{ itemDistrict.district }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Kind of animal</mat-label>
@@ -55,7 +54,7 @@
       <button
         type="button"
         class="btn"
-        (click)="toFilter(kindanimal.value, gender.value, attention.value)"
+        (click)="toFilter(kindanimal.value, gender.value, attention.value, district.value)"
       >
         Filter
       </button>
@@ -64,7 +63,7 @@
 
     <div class="cards" >
 
-      <div *ngFor="let publicationModel of publicationArray">
+      <div *ngFor="let publicationModel of arrayPublications">
 
       <mat-card class="example-card" >
 
@@ -104,8 +103,8 @@
           <button
             (click)="
                             onAdopt(
-                              listpets[i].userId,
-                              listpets[i].publicationId
+                              publicationModel.idUser,
+                              publicationModel.idPublication
                             )
                           "
             id="edit"
@@ -119,7 +118,7 @@
           <button
             mat-button
             type="button"
-            (click)="goToPerfil(name.userId)"
+            (click)="goToProfile(publicationModel.idUser)"
           >
             See User Profile
           </button>
