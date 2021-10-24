@@ -43,6 +43,8 @@ import { AddDialogComponent } from './components/Adds/my-adds-dialogs/add-dialog
 import { EditDialogComponent } from './components/Adds/my-adds-dialogs/edit-dialog/edit-dialog.component';
 import {NotificationComponent} from './components/notification/notification.component';
 import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-promotion.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +67,8 @@ import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-pr
     MyAddsComponent,
     AddDialogComponent,
     EditDialogComponent,
-    AddsPromotionComponent
+    AddsPromotionComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -75,9 +78,10 @@ import { AddsPromotionComponent } from './components/Adds/adds-promotion/adds-pr
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule
   ],
   providers: [
-    AuthService, StorageService, AuthGuard, UserService, PublishService, AdoptionRequestService, 
+    AuthService, StorageService, AuthGuard, UserService, PublishService, AdoptionRequestService,
     AdvertisementService, DistrictService, PetsService, UserGuard, VetGuard, SuppGuard,
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,17 +1,26 @@
 
 .container{
   display: grid;
-  grid-template-columns: 20% 78%;
-  padding-top:20px;
-  padding-right:20px;
+  grid-template-columns: repeat(2,1fr);
+
   background-color: #C5CAE9;
-  gap: 20px;
+  gap: 1em;
+  align-items: stretch;
+  grid-auto-rows: minmax(100px,auto);
+  margin: 0;
 }
 
 .filters{
-  display: flex;
-  flex-direction: column;
+align-self: start;
   height: 350px;
+  grid-column: 1/2;
+
+}
+.my_adds{
+align-self: start;
+  height: 350px;
+  grid-column: 3/3;
+
 }
 
 .filters button {
@@ -27,9 +36,10 @@
 .cards{
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto;
-  column-gap: 10px;
-  row-gap: 15px;
+grid-template-rows: auto;
+  float:right;
+  gap:10px;
+
 }
 
 .example-card{
