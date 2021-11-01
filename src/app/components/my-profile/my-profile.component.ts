@@ -4,7 +4,7 @@ import {StorageService} from '../../services/storage.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LocationService} from '../../services/location.service';
 import { User } from '../../models/user.model';
-
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-my-profile',
@@ -24,6 +24,8 @@ export class MyProfileComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void{
     this.userService.currentUser = this.storageService.getCurrentUser().id;
   }
+
+
   public getInfoCurrentUser(): void{
 
     // console.log(this.auxInfUser);
@@ -50,43 +52,63 @@ export class MyProfileComponent implements OnInit, OnDestroy{
     <div style="display: flex; flex-wrap: wrap; gap:20px; width: 430px">
       <mat-form-field appearance="standard">
         <mat-label>email</mat-label>
-        <input  matInput #email [value]="infUser.email">
+        <input  matInput #email maxlength="20"  [value]="infUser.email" >
+        <mat-hint align="end">{{email.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='email.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>password</mat-label>
-        <input  matInput #password [value]="infUser.password">
+        <input  matInput #password maxlength="30"  [value]="infUser.password">
+        <mat-hint align="end">{{password.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='password.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>type</mat-label>
-        <input  matInput #type [value]="infUser.type">
+        <input  matInput #type maxlength="20"  [value]="infUser.type">
+        <mat-hint align="end">{{type.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='type.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>user</mat-label>
-        <input  matInput #user [value]="infUser.user">
+        <input  matInput #user maxlength="20"  [value]="infUser.user">
+        <mat-hint align="end">{{user.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='user.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>ruc</mat-label>
-        <input  matInput #ruc [value]="infUser.ruc">
+        <input  matInput #ruc maxlength="11"  [value]="infUser.ruc">
+        <mat-hint align="end">{{ruc.value?.length || 0}}/11</mat-hint>
+        <mat-hint  *ngIf='ruc.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>dni</mat-label>
-        <input  matInput #dni [value]="infUser.dni">
+        <input  matInput #dni maxlength="8"  [value]="infUser.dni">
+        <mat-hint align="end">{{dni.value?.length || 0}}/8</mat-hint>
+        <mat-hint  *ngIf='dni.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field  appearance="standard">
         <mat-label>phone</mat-label>
-        <input  matInput #phone [value]="infUser.phone">
+        <input  matInput #phone maxlength="9"  [value]="infUser.phone">
+        <mat-hint align="end">{{phone.value?.length || 0}}/9</mat-hint>
+        <mat-hint  *ngIf='phone.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>name</mat-label>
-        <input  matInput #name [value]="infUser.name">
+        <input  matInput #name maxlength="20"  [value]="infUser.name">
+        <mat-hint align="end">{{name.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='name.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>last Name</mat-label>
-        <input  matInput #lastname [value]="infUser.lastname">
+        <input  matInput #lastname maxlength="20"  [value]="infUser.lastname">
+        <mat-hint align="end">{{lastname.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='lastname.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-form-field appearance="standard">
         <mat-label>District</mat-label>
-        <input  matInput #districtId [value]="location">
+        <input  matInput #districtId maxlength="20"  [value]="location">
+        <mat-hint align="end">{{districtId.value?.length || 0}}/20</mat-hint>
+        <mat-hint  *ngIf='districtId.value.length === 0 ' style="color:red">You Must enter a value</mat-hint>
       </mat-form-field>
       <mat-card-actions>
         <button mat-button
@@ -100,12 +122,14 @@ export class MyProfileComponent implements OnInit, OnDestroy{
 export class FormUserDialogComponent implements OnInit {
   infUser: any;
   location: any;
+
   constructor(public dialog: MatDialog, private userService: UserService, private storageService: StorageService,
               private locationService: LocationService){}
 
   ngOnInit(): void {
     this.getInfoCurrentUser();
   }
+
   getInfoCurrentUser(): void{
 
 
@@ -207,7 +231,10 @@ export class FormUserDialogComponent implements OnInit {
     districtId = locationId;
 
 
-
+    if (email === '' || type === '' || user === '' || dni === '' || ruc === '' || phone === ''
+    || name === '' || lastname === '' || districtId === ''){
+     return;
+    }
     this.userService.patchUser(this.storageService.getCurrentUser().id,
       {email, type, user, ruc, dni, phone, name, lastname, districtId}).subscribe(
   );
